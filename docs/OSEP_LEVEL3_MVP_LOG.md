@@ -59,3 +59,15 @@
 - 修改內容：將 http://localhost:8601/osep/extensions/ 加入 trusted extension path
 - 測試結果：成功
 - 結論：OSEP Extension 可透過本機 trusted path 以 unsandboxed 方式執行，WebSerial 可正常與 ESP8266 互動
+
+## MVP-05D Extension 選單整合測試
+
+- 修改檔案：src/lib/libraries/extensions/index.jsx
+- Extension 名稱：OSEP SmartRing
+- Extension URL：http://localhost:8601/osep/extensions/extensionV22C17.js
+- 載入方式：Extension 選單載入
+- Trusted / Unsandboxed：成功
+- ESP8266 WebSerial 互動：成功
+- Git commit：完成
+- 結論：OSEP SmartRing 已可作為自架 OSEP Scratch Editor 的擴充功能選單項目使用
+
