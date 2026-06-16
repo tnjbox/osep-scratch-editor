@@ -71,3 +71,13 @@
 - Git commit：完成
 - 結論：OSEP SmartRing 已可作為自架 OSEP Scratch Editor 的擴充功能選單項目使用
 
+## MVP-06 C01_connect.sb3 載入測試
+
+- 專案檔案：static/osep/projects/C01_connect.sb3
+- 測試方式：在自架 OSEP Scratch Editor 手動載入 C01_connect.sb3
+- OSEP Extension 載入方式：Extension 選單載入 OSEP SmartRing
+- Extension ID 對應：成功
+- OSEP 積木狀態：正常，未出現 undefined / 紅色積木
+- WebSerial 連線：成功
+- ESP8266 搖桿 / 按鍵互動：成功
+- 結論：C01_connect.sb3 可作為自架 OSEP Scratch Editor 的第一個練習檔git status
