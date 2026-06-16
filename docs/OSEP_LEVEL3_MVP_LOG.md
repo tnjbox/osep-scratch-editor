@@ -104,3 +104,17 @@
 - ESP8266 WebSerial 互動：成功
 - 結論：自架 OSEP Scratch Editor 已具備最小課堂入口能力
 
+
+## MVP-09 Build 版測試
+
+- Build 指令：npm run build
+- Build 測試伺服器：npx serve build
+- 測試網址：http://localhost:3000/osep/
+- C01 載入方式：入口頁同時帶入 extension 與 project_url 參數
+- Extension URL：使用 window.location.origin 動態產生
+- Project URL：使用 window.location.origin 動態產生
+- Trusted Extension：信任目前網站來源下的 /osep/extensions/
+- C01_connect.sb3 自動載入：成功
+- OSEP SmartRing Extension 自動載入：成功
+- ESP8266 WebSerial 互動：成功
+- 結論：自架 OSEP Scratch Editor 已可 build 成正式可測試版本
