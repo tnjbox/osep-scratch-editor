@@ -407,6 +407,21 @@ export default [
         featured: true
     },
     {
+        name: 'OSEP SmartRing',
+        extensionId: 'osepv22c17',
+        extensionURL: 'http://localhost:8601/osep/extensions/extensionV22C17.js',
+        iconURL: customExtensionIcon,
+        description: (
+            <FormattedMessage
+                defaultMessage="Connect to OSEP SmartRing via WebSerial."
+                description="Description for the OSEP SmartRing extension"
+                id="gui.extension.osepSmartRing.description"
+            />
+        ),
+        tags: ['tw'],
+        featured: true
+    },
+    {
         name: (
             <FormattedMessage
                 defaultMessage="Custom Extension"
