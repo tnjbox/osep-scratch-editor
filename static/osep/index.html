@@ -1,14 +1,205 @@
-<a id="c01-link" href="#">開始 C01 連線測試</a>
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>OSEP SmartRing 課堂任務入口</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<script>
-  const origin = window.location.origin;
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-  const extensionUrl = `${origin}/osep/extensions/extensionV22C17.js`;
-  const projectUrl = `${origin}/osep/projects/C01_connect.sb3`;
+    body {
+      margin: 0;
+      font-family: "Microsoft JhengHei", "Noto Sans TC", Arial, sans-serif;
+      background: #f5f7fb;
+      color: #1f2937;
+    }
 
-  const editorUrl =
-    `/?extension=${encodeURIComponent(extensionUrl)}` +
-    `&project_url=${encodeURIComponent(projectUrl)}`;
+    header {
+      background: linear-gradient(135deg, #2563eb, #0f766e);
+      color: white;
+      padding: 32px 20px;
+      text-align: center;
+    }
 
-  document.getElementById('c01-link').href = editorUrl;
-</script>
+    header h1 {
+      margin: 0;
+      font-size: 32px;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      margin: 12px 0 0;
+      font-size: 16px;
+      opacity: 0.95;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 20px 48px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      margin: 8px 0 18px;
+      border-left: 6px solid #2563eb;
+      padding-left: 12px;
+    }
+
+    .task-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+
+    .task-card {
+      background: white;
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+      border: 1px solid #e5e7eb;
+    }
+
+    .task-card h2 {
+      margin: 0 0 10px;
+      font-size: 21px;
+    }
+
+    .task-card p {
+      margin: 0 0 18px;
+      line-height: 1.6;
+      color: #4b5563;
+    }
+
+    .task-card .tag {
+      display: inline-block;
+      font-size: 13px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #dbeafe;
+      color: #1d4ed8;
+      margin-bottom: 14px;
+    }
+
+    .task-card.disabled {
+      opacity: 0.58;
+    }
+
+    .task-card.disabled .tag {
+      background: #e5e7eb;
+      color: #6b7280;
+    }
+
+    .task-card a,
+    .task-card button {
+      display: inline-block;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 16px;
+      background: #2563eb;
+      color: white;
+      font-size: 15px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .task-card button:disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+    }
+
+    .note {
+      margin-top: 28px;
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      color: #7c2d12;
+      padding: 16px 18px;
+      border-radius: 12px;
+      line-height: 1.7;
+    }
+
+    footer {
+      text-align: center;
+      color: #6b7280;
+      padding: 24px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>OSEP SmartRing 課堂任務入口</h1>
+    <p>使用 OSEP Scratch Editor 連接 ESP8266 SmartRing，進行 WebSerial 互動控制。</p>
+  </header>
+
+  <main>
+    <h2 class="section-title">Level 3 課堂任務</h2>
+
+    <div class="task-grid">
+      <div class="task-card">
+        <span class="tag">已完成測試</span>
+        <h2>C01 連線測試</h2>
+        <p>
+          自動載入 OSEP SmartRing Extension 與 C01 專案，
+          用來測試 Scratch Editor、WebSerial 與 ESP8266 是否能正常連線。
+        </p>
+        <a id="c01-link" href="#">開始 C01</a>
+      </div>
+
+      <div class="task-card disabled">
+        <span class="tag">即將開放</span>
+        <h2>C02 按鍵偵測</h2>
+        <p>
+          讀取 SmartRing 控制器按鍵狀態，練習 Scratch 事件判斷與互動控制。
+        </p>
+        <button disabled>尚未開放</button>
+      </div>
+
+      <div class="task-card disabled">
+        <span class="tag">即將開放</span>
+        <h2>C03 燈環控制</h2>
+        <p>
+          控制 WS2812 LED 燈環的顏色、亮度與基本顯示效果。
+        </p>
+        <button disabled>尚未開放</button>
+      </div>
+
+      <div class="task-card disabled">
+        <span class="tag">即將開放</span>
+        <h2>C04 搖桿方向控制</h2>
+        <p>
+          使用 SmartRing 控制器的方向輸入，控制 Scratch 角色移動或遊戲互動。
+        </p>
+        <button disabled>尚未開放</button>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>使用提醒：</strong>
+      請先確認 ESP8266 已連接電腦，並使用支援 WebSerial 的瀏覽器，例如 Chrome 或 Edge。
+      進入任務後，請在 Scratch 畫面中執行連線積木。
+    </div>
+  </main>
+
+  <footer>
+    OSEP Scratch Editor / SmartRingControl / Level 3 MVP-11
+  </footer>
+
+  <script>
+    const origin = window.location.origin;
+
+    const extensionUrl = `${origin}/osep/extensions/extensionV22C17.js`;
+    const projectUrl = `${origin}/osep/projects/C01_connect.sb3`;
+
+    const editorUrl =
+      `${origin}/?extension=${encodeURIComponent(extensionUrl)}` +
+      `&project_url=${encodeURIComponent(projectUrl)}`;
+
+    document.getElementById("c01-link").href = editorUrl;
+  </script>
+</body>
+</html>
