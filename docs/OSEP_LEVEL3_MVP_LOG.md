@@ -118,3 +118,10 @@
 - OSEP SmartRing Extension 自動載入：成功
 - ESP8266 WebSerial 互動：成功
 - 結論：自架 OSEP Scratch Editor 已可 build 成正式可測試版本
+
+MVP-10 完成：
+1. 家中電腦成功將 MVP-09 版本 push 到 GitHub
+2. GitHub repo 已更新到 feature/osep-extension-menu
+3. 學校電腦成功 pull 最新版本
+4. 學校電腦測試正常
+5. 兩邊電腦已建立 GitHub 同步流程
