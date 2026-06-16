@@ -1,15 +1,14 @@
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-  <meta charset="UTF-8">
-  <title>OSEP Scratch 課堂入口</title>
-</head>
-<body>
-  <h1>OSEP Scratch SmartRing</h1>
-  <p>請選擇練習任務：</p>
+<a id="c01-link" href="#">開始 C01 連線測試</a>
 
-  <a href="/?project_url=http%3A%2F%2Flocalhost%3A8601%2Fosep%2Fprojects%2FC01_connect.sb3">
-    開始 C01 連線測試
-  </a>
-</body>
-</html>
+<script>
+  const origin = window.location.origin;
+
+  const extensionUrl = `${origin}/osep/extensions/extensionV22C17.js`;
+  const projectUrl = `${origin}/osep/projects/C01_connect.sb3`;
+
+  const editorUrl =
+    `/?extension=${encodeURIComponent(extensionUrl)}` +
+    `&project_url=${encodeURIComponent(projectUrl)}`;
+
+  document.getElementById('c01-link').href = editorUrl;
+</script>

@@ -31,7 +31,7 @@ const isTrustedExtension = url => (
     url.startsWith('http://localhost:8000/') ||
 
     // OSEP Scratch local trusted extensions.
-    url.startsWith('http://localhost:8601/osep/extensions/') ||
+    url.startsWith(`${window.location.origin}/osep/extensions/`) ||
 
     extensionsTrustedByUser.has(url)
 );
