@@ -41,3 +41,21 @@
 - ESP8266 互動：成功
 - WebSerial 連線：成功
 - 結論：自架 Editor 開發環境可支援 OSEP WebSerial Extension
+
+## MVP-05B 本地 Extension URL 測試
+
+- Extension 檔案位置：static/osep/extensions/extensionV22C17.js
+- 測試 URL：http://localhost:8601/osep/extensions/extensionV22C17.js
+- 結果：Extension 可被載入，但被 sandbox 執行
+- 錯誤訊息：Error in sandboxed script
+- 判斷：只修改 Extension Library 選單不足以支援 WebSerial Extension
+- 下一步：尋找 trusted / unsandboxed extension 載入機制
+
+## MVP-05C Trusted Local Extension 測試
+
+- Extension 檔案位置：static/osep/extensions/extensionV22C17.js
+- 測試 URL：http://localhost:8601/osep/extensions/extensionV22C17.js
+- 修改檔案：src/containers/tw-security-manager.jsx
+- 修改內容：將 http://localhost:8601/osep/extensions/ 加入 trusted extension path
+- 測試結果：成功
+- 結論：OSEP Extension 可透過本機 trusted path 以 unsandboxed 方式執行，WebSerial 可正常與 ESP8266 互動

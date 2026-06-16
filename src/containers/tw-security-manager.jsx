@@ -24,11 +24,14 @@ const manuallyTrustExtension = url => {
  * @returns {boolean} True if the extension can is trusted
  */
 const isTrustedExtension = url => (
-    // Always trust our official extension repostiory.
+    // Always trust our official extension repository.
     url.startsWith('https://extensions.turbowarp.org/') ||
 
     // For development.
     url.startsWith('http://localhost:8000/') ||
+
+    // OSEP Scratch local trusted extensions.
+    url.startsWith('http://localhost:8601/osep/extensions/') ||
 
     extensionsTrustedByUser.has(url)
 );
