@@ -92,3 +92,15 @@
 - OSEP Extension 對應：成功
 - ESP8266 WebSerial 互動：成功
 - 結論：自架 OSEP Scratch Editor 可透過 project_url 參數載入課程練習檔
+
+## MVP-08 C01 課堂入口頁測試
+
+- 入口頁位置：static/osep/index.html
+- 入口網址：http://localhost:8601/osep/
+- 功能：提供 C01 連線測試入口
+- 點選後載入：C01_connect.sb3
+- project_url 自動載入：成功
+- OSEP SmartRing Extension：可正常載入
+- ESP8266 WebSerial 互動：成功
+- 結論：自架 OSEP Scratch Editor 已具備最小課堂入口能力
+
