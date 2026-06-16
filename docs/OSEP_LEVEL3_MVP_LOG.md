@@ -81,3 +81,14 @@
 - WebSerial 連線：成功
 - ESP8266 搖桿 / 按鍵互動：成功
 - 結論：C01_connect.sb3 可作為自架 OSEP Scratch Editor 的第一個練習檔git status
+
+## MVP-07 C01 project_url 自動載入測試
+
+- 專案檔案：static/osep/projects/C01_connect.sb3
+- 專案 URL：http://localhost:8601/osep/projects/C01_connect.sb3
+- Editor 測試 URL：http://localhost:8601/?project_url=http%3A%2F%2Flocalhost%3A8601%2Fosep%2Fprojects%2FC01_connect.sb3
+- 測試結果：成功
+- C01 自動載入：成功
+- OSEP Extension 對應：成功
+- ESP8266 WebSerial 互動：成功
+- 結論：自架 OSEP Scratch Editor 可透過 project_url 參數載入課程練習檔
