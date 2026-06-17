@@ -52,7 +52,7 @@ window.OSEP_COURSE = {
           ],
           project: "/osep/projects/ch04/C402_sprite_move.sb3",
           checklist: "",
-          enabled: false
+          enabled: true
         },
         {
           code: "C403",
