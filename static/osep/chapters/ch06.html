@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>SmartRingController 章節任務</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Microsoft JhengHei", "Noto Sans TC", Arial, sans-serif;
+      background: #f5f7fb;
+      color: #1f2937;
+    }
+
+    header {
+      background: linear-gradient(135deg, #2563eb, #0f766e);
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 30px;
+    }
+
+    header p {
+      margin: 12px 0 0;
+      font-size: 16px;
+      opacity: 0.95;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 28px 20px 48px;
+    }
+
+    .nav {
+      margin-bottom: 18px;
+    }
+
+    .nav a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .chapter-info {
+      background: white;
+      border-radius: 16px;
+      padding: 22px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+      margin-bottom: 22px;
+    }
+
+    .chapter-info h2 {
+      margin: 0 0 10px;
+      font-size: 24px;
+    }
+
+    .chapter-info p {
+      line-height: 1.7;
+      color: #4b5563;
+    }
+
+    .concepts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .concept {
+      display: inline-block;
+      background: #dbeafe;
+      color: #1d4ed8;
+      border-radius: 999px;
+      padding: 5px 11px;
+      font-size: 13px;
+    }
+
+    details {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 0;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+      overflow: hidden;
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 18px 20px;
+      font-size: 18px;
+      font-weight: bold;
+      background: #ffffff;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "＋";
+      float: right;
+      color: #2563eb;
+      font-weight: bold;
+    }
+
+    details[open] summary::after {
+      content: "－";
+    }
+
+    .task-body {
+      border-top: 1px solid #e5e7eb;
+      padding: 18px 20px 20px;
+      line-height: 1.7;
+      color: #374151;
+    }
+
+    .task-code {
+      display: inline-block;
+      background: #eef2ff;
+      color: #3730a3;
+      border-radius: 999px;
+      padding: 4px 10px;
+      margin-right: 8px;
+      font-size: 13px;
+    }
+
+    .task-status {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 13px;
+      background: #e5e7eb;
+      color: #6b7280;
+    }
+
+    .task-status.enabled {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .btn {
+      display: inline-block;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 14px;
+      background: #2563eb;
+      color: white;
+      font-size: 15px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .btn.secondary {
+      background: #0f766e;
+    }
+
+    .btn.disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    ul {
+      margin-top: 8px;
+    }
+
+    footer {
+      text-align: center;
+      color: #6b7280;
+      padding: 24px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1 id="chapter-title">SmartRingController 章節任務</h1>
+    <p id="chapter-subtitle">載入中...</p>
+  </header>
+
+  <main>
+    <div class="nav">
+      <a href="/osep/">← 返回教材首頁</a>
+    </div>
+
+    <section class="chapter-info">
+      <h2 id="chapter-heading">章節名稱</h2>
+      <p id="chapter-description">章節說明載入中...</p>
+      <p><strong>適合對象：</strong><span id="chapter-audience"></span></p>
+      <div class="concepts" id="chapter-concepts"></div>
+    </section>
+
+    <section id="task-list"></section>
+  </main>
+
+  <footer>
+    OSEP Scratch Editor / SmartRingControl / Level 3 MVP-12
+  </footer>
+
+  <script src="/osep/data/tasks.js"></script>
+  <script>
+    const chapterId = "ch06";
+    const origin = window.location.origin;
+
+    function createEditorUrl(projectPath) {
+      const extensionUrl = `${origin}/osep/extensions/extensionV22C17.js`;
+      const projectUrl = `${origin}${projectPath}`;
+      return `${origin}/?extension=${encodeURIComponent(extensionUrl)}&project_url=${encodeURIComponent(projectUrl)}`;
+    }
+
+    function renderChapter() {
+      const course = window.OSEP_COURSE;
+      const chapter = course.chapters.find(item => item.id === chapterId);
+
+      if (!chapter) {
+        document.getElementById("chapter-title").textContent = "找不到章節資料";
+        return;
+      }
+
+      document.title = chapter.title + "｜SmartRingController";
+      document.getElementById("chapter-title").textContent = chapter.title;
+      document.getElementById("chapter-subtitle").textContent = chapter.subtitle;
+      document.getElementById("chapter-heading").textContent = chapter.title;
+      document.getElementById("chapter-description").textContent = chapter.description;
+      document.getElementById("chapter-audience").textContent = chapter.audience;
+
+      const conceptsBox = document.getElementById("chapter-concepts");
+      conceptsBox.innerHTML = "";
+      chapter.concepts.forEach(concept => {
+        const span = document.createElement("span");
+        span.className = "concept";
+        span.textContent = concept;
+        conceptsBox.appendChild(span);
+      });
+
+      const taskList = document.getElementById("task-list");
+      taskList.innerHTML = "";
+
+      chapter.tasks.forEach((task, index) => {
+        const details = document.createElement("details");
+
+        const summary = document.createElement("summary");
+        summary.innerHTML = `<span class="task-code">${task.code}</span>${task.title}`;
+        details.appendChild(summary);
+
+        const body = document.createElement("div");
+        body.className = "task-body";
+
+        const statusClass = task.enabled ? "task-status enabled" : "task-status";
+        const statusText = task.enabled ? "已開放" : "即將開放";
+
+        const goalsHtml = task.goals.map(goal => `<li>${goal}</li>`).join("");
+
+        const projectButton = task.enabled
+          ? `<a class="btn" href="${createEditorUrl(task.project)}">開啟任務練習檔</a>`
+          : `<a class="btn disabled" href="#">任務練習檔尚未開放</a>`;
+
+        const checklistButton = task.checklist
+          ? `<a class="btn secondary" href="${task.checklist}" target="_blank" rel="noopener">填寫自我檢核表</a>`
+          : `<a class="btn secondary disabled" href="#">自我檢核表尚未開放</a>`;
+
+        body.innerHTML = `
+          <p><span class="${statusClass}">${statusText}</span></p>
+          <p><strong>任務說明：</strong>${task.description}</p>
+          <p><strong>學習目標：</strong></p>
+          <ul>${goalsHtml}</ul>
+          <div class="button-row">
+            ${projectButton}
+            ${checklistButton}
+          </div>
+        `;
+
+        details.appendChild(body);
+        taskList.appendChild(details);
+      });
+    }
+
+    renderChapter();
+  </script>
+</body>
+</html>

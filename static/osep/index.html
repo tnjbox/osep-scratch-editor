@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <title>OSEP SmartRing 課堂任務入口</title>
+  <title>SmartRingController 教材入口</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
@@ -20,13 +20,13 @@
     header {
       background: linear-gradient(135deg, #2563eb, #0f766e);
       color: white;
-      padding: 32px 20px;
+      padding: 34px 20px;
       text-align: center;
     }
 
     header h1 {
       margin: 0;
-      font-size: 32px;
+      font-size: 34px;
       letter-spacing: 1px;
     }
 
@@ -34,6 +34,7 @@
       margin: 12px 0 0;
       font-size: 16px;
       opacity: 0.95;
+      line-height: 1.7;
     }
 
     main {
@@ -42,20 +43,41 @@
       padding: 28px 20px 48px;
     }
 
+    .intro {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+      margin-bottom: 24px;
+      line-height: 1.8;
+    }
+
+    .intro h2 {
+      margin: 0 0 12px;
+      font-size: 24px;
+    }
+
+    .intro p {
+      color: #4b5563;
+      margin: 0 0 12px;
+    }
+
     .section-title {
       font-size: 22px;
-      margin: 8px 0 18px;
+      margin: 28px 0 18px;
       border-left: 6px solid #2563eb;
       padding-left: 12px;
     }
 
-    .task-grid {
+    .chapter-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 18px;
     }
 
-    .task-card {
+    .chapter-card,
+    .test-card {
       background: white;
       border-radius: 16px;
       padding: 22px;
@@ -63,18 +85,20 @@
       border: 1px solid #e5e7eb;
     }
 
-    .task-card h2 {
+    .chapter-card h3,
+    .test-card h3 {
       margin: 0 0 10px;
       font-size: 21px;
     }
 
-    .task-card p {
-      margin: 0 0 18px;
+    .chapter-card p,
+    .test-card p {
+      margin: 0 0 16px;
       line-height: 1.6;
       color: #4b5563;
     }
 
-    .task-card .tag {
+    .tag {
       display: inline-block;
       font-size: 13px;
       padding: 4px 10px;
@@ -84,17 +108,12 @@
       margin-bottom: 14px;
     }
 
-    .task-card.disabled {
-      opacity: 0.58;
+    .tag.test {
+      background: #dcfce7;
+      color: #166534;
     }
 
-    .task-card.disabled .tag {
-      background: #e5e7eb;
-      color: #6b7280;
-    }
-
-    .task-card a,
-    .task-card button {
+    .btn {
       display: inline-block;
       border: none;
       border-radius: 10px;
@@ -106,9 +125,8 @@
       cursor: pointer;
     }
 
-    .task-card button:disabled {
-      background: #9ca3af;
-      cursor: not-allowed;
+    .btn.secondary {
+      background: #0f766e;
     }
 
     .note {
@@ -132,74 +150,98 @@
 
 <body>
   <header>
-    <h1>OSEP SmartRing 課堂任務入口</h1>
-    <p>使用 OSEP Scratch Editor 連接 ESP8266 SmartRing，進行 WebSerial 互動控制。</p>
+    <h1 id="course-title">SmartRingController 教材入口</h1>
+    <p id="course-subtitle">
+      使用 OSEP Scratch Editor 連接 ESP8266 SmartRing，學習實體運算、互動控制與程式設計。
+    </p>
   </header>
 
   <main>
-    <h2 class="section-title">Level 3 課堂任務</h2>
+    <section class="intro">
+      <h2>教材簡介</h2>
+      <p>
+        SmartRingController 是一套結合 ESP8266、WebSerial、OSEP Scratch Editor 與 WS2812 LED 燈環的互動控制教材。
+        學生可以透過實體控制器操作 Scratch 角色，並控制 LED 燈環產生即時回饋。
+      </p>
+      <p>
+        本教材以「動手實作 → 統整反思 → 舉一反三 → 學習遷移」為核心，
+        從基礎互動控制逐步延伸到條件判斷、陣列應用與模組化程式設計。
+      </p>
+    </section>
 
-    <div class="task-grid">
-      <div class="task-card">
-        <span class="tag">已完成測試</span>
-        <h2>C01 連線測試</h2>
-        <p>
-          自動載入 OSEP SmartRing Extension 與 C01 專案，
-          用來測試 Scratch Editor、WebSerial 與 ESP8266 是否能正常連線。
-        </p>
-        <a id="c01-link" href="#">開始 C01</a>
-      </div>
+    <h2 class="section-title">開始前檢查</h2>
 
-      <div class="task-card disabled">
-        <span class="tag">即將開放</span>
-        <h2>C02 按鍵偵測</h2>
-        <p>
-          讀取 SmartRing 控制器按鍵狀態，練習 Scratch 事件判斷與互動控制。
-        </p>
-        <button disabled>尚未開放</button>
-      </div>
+    <section class="test-card">
+      <span class="tag test">共用測試</span>
+      <h3 id="connection-title">C01 課前連線測試</h3>
+      <p id="connection-description">
+        確認 OSEP Scratch Editor、SmartRing Extension、WebSerial 與 ESP8266 SmartRing 是否能正常連線。
+      </p>
+      <a id="connection-link" class="btn secondary" href="#">開始連線測試</a>
+    </section>
 
-      <div class="task-card disabled">
-        <span class="tag">即將開放</span>
-        <h2>C03 燈環控制</h2>
-        <p>
-          控制 WS2812 LED 燈環的顏色、亮度與基本顯示效果。
-        </p>
-        <button disabled>尚未開放</button>
-      </div>
+    <h2 class="section-title">章節學習任務</h2>
 
-      <div class="task-card disabled">
-        <span class="tag">即將開放</span>
-        <h2>C04 搖桿方向控制</h2>
-        <p>
-          使用 SmartRing 控制器的方向輸入，控制 Scratch 角色移動或遊戲互動。
-        </p>
-        <button disabled>尚未開放</button>
-      </div>
-    </div>
+    <section class="chapter-grid" id="chapter-grid">
+      <!-- 章節卡片由 tasks.js 動態產生 -->
+    </section>
 
     <div class="note">
       <strong>使用提醒：</strong>
-      請先確認 ESP8266 已連接電腦，並使用支援 WebSerial 的瀏覽器，例如 Chrome 或 Edge。
-      進入任務後，請在 Scratch 畫面中執行連線積木。
+      請先確認 ESP8266 SmartRing 已連接電腦，並使用支援 WebSerial 的瀏覽器，例如 Chrome 或 Edge。
+      進入任務練習檔後，請在 Scratch 畫面中執行連線積木。
     </div>
   </main>
 
   <footer>
-    OSEP Scratch Editor / SmartRingControl / Level 3 MVP-11
+    OSEP Scratch Editor / SmartRingControl / Level 3 MVP-12
   </footer>
 
+  <script src="/osep/data/tasks.js"></script>
   <script>
     const origin = window.location.origin;
 
-    const extensionUrl = `${origin}/osep/extensions/extensionV22C17.js`;
-    const projectUrl = `${origin}/osep/projects/C01_connect.sb3`;
+    function createEditorUrl(projectPath) {
+      const extensionUrl = `${origin}/osep/extensions/extensionV22C17.js`;
+      const projectUrl = `${origin}${projectPath}`;
+      return `${origin}/?extension=${encodeURIComponent(extensionUrl)}&project_url=${encodeURIComponent(projectUrl)}`;
+    }
 
-    const editorUrl =
-      `${origin}/?extension=${encodeURIComponent(extensionUrl)}` +
-      `&project_url=${encodeURIComponent(projectUrl)}`;
+    function renderHome() {
+      const course = window.OSEP_COURSE;
 
-    document.getElementById("c01-link").href = editorUrl;
+      document.title = course.title;
+      document.getElementById("course-title").textContent = course.title;
+      document.getElementById("course-subtitle").textContent = course.subtitle;
+
+      const connection = course.connectionTest;
+      document.getElementById("connection-title").textContent =
+        `${connection.code} ${connection.title}`;
+      document.getElementById("connection-description").textContent =
+        connection.description;
+      document.getElementById("connection-link").href =
+        createEditorUrl(connection.project);
+
+      const chapterGrid = document.getElementById("chapter-grid");
+      chapterGrid.innerHTML = "";
+
+      course.chapters.forEach(chapter => {
+        const card = document.createElement("article");
+        card.className = "chapter-card";
+
+        card.innerHTML = `
+          <span class="tag">${chapter.audience}</span>
+          <h3>${chapter.title}</h3>
+          <p>${chapter.subtitle}</p>
+          <p>${chapter.description}</p>
+          <a class="btn" href="/osep/chapters/${chapter.id}.html">進入章節</a>
+        `;
+
+        chapterGrid.appendChild(card);
+      });
+    }
+
+    renderHome();
   </script>
 </body>
 </html>
