@@ -287,3 +287,67 @@ docs/OSEP_LEVEL3_MVP_LOG.md
 static/osep/data/tasks.js
 static/osep/projects/ch04/C402_sprite_move.sb3
 docs/OSEP_LEVEL3_MVP_LOG.md
+
+## MVP-16｜建立第 4 章自我檢核表架構
+
+### 完成日期
+
+2026-06-17
+
+### 目標
+
+建立第 4 章 C401～C406 的自我檢核表靜態頁面，並將檢核表連結接回第 4 章任務卡片，讓學生完成每個任務後可以進行自我檢核與反思。
+
+### 完成內容
+
+1. 調整第 4～7 章任務練習檔開啟方式：
+   - 點選「開啟任務練習檔」時，Scratch Editor 改為在新分頁開啟。
+   - 原本章節頁保留在原分頁，方便學生對照任務說明與檢核表。
+2. 建立第 4 章自我檢核表資料夾：
+   - `static/osep/checklists/ch04/`
+3. 建立 C401 自我檢核表頁面：
+   - `static/osep/checklists/ch04/C401_checklist.html`
+4. 建立 C402～C406 自我檢核表頁面：
+   - `static/osep/checklists/ch04/C402_checklist.html`
+   - `static/osep/checklists/ch04/C403_checklist.html`
+   - `static/osep/checklists/ch04/C404_checklist.html`
+   - `static/osep/checklists/ch04/C405_checklist.html`
+   - `static/osep/checklists/ch04/C406_checklist.html`
+5. 每個自我檢核表頁面皆包含：
+   - 任務目標
+   - 我做到了
+   - 我能說明
+   - 延伸挑戰
+   - 完成後想一想
+   - 返回第 4 章
+   - 返回教材總入口
+6. 修改 `static/osep/data/tasks.js`：
+   - 將 C401～C406 的 `checklist` 欄位接上對應檢核表頁面。
+7. 完成本機測試：
+   - 第 4 章 C401～C406 任務練習檔皆可在新分頁開啟。
+   - 第 4 章 C401～C406 自我檢核表按鈕皆可正常開啟。
+   - 每個檢核表頁面可正常顯示。
+   - checkbox 可正常勾選。
+   - 返回第 4 章與返回教材總入口按鈕正常。
+8. 已完成 commit 並 push 到 GitHub：
+   - `ch04-ch07: open task projects in new tab (target=_blank, noopener noreferrer)`
+   - `MVP-16 add C401 checklist page`
+   - `ch04: add C402-C406 checklist pages`
+   - `ch04: set checklist URLs for C401-C406`
+
+### 修改檔案
+
+```text
+static/osep/chapters/ch04.html
+static/osep/chapters/ch05.html
+static/osep/chapters/ch06.html
+static/osep/chapters/ch07.html
+static/osep/checklists/ch04/C401_checklist.html
+static/osep/checklists/ch04/C402_checklist.html
+static/osep/checklists/ch04/C403_checklist.html
+static/osep/checklists/ch04/C404_checklist.html
+static/osep/checklists/ch04/C405_checklist.html
+static/osep/checklists/ch04/C406_checklist.html
+static/osep/data/tasks.js
+docs/OSEP_LEVEL3_MVP_LOG.md
+
