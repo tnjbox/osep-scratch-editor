@@ -351,3 +351,77 @@ static/osep/checklists/ch04/C406_checklist.html
 static/osep/data/tasks.js
 docs/OSEP_LEVEL3_MVP_LOG.md
 
+## MVP-17｜建立第 4 章自我檢核表送出功能
+
+### 完成日期
+
+2026-06-18
+
+### 目標
+
+將第 4 章 C401～C406 自我檢核表由靜態 HTML 頁面升級為可送出表單，讓學生完成任務後可以填寫班級、座號、姓名、勾選自我檢核項目、填寫學習反思，並將資料送出到 Google Sheet。
+
+### 完成內容
+
+1. 建立 Google Sheet 回收表：
+   - 試算表名稱：`OSEP_SmartRing_Checklist_Responses`
+   - 工作表名稱：`responses`
+2. 設定 Google Sheet 欄位：
+   - `timestamp`
+   - `chapter`
+   - `taskCode`
+   - `taskTitle`
+   - `className`
+   - `seatNumber`
+   - `studentName`
+   - `doneItems`
+   - `explainItems`
+   - `challengeItems`
+   - `reflection`
+   - `userAgent`
+3. 建立 Google Apps Script Web App：
+   - `doPost(e)`：接收前端 JSON 資料並寫入 Google Sheet。
+   - `doGet()`：提供 API 運作測試。
+   - `testDoPost()`：提供 Apps Script 內部測試資料。
+4. 完成 Apps Script 測試：
+   - `doGet` 測試成功。
+   - `testDoPost` 測試成功。
+   - Google Sheet 可新增測試資料。
+5. 將 `C401_checklist.html` 升級為可送出版本：
+   - 新增班級、座號、姓名欄位。
+   - 新增學習反思欄位。
+   - 新增「送出自我檢核」按鈕。
+   - 新增送出狀態訊息。
+   - 可將 `doneItems`、`explainItems`、`challengeItems` 寫入 Google Sheet。
+6. 建立自我檢核表送出規格文件：
+   - `docs/OSEP_CHECKLIST_SUBMIT_SPEC.md`
+7. 將 C402～C406 自我檢核表批次升級為可送出版本：
+   - `C402_checklist.html`
+   - `C403_checklist.html`
+   - `C404_checklist.html`
+   - `C405_checklist.html`
+   - `C406_checklist.html`
+8. 完成本機測試：
+   - C401～C406 每一頁皆可輸入班級、座號、姓名。
+   - checkbox 可正常勾選。
+   - 學習反思欄位可輸入。
+   - 必填欄位未填時會提示。
+   - 送出後 Google Sheet 可新增對應任務資料。
+   - `taskCode` 與 `taskTitle` 寫入正確。
+9. 已完成 commit 並 push 到 GitHub：
+   - `MVP-17 enable C401 checklist submission`
+   - `docs add checklist submit spec`
+   - `MVP-17 enable chapter 4 checklist submissions`
+
+### 修改檔案
+
+```text
+static/osep/checklists/ch04/C401_checklist.html
+static/osep/checklists/ch04/C402_checklist.html
+static/osep/checklists/ch04/C403_checklist.html
+static/osep/checklists/ch04/C404_checklist.html
+static/osep/checklists/ch04/C405_checklist.html
+static/osep/checklists/ch04/C406_checklist.html
+docs/OSEP_CHECKLIST_SUBMIT_SPEC.md
+docs/OSEP_LEVEL3_MVP_LOG.md
+
