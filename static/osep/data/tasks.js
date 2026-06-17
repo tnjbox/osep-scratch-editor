@@ -65,7 +65,7 @@ window.OSEP_COURSE = {
           ],
           project: "/osep/projects/ch04/C403_led_color.sb3",
           checklist: "",
-          enabled: false
+          enabled: true
         },
         {
           code: "C404",
@@ -78,7 +78,7 @@ window.OSEP_COURSE = {
           ],
           project: "/osep/projects/ch04/C404_led_feedback.sb3",
           checklist: "",
-          enabled: false
+          enabled: true
         },
         {
           code: "C405",
@@ -91,7 +91,7 @@ window.OSEP_COURSE = {
           ],
           project: "/osep/projects/ch04/C405_mini_game.sb3",
           checklist: "",
-          enabled: false
+          enabled: true
         },
         {
           code: "C406",
@@ -104,7 +104,7 @@ window.OSEP_COURSE = {
           ],
           project: "/osep/projects/ch04/C406_challenge.sb3",
           checklist: "",
-          enabled: false
+          enabled: true
         }
       ]
     },
