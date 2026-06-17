@@ -127,6 +127,60 @@
       margin-top: 12px;
     }
 
+    .field-group {
+      display: grid;
+      gap: 12px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field label {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      font-size: 1rem;
+      font-family: inherit;
+      color: var(--text);
+    }
+
+    .field textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .status-message {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      background: #f8fafc;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .status-message.error {
+      background: #fef2f2;
+      border-color: #fecaca;
+      color: #991b1b;
+    }
+
+    .status-message.success {
+      background: #ecfdf5;
+      border-color: #a7f3d0;
+      color: #14532d;
+    }
+
     .actions {
       display: flex;
       flex-wrap: wrap;
@@ -210,7 +264,29 @@
       </p>
     </section>
 
-    <section class="card done">
+    <section class="card">
+      <h2>學生基本資料</h2>
+      <div class="field-group">
+        <div class="field">
+          <label for="className">班級</label>
+          <input id="className" type="text" placeholder="請輸入班級" required />
+        </div>
+        <div class="field">
+          <label for="seatNumber">座號</label>
+          <input id="seatNumber" type="text" placeholder="請輸入座號" required />
+        </div>
+        <div class="field">
+          <label for="studentName">姓名</label>
+          <input id="studentName" type="text" placeholder="請輸入姓名" required />
+        </div>
+        <div class="field">
+          <label for="reflection">學習反思</label>
+          <textarea id="reflection" placeholder="請寫下你完成 C402 後的發現、困難或想改進的地方。"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <section class="card done" data-section="doneItems">
       <h2>我做到了</h2>
       <ul class="checklist">
         <li><input type="checkbox" /><span>我能開啟 C402 任務練習檔。</span></li>
@@ -223,7 +299,7 @@
       </ul>
     </section>
 
-    <section class="card">
+    <section class="card" data-section="explainItems">
       <h2>我能說明</h2>
       <ul class="checklist">
         <li><input type="checkbox" /><span>我能說明 x 座標改變會影響角色左右位置。</span></li>
@@ -232,7 +308,7 @@
       </ul>
     </section>
 
-    <section class="card challenge">
+    <section class="card challenge" data-section="challengeItems">
       <h2>延伸挑戰</h2>
       <ul class="checklist">
         <li><input type="checkbox" /><span>我能讓角色碰到邊緣時反彈或回到中間。</span></li>
@@ -250,8 +326,10 @@
         你可以試著向同學說明：為什麼往左、往右要改變 x 座標，而往上、往下要改變 y 座標？
       </p>
 
+      <div id="statusMessage" class="status-message" aria-live="polite" hidden></div>
       <div class="actions">
-        <a class="button primary" href="/osep/chapters/ch04.html">返回第 4 章</a>
+        <button id="submitButton" class="button primary" type="button">送出自我檢核</button>
+        <a class="button secondary" href="/osep/chapters/ch04.html">返回第 4 章</a>
         <a class="button secondary" href="/osep/">返回教材總入口</a>
       </div>
     </section>
@@ -260,5 +338,103 @@
   <footer>
     OSEP SmartRingController｜C402 角色移動自我檢核表
   </footer>
+  <script>
+    (function () {
+      const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbznEiflKFq17wqIBGtplJUazjuqZmfGdqFJmGth4zBYQPwyaZmh6vGkkzmb5LIB-kg/exec';
+      const TASK_CODE = 'C402';
+      const TASK_TITLE = '角色移動';
+      const submitButton = document.getElementById('submitButton');
+      const statusMessage = document.getElementById('statusMessage');
+      const classNameInput = document.getElementById('className');
+      const seatNumberInput = document.getElementById('seatNumber');
+      const studentNameInput = document.getElementById('studentName');
+      const reflectionInput = document.getElementById('reflection');
+
+      function showMessage(text, type) {
+        statusMessage.textContent = text;
+        statusMessage.className = 'status-message';
+        if (type === 'error') {
+          statusMessage.classList.add('error');
+        } else if (type === 'success') {
+          statusMessage.classList.add('success');
+        }
+        statusMessage.hidden = false;
+      }
+
+      function getCheckedItems(sectionName) {
+        const section = document.querySelector('[data-section="' + sectionName + '"]');
+        if (!section) return [];
+        return Array.from(section.querySelectorAll('input[type="checkbox"]'))
+          .filter((checkbox) => checkbox.checked)
+          .map((checkbox) => {
+            const label = checkbox.nextElementSibling;
+            return label ? label.textContent.trim() : '';
+          })
+          .filter(Boolean);
+      }
+
+      function validateInputs() {
+        if (!classNameInput.value.trim()) {
+          showMessage('請填寫班級。', 'error');
+          return false;
+        }
+        if (!seatNumberInput.value.trim()) {
+          showMessage('請填寫座號。', 'error');
+          return false;
+        }
+        if (!studentNameInput.value.trim()) {
+          showMessage('請填寫姓名。', 'error');
+          return false;
+        }
+        return true;
+      }
+
+      function setSubmitting(isSubmitting) {
+        submitButton.disabled = isSubmitting;
+        submitButton.textContent = isSubmitting ? '送出中……' : '送出自我檢核';
+      }
+
+      submitButton.addEventListener('click', function () {
+        if (!validateInputs()) {
+          return;
+        }
+
+        const payload = {
+          chapter: 'ch04',
+          taskCode: TASK_CODE,
+          taskTitle: TASK_TITLE,
+          className: classNameInput.value.trim(),
+          seatNumber: seatNumberInput.value.trim(),
+          studentName: studentNameInput.value.trim(),
+          doneItems: getCheckedItems('doneItems'),
+          explainItems: getCheckedItems('explainItems'),
+          challengeItems: getCheckedItems('challengeItems'),
+          reflection: reflectionInput.value.trim(),
+          userAgent: navigator.userAgent
+        };
+
+        setSubmitting(true);
+        showMessage('送出中，請稍候……');
+
+        fetch(WEB_APP_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8'
+          },
+          body: JSON.stringify(payload)
+        })
+          .then(function () {
+            showMessage('已送出。請回到課堂或向老師確認資料是否成功記錄。', 'success');
+          })
+          .catch(function () {
+            showMessage('送出失敗，請檢查網路後再試一次，或請老師協助。', 'error');
+          })
+          .finally(function () {
+            setSubmitting(false);
+          });
+      });
+    })();
+  </script>
 </body>
 </html>
