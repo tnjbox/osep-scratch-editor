@@ -125,3 +125,28 @@ MVP-10 完成：
 3. 學校電腦成功 pull 最新版本
 4. 學校電腦測試正常
 5. 兩邊電腦已建立 GitHub 同步流程
+
+## MVP-11｜建立正式課堂任務首頁
+
+### 完成日期
+2026-06-17
+
+### 完成內容
+1. 將 `/osep/` 課堂入口頁改為正式任務首頁。
+2. 建立 C01、C02、C03、C04 四個任務卡片。
+3. C01「連線測試」可點擊進入。
+4. C01 可自動載入 OSEP SmartRing Extension。
+5. C01 可自動載入 `C01_connect.sb3`。
+6. C02～C04 先設定為「即將開放」，避免學生誤點。
+7. 頁面使用 `window.location.origin` 動態產生 extension URL 與 project URL。
+8. 本機測試成功，並已 push 到 GitHub。
+
+### 修改檔案
+- `static/osep/index.html`
+
+### 測試結果
+1. `http://localhost:8601/osep/` 可正常開啟。
+2. 可看到 OSEP SmartRing 課堂任務入口頁。
+3. C01 可正常點擊。
+4. 點選 C01 後可進入 Scratch Editor。
+5. Extension 與 C01 專案可自動載入。
