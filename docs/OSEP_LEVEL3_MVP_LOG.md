@@ -150,3 +150,50 @@ MVP-10 完成：
 3. C01 可正常點擊。
 4. 點選 C01 後可進入 Scratch Editor。
 5. Extension 與 C01 專案可自動載入。
+
+## MVP-12｜建立 SmartRingController 教材網站架構 V1
+
+### 完成內容
+
+1. 將 `/osep/index.html` 從單一課堂任務首頁，調整為 SmartRingController 教材總入口。
+2. 保留 `C01_connect.sb3` 作為全課程共用「課前連線測試」，不列入第4章正式任務。
+3. 建立正式任務命名規則：
+
+   * C401～C406：第4章基礎任務
+   * C501～C506：第5章進階任務
+   * C601～C606：第6章陣列任務
+   * C701～C706：第7章模組化任務
+4. 新增 `static/osep/data/tasks.js`，集中管理教材章節、任務代碼、任務名稱、任務說明、學習目標、Scratch 專案路徑與自我檢核表連結。
+5. 新增第4～7章章節頁：
+
+   * `static/osep/chapters/ch04.html`
+   * `static/osep/chapters/ch05.html`
+   * `static/osep/chapters/ch06.html`
+   * `static/osep/chapters/ch07.html`
+6. 每個章節頁可讀取 `tasks.js`，動態呈現該章教材簡介、學習概念與 6 個任務摺疊區塊。
+7. 每個任務摺疊區塊預留：
+
+   * 任務說明
+   * 學習目標
+   * 任務練習檔按鈕
+   * 自我檢核表按鈕
+8. 尚未建立的任務練習檔與自我檢核表，先顯示為「尚未開放」。
+9. 本機測試成功，並已 push 到 GitHub。
+
+### 修改與新增檔案
+
+* `static/osep/index.html`
+* `static/osep/data/tasks.js`
+* `static/osep/chapters/ch04.html`
+* `static/osep/chapters/ch05.html`
+* `static/osep/chapters/ch06.html`
+* `static/osep/chapters/ch07.html`
+
+### 測試結果
+
+1. `http://localhost:8601/osep/` 可正常開啟教材總入口。
+2. 首頁可顯示教材簡介、C01 課前連線測試與第4～7章入口。
+3. C01 課前連線測試可正常開啟 Scratch Editor，並自動載入 OSEP Extension 與 `C01_connect.sb3`。
+4. 第4～7章頁面可正常開啟。
+5. 章節頁可顯示章節簡介、學習概念與 6 個任務摺疊區塊。
+6. 任務練習檔與自我檢核表按鈕可依照 `tasks.js` 中的 `enabled` 與 `checklist` 狀態顯示。
