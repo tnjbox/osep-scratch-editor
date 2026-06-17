@@ -244,3 +244,46 @@ static/osep/projects/ch04/C401_button_detect.sb3
 docs/OSEP_LEVEL3_MVP_LOG.md
 
 
+## MVP-14｜建立 C402 角色移動任務
+
+### 完成日期
+
+2026-06-17
+
+### 目標
+
+建立第 4 章第二個正式任務 C402「角色移動」，讓學生使用 SmartRingController 的 4 個方向鍵控制 Scratch 角色上下左右移動，從 C401 的「按鍵偵測」進一步理解「按鍵輸入」與「角色座標變化」之間的關係。
+
+### 完成內容
+
+1. 確認 C402 定位為第 4 章基礎任務的第二個正式任務。
+2. 確認 C402 採用 4 鍵方向鍵控制：
+   - BTN1：角色往上移動
+   - BTN2：角色往下移動
+   - BTN3：角色往左移動
+   - BTN4：角色往右移動
+3. 建立 C402 學生練習檔：
+   - `static/osep/projects/ch04/C402_sprite_move.sb3`
+4. C402 練習檔採用半成品學生練習檔設計：
+   - 保留角色、起始位置與任務提示。
+   - 預備方向鍵偵測與 x/y 座標移動積木。
+   - 不直接完成完整答案，讓學生需要自行組合核心邏輯。
+5. 修改 `static/osep/data/tasks.js`：
+   - 確認 C402 project 路徑為 `/osep/projects/ch04/C402_sprite_move.sb3`
+   - 將 C402 的 `enabled` 改為 `true`
+   - `checklist` 暫時維持空字串，等待後續自我檢核頁建立。
+6. 完成本機測試：
+   - 第 4 章頁面可展開 C402 任務。
+   - C402「開啟任務練習檔」按鈕可正常啟動 Scratch Editor。
+   - Scratch Editor 可自動載入 OSEP SmartRing Extension。
+   - Scratch Editor 可自動載入 C402 專案。
+   - ESP8266 SmartRingController BTN1～BTN4 可正常控制角色上下左右移動。
+7. 已完成 commit 並 push 到 GitHub：
+   - `MVP-14 create C402 sprite move task`
+
+### 修改檔案
+
+```text
+static/osep/data/tasks.js
+static/osep/projects/ch04/C402_sprite_move.sb3
+docs/OSEP_LEVEL3_MVP_LOG.md
