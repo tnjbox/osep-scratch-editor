@@ -39,7 +39,7 @@ window.OSEP_COURSE = {
           ],
           project: "/osep/projects/ch04/C401_button_detect.sb3",
           checklist: "",
-          enabled: false
+          enabled: true
         },
         {
           code: "C402",
