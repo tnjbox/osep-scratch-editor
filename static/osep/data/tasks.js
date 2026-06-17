@@ -38,7 +38,7 @@ window.OSEP_COURSE = {
             "能使用條件判斷做出角色回應"
           ],
           project: "/osep/projects/ch04/C401_button_detect.sb3",
-          checklist: "",
+          checklist: "/osep/checklists/ch04/C401_checklist.html",
           enabled: true
         },
         {
@@ -51,7 +51,7 @@ window.OSEP_COURSE = {
             "能調整角色移動速度"
           ],
           project: "/osep/projects/ch04/C402_sprite_move.sb3",
-          checklist: "",
+          checklist: "/osep/checklists/ch04/C402_checklist.html",
           enabled: true
         },
         {
@@ -64,7 +64,7 @@ window.OSEP_COURSE = {
             "能使用程式改變實體燈光輸出"
           ],
           project: "/osep/projects/ch04/C403_led_color.sb3",
-          checklist: "",
+          checklist: "/osep/checklists/ch04/C403_checklist.html",
           enabled: true
         },
         {
@@ -77,7 +77,7 @@ window.OSEP_COURSE = {
             "能理解互動回饋的設計概念"
           ],
           project: "/osep/projects/ch04/C404_led_feedback.sb3",
-          checklist: "",
+          checklist: "/osep/checklists/ch04/C404_checklist.html",
           enabled: true
         },
         {
@@ -90,7 +90,7 @@ window.OSEP_COURSE = {
             "能完成一個小型互動作品"
           ],
           project: "/osep/projects/ch04/C405_mini_game.sb3",
-          checklist: "",
+          checklist: "/osep/checklists/ch04/C405_checklist.html",
           enabled: true
         },
         {
@@ -103,7 +103,7 @@ window.OSEP_COURSE = {
             "能完成基礎互動挑戰"
           ],
           project: "/osep/projects/ch04/C406_challenge.sb3",
-          checklist: "",
+          checklist: "/osep/checklists/ch04/C406_checklist.html",
           enabled: true
         }
       ]
