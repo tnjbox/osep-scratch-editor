@@ -273,7 +273,7 @@
         const goalsHtml = task.goals.map(goal => `<li>${goal}</li>`).join("");
 
         const projectButton = task.enabled
-          ? `<a class="btn" href="${createEditorUrl(task.project)}">開啟任務練習檔</a>`
+          ? `<a class="btn" href="${createEditorUrl(task.project)}" target="_blank" rel="noopener noreferrer">開啟任務練習檔</a>`
           : `<a class="btn disabled" href="#">任務練習檔尚未開放</a>`;
 
         const checklistButton = task.checklist
