@@ -197,3 +197,50 @@ MVP-10 完成：
 4. 第4～7章頁面可正常開啟。
 5. 章節頁可顯示章節簡介、學習概念與 6 個任務摺疊區塊。
 6. 任務練習檔與自我檢核表按鈕可依照 `tasks.js` 中的 `enabled` 與 `checklist` 狀態顯示。
+
+## MVP-13｜建立 C401 按鍵偵測任務
+
+### 完成日期
+
+2026-06-17
+
+### 目標
+
+建立第 4 章第一個正式任務 C401「按鍵偵測」，讓學生可以透過 SmartRingController 的 4 個方向鍵，練習使用 Scratch 偵測實體按鍵輸入，並讓角色做出對應回應。
+
+### 完成內容
+
+1. 確認 C401 定位為第 4 章基礎任務的第一個正式任務。
+2. 確認 C401 採用 4 鍵方向鍵偵測：
+   - BTN1：上
+   - BTN2：下
+   - BTN3：左
+   - BTN4：右
+3. 建立 C401 學生練習檔：
+   - `static/osep/projects/ch04/C401_button_detect.sb3`
+4. C401 練習檔採用半成品學生練習檔設計：
+   - 保留角色與任務提示。
+   - 預備會用到的方向鍵偵測積木。
+   - 不直接完成完整答案，讓學生需要自行組合核心邏輯。
+5. 修改 `static/osep/data/tasks.js`：
+   - 確認 C401 project 路徑為 `/osep/projects/ch04/C401_button_detect.sb3`
+   - 將 C401 的 `enabled` 改為 `true`
+   - `checklist` 暫時維持空字串，等待後續自我檢核頁建立。
+6. 完成本機測試：
+   - `/osep/` 可正常開啟教材總入口。
+   - 第 4 章頁面可展開 C401 任務。
+   - C401「開啟任務練習檔」按鈕可正常啟動 Scratch Editor。
+   - Scratch Editor 可自動載入 OSEP SmartRing Extension。
+   - Scratch Editor 可自動載入 C401 專案。
+   - ESP8266 SmartRingController BTN1～BTN4 測試正常。
+7. 已完成 commit 並 push 到 GitHub：
+   - `MVP-13 create C401 button detect task`
+
+### 修改檔案
+
+```text
+static/osep/data/tasks.js
+static/osep/projects/ch04/C401_button_detect.sb3
+docs/OSEP_LEVEL3_MVP_LOG.md
+
+
