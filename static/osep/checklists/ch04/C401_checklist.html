@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>C401｜按鍵偵測自我檢核表</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --border: #e5e7eb;
+      --success-bg: #ecfdf5;
+      --success-border: #a7f3d0;
+      --challenge-bg: #fff7ed;
+      --challenge-border: #fed7aa;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    header {
+      background: linear-gradient(135deg, #2563eb, #0f172a);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    header .label {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.16);
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      letter-spacing: 0.04em;
+    }
+
+    header p {
+      margin: 12px auto 0;
+      max-width: 720px;
+      color: rgba(255, 255, 255, 0.86);
+    }
+
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 28px 18px 48px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    .card h2 {
+      margin: 0 0 14px;
+      font-size: 1.35rem;
+      color: #111827;
+    }
+
+    .goal {
+      background: #eff6ff;
+      border-left: 6px solid var(--primary);
+    }
+
+    .done {
+      background: var(--success-bg);
+      border-color: var(--success-border);
+    }
+
+    .challenge {
+      background: var(--challenge-bg);
+      border-color: var(--challenge-border);
+    }
+
+    .checklist {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .checklist li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px dashed rgba(107, 114, 128, 0.3);
+    }
+
+    .checklist li:last-child {
+      border-bottom: none;
+    }
+
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin-top: 4px;
+      accent-color: var(--primary);
+      flex: 0 0 auto;
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-top: 12px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .button {
+      display: inline-block;
+      text-decoration: none;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: 0.18s ease;
+    }
+
+    .button.primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .button.primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .button.secondary {
+      background: white;
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .button.secondary:hover {
+      background: #eff6ff;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding: 24px 12px 36px;
+    }
+
+    @media (max-width: 640px) {
+      header {
+        padding: 32px 16px;
+      }
+
+      header h1 {
+        font-size: 1.6rem;
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      .button {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="label">第 4 章｜基礎任務</div>
+    <h1>C401｜按鍵偵測自我檢核表</h1>
+    <p>
+      完成本任務後，請檢查自己是否能使用 SmartRingController 的方向鍵，
+      讓 Scratch 角色回應目前按下的按鍵。
+    </p>
+  </header>
+
+  <main>
+    <section class="card goal">
+      <h2>任務目標</h2>
+      <p>
+        我能使用 SmartRingController 的方向鍵，讓 Scratch 角色回應目前按下的按鍵。
+      </p>
+      <p class="note">
+        這個任務的重點是理解「實體按鍵輸入 → Scratch 條件判斷 → 角色回應」的基本流程。
+      </p>
+    </section>
+
+    <section class="card done">
+      <h2>我做到了</h2>
+      <ul class="checklist">
+        <li>
+          <input type="checkbox" />
+          <span>我能開啟 C401 任務練習檔。</span>
+        </li>
+        <li>
+          <input type="checkbox" />
+          <span>我能完成 SmartRingController 連線。</span>
+        </li>
+        <li>
+          <input type="checkbox" />
+          <span>我能偵測 BTN1 上鍵。</span>
+        </li>
+        <li>
+          <input type="checkbox" />
+          <span>我能偵測 BTN2 下鍵。</span>
+        </li>
+        <li>
+          <input type="checkbox" />
+          <span>我能偵測 BTN3 左鍵。</span>
+        </li>
+        <li>
+          <input type="checkbox" />
+          <span>我能偵測 BTN4 右鍵。</span>
+        </li>
+        <li>
+          <input type="checkbox" />
+          <span>我能讓角色說出目前按下的方向鍵。</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>我能說明</h2>
+      <ul class="checklist">
+        <li>
+          <input type="checkbox" />
+          <span>我能說明為什麼要使用「重複無限次」持續偵測按鍵。</span>
+        </li>
+        <li>
+          <input type="checkbox" />
+          <span>我能說明「如果……那麼」在按鍵偵測中的用途。</span>
+        </li>
+        <li>
+          <input type="checkbox" />
+          <span>我能說明實體按鍵如何影響 Scratch 角色。</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="card challenge">
+      <h2>延伸挑戰</h2>
+      <ul class="checklist">
+        <li>
+          <input type="checkbox" />
+          <span>我能加入更多按鍵偵測。</span>
+        </li>
+        <li>
+          <input type="checkbox" />
+          <span>我能讓不同按鍵播放不同音效。</span>
+        </li>
+        <li>
+          <input type="checkbox" />
+          <span>我能讓不同按鍵切換不同造型。</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>完成後想一想</h2>
+      <p>
+        這個任務中，SmartRingController 扮演「輸入裝置」的角色，
+        Scratch 程式負責判斷按鍵狀態，角色說話則是程式產生的畫面回饋。
+      </p>
+      <p class="note">
+        你可以試著向同學說明：按下實體按鍵之後，Scratch 是如何知道你按了哪一顆按鍵？
+      </p>
+
+      <div class="actions">
+        <a class="button primary" href="/osep/chapters/ch04.html">返回第 4 章</a>
+        <a class="button secondary" href="/osep/">返回教材總入口</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    OSEP SmartRingController｜C401 按鍵偵測自我檢核表
+  </footer>
+</body>
+</html>
