@@ -425,3 +425,35 @@ static/osep/checklists/ch04/C406_checklist.html
 docs/OSEP_CHECKLIST_SUBMIT_SPEC.md
 docs/OSEP_LEVEL3_MVP_LOG.md
 
+---
+
+## MVP-19｜重構自我檢核表共用送出 JS
+
+### 完成日期
+
+2026-06-18
+
+### 本版新增功能
+
+1. 新增第 4 章自我檢核表共用送出程式：
+   - `static/osep/checklists/checklist-submit.js`
+2. 將 C401～C406 原本各自內嵌的 Google Sheet 送出 JavaScript 抽出為共用檔案。
+3. C401～C406 各自保留任務設定：
+   - `chapter`
+   - `taskCode`
+   - `taskTitle`
+4. 成功訊息統一為：
+   - `已送出自我檢核表`
+5. 保留原本 Google Sheet 送出功能，並讓第 5～7 章後續檢核表可重複使用共用送出邏輯。
+
+### 修改檔案
+
+```text
+static/osep/checklists/checklist-submit.js
+static/osep/checklists/ch04/C401_checklist.html
+static/osep/checklists/ch04/C402_checklist.html
+static/osep/checklists/ch04/C403_checklist.html
+static/osep/checklists/ch04/C404_checklist.html
+static/osep/checklists/ch04/C405_checklist.html
+static/osep/checklists/ch04/C406_checklist.html
+docs/OSEP_LEVEL3_MVP_LOG.md
