@@ -70,40 +70,37 @@
           <label for="studentName">姓名</label>
           <input id="studentName" type="text" placeholder="請輸入姓名" required />
         </div>
-        <div class="field">
-          <label for="reflection">學習反思</label>
-          <textarea id="reflection" placeholder="請寫下你完成 C404 後的發現、困難或想改進的地方。"></textarea>
-        </div>
+        
       </div>
     </section>
 
-    <section class="card done" data-section="doneItems">
+    <section class="card done">
       <h2>我做到了</h2>
       <ul class="checklist">
-        <li><input type="checkbox" /><span>我能開啟 C404 任務練習檔。</span></li>
-        <li><input type="checkbox" /><span>我能完成 SmartRingController 連線。</span></li>
-        <li><input type="checkbox" /><span>我按方向鍵時，角色會移動。</span></li>
-        <li><input type="checkbox" /><span>我按方向鍵時，SmartRing LED 會顯示對應顏色。</span></li>
-        <li><input type="checkbox" /><span>我能讓同一個按鍵同時產生畫面回饋與實體燈光回饋。</span></li>
-        <li><input type="checkbox" /><span>我能修改不同方向鍵對應的 LED 顏色。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能開啟 C404 任務練習檔" /><span>我能開啟 C404 任務練習檔。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能完成 SmartRingController 連線" /><span>我能完成 SmartRingController 連線。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我按方向鍵時，角色會移動" /><span>我按方向鍵時，角色會移動。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我按方向鍵時，SmartRing LED 會顯示對應顏色" /><span>我按方向鍵時，SmartRing LED 會顯示對應顏色。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能讓同一個按鍵同時產生畫面回饋與實體燈光回饋" /><span>我能讓同一個按鍵同時產生畫面回饋與實體燈光回饋。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能修改不同方向鍵對應的 LED 顏色" /><span>我能修改不同方向鍵對應的 LED 顏色。</span></li>
       </ul>
     </section>
 
-    <section class="card" data-section="explainItems">
+    <section class="card">
       <h2>我能說明</h2>
       <ul class="checklist">
-        <li><input type="checkbox" /><span>我能說明輸入、處理、輸出的流程。</span></li>
-        <li><input type="checkbox" /><span>我能說明什麼是互動回饋。</span></li>
-        <li><input type="checkbox" /><span>我能說明為什麼實體燈光可以幫助使用者理解操作結果。</span></li>
+        <li><input type="checkbox" name="explainItems" value="我能說明輸入、處理、輸出的流程" /><span>我能說明輸入、處理、輸出的流程。</span></li>
+        <li><input type="checkbox" name="explainItems" value="我能說明什麼是互動回饋" /><span>我能說明什麼是互動回饋。</span></li>
+        <li><input type="checkbox" name="explainItems" value="我能說明為什麼實體燈光可以幫助使用者理解操作結果" /><span>我能說明為什麼實體燈光可以幫助使用者理解操作結果。</span></li>
       </ul>
     </section>
 
-    <section class="card challenge" data-section="challengeItems">
+    <section class="card challenge">
       <h2>延伸挑戰</h2>
       <ul class="checklist">
-        <li><input type="checkbox" /><span>我能加入角色說話提示。</span></li>
-        <li><input type="checkbox" /><span>我能讓 LED 回饋變成閃爍效果。</span></li>
-        <li><input type="checkbox" /><span>我能設計不同操作狀態的燈號規則。</span></li>
+        <li><input type="checkbox" name="challengeItems" value="我能加入角色說話提示" /><span>我能加入角色說話提示。</span></li>
+        <li><input type="checkbox" name="challengeItems" value="我能讓 LED 回饋變成閃爍效果" /><span>我能讓 LED 回饋變成閃爍效果。</span></li>
+        <li><input type="checkbox" name="challengeItems" value="我能設計不同操作狀態的燈號規則" /><span>我能設計不同操作狀態的燈號規則。</span></li>
       </ul>
     </section>
 
@@ -112,7 +109,12 @@
       <p>這個任務中，方向鍵輸入會讓角色移動，也會讓 LED 顯示顏色。</p>
       <p class="note">你可以試著向同學說明：畫面上的角色移動和實體 LED 回饋，哪一種比較容易讓使用者理解目前狀態？為什麼？</p>
 
-      <div id="statusMessage" class="status-message" aria-live="polite" hidden></div>
+      
+
+      <div class="field">
+        <label for="reflection">你覺得燈號回饋能幫助使用者知道哪些事情？</label>
+        <textarea id="reflection" placeholder="請依據你的實作內容寫下想法。"></textarea>
+      </div>
       <div class="actions">
         <button id="submitButton" class="button primary" type="button">送出自我檢核</button>
         <p id="submitStatus" class="submit-status"></p>

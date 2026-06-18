@@ -279,41 +279,38 @@
           <label for="studentName">姓名</label>
           <input id="studentName" type="text" placeholder="請輸入姓名" required />
         </div>
-        <div class="field">
-          <label for="reflection">學習反思</label>
-          <textarea id="reflection" placeholder="請寫下你完成 C402 後的發現、困難或想改進的地方。"></textarea>
-        </div>
+        
       </div>
     </section>
 
-    <section class="card done" data-section="doneItems">
+    <section class="card done">
       <h2>我做到了</h2>
       <ul class="checklist">
-        <li><input type="checkbox" /><span>我能開啟 C402 任務練習檔。</span></li>
-        <li><input type="checkbox" /><span>我能完成 SmartRingController 連線。</span></li>
-        <li><input type="checkbox" /><span>我按 BTN1 時，角色會往上移動。</span></li>
-        <li><input type="checkbox" /><span>我按 BTN2 時，角色會往下移動。</span></li>
-        <li><input type="checkbox" /><span>我按 BTN3 時，角色會往左移動。</span></li>
-        <li><input type="checkbox" /><span>我按 BTN4 時，角色會往右移動。</span></li>
-        <li><input type="checkbox" /><span>我能調整角色每次移動的距離。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能開啟 C402 任務練習檔" /><span>我能開啟 C402 任務練習檔。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能完成 SmartRingController 連線" /><span>我能完成 SmartRingController 連線。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我按 BTN1 時，角色會往上移動" /><span>我按 BTN1 時，角色會往上移動。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我按 BTN2 時，角色會往下移動" /><span>我按 BTN2 時，角色會往下移動。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我按 BTN3 時，角色會往左移動" /><span>我按 BTN3 時，角色會往左移動。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我按 BTN4 時，角色會往右移動" /><span>我按 BTN4 時，角色會往右移動。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能調整角色每次移動的距離" /><span>我能調整角色每次移動的距離。</span></li>
       </ul>
     </section>
 
-    <section class="card" data-section="explainItems">
+    <section class="card">
       <h2>我能說明</h2>
       <ul class="checklist">
-        <li><input type="checkbox" /><span>我能說明 x 座標改變會影響角色左右位置。</span></li>
-        <li><input type="checkbox" /><span>我能說明 y 座標改變會影響角色上下位置。</span></li>
-        <li><input type="checkbox" /><span>我能說明移動數值變大或變小會如何影響速度。</span></li>
+        <li><input type="checkbox" name="explainItems" value="我能說明 x 座標改變會影響角色左右位置" /><span>我能說明 x 座標改變會影響角色左右位置。</span></li>
+        <li><input type="checkbox" name="explainItems" value="我能說明 y 座標改變會影響角色上下位置" /><span>我能說明 y 座標改變會影響角色上下位置。</span></li>
+        <li><input type="checkbox" name="explainItems" value="我能說明移動數值變大或變小會如何影響速度" /><span>我能說明移動數值變大或變小會如何影響速度。</span></li>
       </ul>
     </section>
 
-    <section class="card challenge" data-section="challengeItems">
+    <section class="card challenge">
       <h2>延伸挑戰</h2>
       <ul class="checklist">
-        <li><input type="checkbox" /><span>我能讓角色碰到邊緣時反彈或回到中間。</span></li>
-        <li><input type="checkbox" /><span>我能加入移動音效。</span></li>
-        <li><input type="checkbox" /><span>我能讓角色移動時切換造型。</span></li>
+        <li><input type="checkbox" name="challengeItems" value="我能讓角色碰到邊緣時反彈或回到中間" /><span>我能讓角色碰到邊緣時反彈或回到中間。</span></li>
+        <li><input type="checkbox" name="challengeItems" value="我能加入移動音效" /><span>我能加入移動音效。</span></li>
+        <li><input type="checkbox" name="challengeItems" value="我能讓角色移動時切換造型" /><span>我能讓角色移動時切換造型。</span></li>
       </ul>
     </section>
 
@@ -326,7 +323,12 @@
         你可以試著向同學說明：為什麼往左、往右要改變 x 座標，而往上、往下要改變 y 座標？
       </p>
 
-      <div id="statusMessage" class="status-message" aria-live="polite" hidden></div>
+      
+
+      <div class="field">
+        <label for="reflection">你覺得用按鍵控制角色移動時，最需要注意什麼？</label>
+        <textarea id="reflection" placeholder="請依據你的實作內容寫下想法。"></textarea>
+      </div>
       <div class="actions">
         <button id="submitButton" class="button primary" type="button">送出自我檢核</button>
         <p id="submitStatus" class="submit-status"></p>

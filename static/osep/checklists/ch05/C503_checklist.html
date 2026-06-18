@@ -275,39 +275,36 @@
           <label for="studentName">姓名</label>
           <input id="studentName" type="text" placeholder="請輸入姓名" required />
         </div>
-        <div class="field">
-          <label for="reflection">學習反思</label>
-          <textarea id="reflection" placeholder="請寫下你完成 C503 後的發現、困難或想改進的地方。"></textarea>
-        </div>
+        
       </div>
     </section>
 
-    <section class="card done" data-section="doneItems">
+    <section class="card done">
       <h2>我做到了</h2>
       <ul class="checklist">
-        <li><input type="checkbox" /><span>我能開啟 C503 任務練習檔。</span></li>
-        <li><input type="checkbox" /><span>我能完成 SmartRingController 連線。</span></li>
-        <li><input type="checkbox" /><span>我能讓 LED 根據角色狀態改變顏色。</span></li>
-        <li><input type="checkbox" /><span>我能讓 LED 顯示成功或警示效果。</span></li>
-        <li><input type="checkbox" /><span>我能判斷哪種狀態需要使用不同燈號回饋。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能開啟 C503 任務練習檔" /><span>我能開啟 C503 任務練習檔。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能完成 SmartRingController 連線" /><span>我能完成 SmartRingController 連線。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能讓 LED 根據角色狀態改變顏色" /><span>我能讓 LED 根據角色狀態改變顏色。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能讓 LED 顯示成功或警示效果" /><span>我能讓 LED 顯示成功或警示效果。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能判斷哪種狀態需要使用不同燈號回饋" /><span>我能判斷哪種狀態需要使用不同燈號回饋。</span></li>
       </ul>
     </section>
 
-    <section class="card" data-section="explainItems">
+    <section class="card">
       <h2>我能說明</h2>
       <ul class="checklist">
-        <li><input type="checkbox" /><span>我能說明 LED 回饋如何幫助使用者理解狀態。</span></li>
-        <li><input type="checkbox" /><span>我能說明程式條件如何決定燈號變化。</span></li>
-        <li><input type="checkbox" /><span>我能說明實體回饋與畫面回饋的差異。</span></li>
+        <li><input type="checkbox" name="explainItems" value="我能說明 LED 回饋如何幫助使用者理解狀態" /><span>我能說明 LED 回饋如何幫助使用者理解狀態。</span></li>
+        <li><input type="checkbox" name="explainItems" value="我能說明程式條件如何決定燈號變化" /><span>我能說明程式條件如何決定燈號變化。</span></li>
+        <li><input type="checkbox" name="explainItems" value="我能說明實體回饋與畫面回饋的差異" /><span>我能說明實體回饋與畫面回饋的差異。</span></li>
       </ul>
     </section>
 
-    <section class="card challenge" data-section="challengeItems">
+    <section class="card challenge">
       <h2>延伸挑戰</h2>
       <ul class="checklist">
-        <li><input type="checkbox" /><span>我能設計不同狀態的多色燈號規則。</span></li>
-        <li><input type="checkbox" /><span>我能讓 LED 變化與角色動作同步。</span></li>
-        <li><input type="checkbox" /><span>我能建立一套簡單的狀態提示系統。</span></li>
+        <li><input type="checkbox" name="challengeItems" value="我能設計不同狀態的多色燈號規則" /><span>我能設計不同狀態的多色燈號規則。</span></li>
+        <li><input type="checkbox" name="challengeItems" value="我能讓 LED 變化與角色動作同步" /><span>我能讓 LED 變化與角色動作同步。</span></li>
+        <li><input type="checkbox" name="challengeItems" value="我能建立一套簡單的狀態提示系統" /><span>我能建立一套簡單的狀態提示系統。</span></li>
       </ul>
     </section>
 
@@ -316,7 +313,12 @@
       <p>這個任務中，LED 不是只有裝飾，而是把程式內部的狀態轉換成使用者容易理解的外部回饋。</p>
       <p class="note">你可以試著向同學說明：當角色狀態改變時，LED 應該如何提醒使用者？</p>
 
-      <div id="statusMessage" class="status-message" aria-live="polite" hidden></div>
+      
+
+      <div class="field">
+        <label for="reflection">你覺得 LED 狀態提示可以幫助玩家理解哪些遊戲狀態？</label>
+        <textarea id="reflection" placeholder="請依據你的實作內容寫下想法。"></textarea>
+      </div>
       <div class="actions">
         <button id="submitButton" class="button primary" type="button">送出自我檢核</button>
         <p id="submitStatus" class="submit-status"></p>

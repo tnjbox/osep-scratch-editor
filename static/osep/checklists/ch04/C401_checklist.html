@@ -280,78 +280,75 @@
           <label for="studentName">姓名</label>
           <input id="studentName" type="text" placeholder="請輸入姓名" required />
         </div>
-        <div class="field">
-          <label for="reflection">學習反思</label>
-          <textarea id="reflection" placeholder="請寫下你完成 C401 後的發現、困難或想改進的地方。"></textarea>
-        </div>
+        
       </div>
     </section>
 
-    <section class="card done" data-section="doneItems">
+    <section class="card done">
       <h2>我做到了</h2>
       <ul class="checklist">
         <li>
-          <input type="checkbox" />
+          <input type="checkbox" name="doneItems" value="我能開啟 C401 任務練習檔" />
           <span>我能開啟 C401 任務練習檔。</span>
         </li>
         <li>
-          <input type="checkbox" />
+          <input type="checkbox" name="doneItems" value="我能完成 SmartRingController 連線" />
           <span>我能完成 SmartRingController 連線。</span>
         </li>
         <li>
-          <input type="checkbox" />
+          <input type="checkbox" name="doneItems" value="我能偵測 BTN1 上鍵" />
           <span>我能偵測 BTN1 上鍵。</span>
         </li>
         <li>
-          <input type="checkbox" />
+          <input type="checkbox" name="doneItems" value="我能偵測 BTN2 下鍵" />
           <span>我能偵測 BTN2 下鍵。</span>
         </li>
         <li>
-          <input type="checkbox" />
+          <input type="checkbox" name="doneItems" value="我能偵測 BTN3 左鍵" />
           <span>我能偵測 BTN3 左鍵。</span>
         </li>
         <li>
-          <input type="checkbox" />
+          <input type="checkbox" name="doneItems" value="我能偵測 BTN4 右鍵" />
           <span>我能偵測 BTN4 右鍵。</span>
         </li>
         <li>
-          <input type="checkbox" />
+          <input type="checkbox" name="doneItems" value="我能讓角色說出目前按下的方向鍵" />
           <span>我能讓角色說出目前按下的方向鍵。</span>
         </li>
       </ul>
     </section>
 
-    <section class="card" data-section="explainItems">
+    <section class="card">
       <h2>我能說明</h2>
       <ul class="checklist">
         <li>
-          <input type="checkbox" />
+          <input type="checkbox" name="explainItems" value="我能說明為什麼要使用「重複無限次」持續偵測按鍵" />
           <span>我能說明為什麼要使用「重複無限次」持續偵測按鍵。</span>
         </li>
         <li>
-          <input type="checkbox" />
+          <input type="checkbox" name="explainItems" value="我能說明「如果……那麼」在按鍵偵測中的用途" />
           <span>我能說明「如果……那麼」在按鍵偵測中的用途。</span>
         </li>
         <li>
-          <input type="checkbox" />
+          <input type="checkbox" name="explainItems" value="我能說明實體按鍵如何影響 Scratch 角色" />
           <span>我能說明實體按鍵如何影響 Scratch 角色。</span>
         </li>
       </ul>
     </section>
 
-    <section class="card challenge" data-section="challengeItems">
+    <section class="card challenge">
       <h2>延伸挑戰</h2>
       <ul class="checklist">
         <li>
-          <input type="checkbox" />
+          <input type="checkbox" name="challengeItems" value="我能加入更多按鍵偵測" />
           <span>我能加入更多按鍵偵測。</span>
         </li>
         <li>
-          <input type="checkbox" />
+          <input type="checkbox" name="challengeItems" value="我能讓不同按鍵播放不同音效" />
           <span>我能讓不同按鍵播放不同音效。</span>
         </li>
         <li>
-          <input type="checkbox" />
+          <input type="checkbox" name="challengeItems" value="我能讓不同按鍵切換不同造型" />
           <span>我能讓不同按鍵切換不同造型。</span>
         </li>
       </ul>
@@ -367,9 +364,14 @@
         你可以試著向同學說明：按下實體按鍵之後，Scratch 是如何知道你按了哪一顆按鍵？
       </p>
 
-      <div id="statusMessage" class="status-message" aria-live="polite" hidden></div>
+      
+
+      <div class="field">
+        <label for="reflection">你覺得 SmartRing 按鍵可以用在哪些互動作品中？</label>
+        <textarea id="reflection" placeholder="請依據你的實作內容寫下想法。"></textarea>
+      </div>
       <div class="actions">
-        <button id="submitBtn" class="button primary" type="button">送出自我檢核表</button>
+        <button id="submitButton" class="button primary" type="button">送出自我檢核</button>
         <p id="submitStatus" class="submit-status"></p>
         <a class="button secondary" href="/osep/chapters/ch04.html">返回第 4 章</a>
         <a class="button secondary" href="/osep/">返回教材總入口</a>

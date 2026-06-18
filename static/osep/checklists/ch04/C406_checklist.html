@@ -70,41 +70,38 @@
           <label for="studentName">姓名</label>
           <input id="studentName" type="text" placeholder="請輸入姓名" required />
         </div>
-        <div class="field">
-          <label for="reflection">學習反思</label>
-          <textarea id="reflection" placeholder="請寫下你完成 C406 後的發現、困難或想改進的地方。"></textarea>
-        </div>
+        
       </div>
     </section>
 
-    <section class="card done" data-section="doneItems">
+    <section class="card done">
       <h2>我做到了</h2>
       <ul class="checklist">
-        <li><input type="checkbox" /><span>我能開啟 C406 任務練習檔。</span></li>
-        <li><input type="checkbox" /><span>我能完成 SmartRingController 連線。</span></li>
-        <li><input type="checkbox" /><span>我能選擇一個挑戰方向。</span></li>
-        <li><input type="checkbox" /><span>我能使用至少一種按鍵偵測。</span></li>
-        <li><input type="checkbox" /><span>我能使用至少一種角色互動。</span></li>
-        <li><input type="checkbox" /><span>我能使用至少一種 LED 回饋。</span></li>
-        <li><input type="checkbox" /><span>我能完成自己的 SmartRing 互動作品。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能開啟 C406 任務練習檔" /><span>我能開啟 C406 任務練習檔。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能完成 SmartRingController 連線" /><span>我能完成 SmartRingController 連線。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能選擇一個挑戰方向" /><span>我能選擇一個挑戰方向。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能使用至少一種按鍵偵測" /><span>我能使用至少一種按鍵偵測。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能使用至少一種角色互動" /><span>我能使用至少一種角色互動。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能使用至少一種 LED 回饋" /><span>我能使用至少一種 LED 回饋。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能完成自己的 SmartRing 互動作品" /><span>我能完成自己的 SmartRing 互動作品。</span></li>
       </ul>
     </section>
 
-    <section class="card" data-section="explainItems">
+    <section class="card">
       <h2>我能說明</h2>
       <ul class="checklist">
-        <li><input type="checkbox" /><span>我能說明我的作品使用了哪些 SmartRing 功能。</span></li>
-        <li><input type="checkbox" /><span>我能說明我的作品中有哪些輸入與輸出。</span></li>
-        <li><input type="checkbox" /><span>我能說明我修改或新增了哪些設計。</span></li>
+        <li><input type="checkbox" name="explainItems" value="我能說明我的作品使用了哪些 SmartRing 功能" /><span>我能說明我的作品使用了哪些 SmartRing 功能。</span></li>
+        <li><input type="checkbox" name="explainItems" value="我能說明我的作品中有哪些輸入與輸出" /><span>我能說明我的作品中有哪些輸入與輸出。</span></li>
+        <li><input type="checkbox" name="explainItems" value="我能說明我修改或新增了哪些設計" /><span>我能說明我修改或新增了哪些設計。</span></li>
       </ul>
     </section>
 
-    <section class="card challenge" data-section="challengeItems">
+    <section class="card challenge">
       <h2>延伸挑戰</h2>
       <ul class="checklist">
-        <li><input type="checkbox" /><span>我能加入分數或時間限制。</span></li>
-        <li><input type="checkbox" /><span>我能加入多種 LED 效果。</span></li>
-        <li><input type="checkbox" /><span>我能向同學展示並說明自己的作品。</span></li>
+        <li><input type="checkbox" name="challengeItems" value="我能加入分數或時間限制" /><span>我能加入分數或時間限制。</span></li>
+        <li><input type="checkbox" name="challengeItems" value="我能加入多種 LED 效果" /><span>我能加入多種 LED 效果。</span></li>
+        <li><input type="checkbox" name="challengeItems" value="我能向同學展示並說明自己的作品" /><span>我能向同學展示並說明自己的作品。</span></li>
       </ul>
     </section>
 
@@ -113,7 +110,12 @@
       <p>這個任務中，你不只是完成指定功能，而是要把前面學到的功能組合成自己的作品。</p>
       <p class="note">你可以試著向同學說明：你的作品想解決什麼問題，或想提供什麼樣的互動體驗？</p>
 
-      <div id="statusMessage" class="status-message" aria-live="polite" hidden></div>
+      
+
+      <div class="field">
+        <label for="reflection">你在完成基礎挑戰任務時，遇到最大的困難是什麼？</label>
+        <textarea id="reflection" placeholder="請依據你的實作內容寫下想法。"></textarea>
+      </div>
       <div class="actions">
         <button id="submitButton" class="button primary" type="button">送出自我檢核</button>
         <p id="submitStatus" class="submit-status"></p>

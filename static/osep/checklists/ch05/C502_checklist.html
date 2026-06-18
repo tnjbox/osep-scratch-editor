@@ -275,39 +275,36 @@
           <label for="studentName">姓名</label>
           <input id="studentName" type="text" placeholder="請輸入姓名" required />
         </div>
-        <div class="field">
-          <label for="reflection">學習反思</label>
-          <textarea id="reflection" placeholder="請寫下你完成 C502 後的發現、困難或想改進的地方。"></textarea>
-        </div>
+        
       </div>
     </section>
 
-    <section class="card done" data-section="doneItems">
+    <section class="card done">
       <h2>我做到了</h2>
       <ul class="checklist">
-        <li><input type="checkbox" /><span>我能開啟 C502 任務練習檔。</span></li>
-        <li><input type="checkbox" /><span>我能建立角色移動速度變數。</span></li>
-        <li><input type="checkbox" /><span>我能依照方向鍵改變角色移動方向。</span></li>
-        <li><input type="checkbox" /><span>我能調整角色移動的速度大小。</span></li>
-        <li><input type="checkbox" /><span>我能比較不同速度設定對操作的影響。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能開啟 C502 任務練習檔" /><span>我能開啟 C502 任務練習檔。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能建立角色移動速度變數" /><span>我能建立角色移動速度變數。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能依照方向鍵改變角色移動方向" /><span>我能依照方向鍵改變角色移動方向。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能調整角色移動的速度大小" /><span>我能調整角色移動的速度大小。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能比較不同速度設定對操作的影響" /><span>我能比較不同速度設定對操作的影響。</span></li>
       </ul>
     </section>
 
-    <section class="card" data-section="explainItems">
+    <section class="card">
       <h2>我能說明</h2>
       <ul class="checklist">
-        <li><input type="checkbox" /><span>我能說明變數如何改變角色移動效果。</span></li>
-        <li><input type="checkbox" /><span>我能說明方向與速度的關係。</span></li>
-        <li><input type="checkbox" /><span>我能說明為什麼速度設定會影響操控體驗。</span></li>
+        <li><input type="checkbox" name="explainItems" value="我能說明變數如何改變角色移動效果" /><span>我能說明變數如何改變角色移動效果。</span></li>
+        <li><input type="checkbox" name="explainItems" value="我能說明方向與速度的關係" /><span>我能說明方向與速度的關係。</span></li>
+        <li><input type="checkbox" name="explainItems" value="我能說明為什麼速度設定會影響操控體驗" /><span>我能說明為什麼速度設定會影響操控體驗。</span></li>
       </ul>
     </section>
 
-    <section class="card challenge" data-section="challengeItems">
+    <section class="card challenge">
       <h2>延伸挑戰</h2>
       <ul class="checklist">
-        <li><input type="checkbox" /><span>我能設計快慢兩種模式。</span></li>
-        <li><input type="checkbox" /><span>我能把速度變數和 LED 效果一起使用。</span></li>
-        <li><input type="checkbox" /><span>我能讓角色在不同速度下切換造型。</span></li>
+        <li><input type="checkbox" name="challengeItems" value="我能設計快慢兩種模式" /><span>我能設計快慢兩種模式。</span></li>
+        <li><input type="checkbox" name="challengeItems" value="我能把速度變數和 LED 效果一起使用" /><span>我能把速度變數和 LED 效果一起使用。</span></li>
+        <li><input type="checkbox" name="challengeItems" value="我能讓角色在不同速度下切換造型" /><span>我能讓角色在不同速度下切換造型。</span></li>
       </ul>
     </section>
 
@@ -316,7 +313,12 @@
       <p>這個任務中，方向鍵決定移動方向，而變數則是控制移動速度；兩者一起能讓控制更精準且有趣。</p>
       <p class="note">你可以試著向同學說明：如果速度太快或太慢，會怎麼影響操作？</p>
 
-      <div id="statusMessage" class="status-message" aria-live="polite" hidden></div>
+      
+
+      <div class="field">
+        <label for="reflection">你覺得速度變數可以用在哪些遊戲或互動作品中？</label>
+        <textarea id="reflection" placeholder="請依據你的實作內容寫下想法。"></textarea>
+      </div>
       <div class="actions">
         <button id="submitButton" class="button primary" type="button">送出自我檢核</button>
         <p id="submitStatus" class="submit-status"></p>

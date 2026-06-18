@@ -85,41 +85,38 @@
           <label for="studentName">姓名</label>
           <input id="studentName" type="text" placeholder="請輸入姓名" required />
         </div>
-        <div class="field">
-          <label for="reflection">學習反思</label>
-          <textarea id="reflection" placeholder="請寫下你完成 C403 後的發現、困難或想改進的地方。"></textarea>
-        </div>
+        
       </div>
     </section>
 
-    <section class="card done" data-section="doneItems">
+    <section class="card done">
       <h2>我做到了</h2>
       <ul class="checklist">
-        <li><input type="checkbox" /><span>我能開啟 C403 任務練習檔。</span></li>
-        <li><input type="checkbox" /><span>我能完成 SmartRingController 連線。</span></li>
-        <li><input type="checkbox" /><span>我能讓 SmartRing LED 顯示紅色。</span></li>
-        <li><input type="checkbox" /><span>我能讓 SmartRing LED 顯示藍色。</span></li>
-        <li><input type="checkbox" /><span>我能讓 SmartRing LED 顯示綠色。</span></li>
-        <li><input type="checkbox" /><span>我能讓 SmartRing LED 顯示黃色。</span></li>
-        <li><input type="checkbox" /><span>我能用不同按鍵控制不同 LED 顏色。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能開啟 C403 任務練習檔" /><span>我能開啟 C403 任務練習檔。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能完成 SmartRingController 連線" /><span>我能完成 SmartRingController 連線。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能讓 SmartRing LED 顯示紅色" /><span>我能讓 SmartRing LED 顯示紅色。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能讓 SmartRing LED 顯示藍色" /><span>我能讓 SmartRing LED 顯示藍色。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能讓 SmartRing LED 顯示綠色" /><span>我能讓 SmartRing LED 顯示綠色。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能讓 SmartRing LED 顯示黃色" /><span>我能讓 SmartRing LED 顯示黃色。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能用不同按鍵控制不同 LED 顏色" /><span>我能用不同按鍵控制不同 LED 顏色。</span></li>
       </ul>
     </section>
 
-    <section class="card" data-section="explainItems">
+    <section class="card">
       <h2>我能說明</h2>
       <ul class="checklist">
-        <li><input type="checkbox" /><span>我能說明 RGB 顏色是由紅、綠、藍組成。</span></li>
-        <li><input type="checkbox" /><span>我能說明 Scratch 如何輸出指令控制實體 LED。</span></li>
-        <li><input type="checkbox" /><span>我能說明按鍵輸入與 LED 輸出之間的關係。</span></li>
+        <li><input type="checkbox" name="explainItems" value="我能說明 RGB 顏色是由紅、綠、藍組成" /><span>我能說明 RGB 顏色是由紅、綠、藍組成。</span></li>
+        <li><input type="checkbox" name="explainItems" value="我能說明 Scratch 如何輸出指令控制實體 LED" /><span>我能說明 Scratch 如何輸出指令控制實體 LED。</span></li>
+        <li><input type="checkbox" name="explainItems" value="我能說明按鍵輸入與 LED 輸出之間的關係" /><span>我能說明按鍵輸入與 LED 輸出之間的關係。</span></li>
       </ul>
     </section>
 
-    <section class="card challenge" data-section="challengeItems">
+    <section class="card challenge">
       <h2>延伸挑戰</h2>
       <ul class="checklist">
-        <li><input type="checkbox" /><span>我能設計自己喜歡的顏色組合。</span></li>
-        <li><input type="checkbox" /><span>我能讓 LED 顏色依照按鍵順序變化。</span></li>
-        <li><input type="checkbox" /><span>我能加入熄燈功能。</span></li>
+        <li><input type="checkbox" name="challengeItems" value="我能設計自己喜歡的顏色組合" /><span>我能設計自己喜歡的顏色組合。</span></li>
+        <li><input type="checkbox" name="challengeItems" value="我能讓 LED 顏色依照按鍵順序變化" /><span>我能讓 LED 顏色依照按鍵順序變化。</span></li>
+        <li><input type="checkbox" name="challengeItems" value="我能加入熄燈功能" /><span>我能加入熄燈功能。</span></li>
       </ul>
     </section>
 
@@ -128,7 +125,12 @@
       <p>這個任務中，Scratch 不只是控制畫面角色，也可以透過 WebSerial 控制 SmartRing 的實體 LED。</p>
       <p class="note">你可以試著向同學說明：按下方向鍵後，程式如何決定 LED 要顯示哪一種顏色？</p>
 
-      <div id="statusMessage" class="status-message" aria-live="polite" hidden></div>
+      
+
+      <div class="field">
+        <label for="reflection">你覺得 LED 顏色可以用來表達哪些狀態？</label>
+        <textarea id="reflection" placeholder="請依據你的實作內容寫下想法。"></textarea>
+      </div>
       <div class="actions">
         <button id="submitButton" class="button primary" type="button">送出自我檢核</button>
         <p id="submitStatus" class="submit-status"></p>

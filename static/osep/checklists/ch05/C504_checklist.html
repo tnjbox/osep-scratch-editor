@@ -275,39 +275,36 @@
           <label for="studentName">姓名</label>
           <input id="studentName" type="text" placeholder="請輸入姓名" required />
         </div>
-        <div class="field">
-          <label for="reflection">學習反思</label>
-          <textarea id="reflection" placeholder="請寫下你完成 C504 後的發現、困難或想改進的地方。"></textarea>
-        </div>
+        
       </div>
     </section>
 
-    <section class="card done" data-section="doneItems">
+    <section class="card done">
       <h2>我做到了</h2>
       <ul class="checklist">
-        <li><input type="checkbox" /><span>我能開啟 C504 任務練習檔。</span></li>
-        <li><input type="checkbox" /><span>我能完成 SmartRingController 連線。</span></li>
-        <li><input type="checkbox" /><span>我能設計至少一個條件判斷。</span></li>
-        <li><input type="checkbox" /><span>我能讓作品在不同條件下產生不同結果。</span></li>
-        <li><input type="checkbox" /><span>我能讓角色或 LED 依條件回應。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能開啟 C504 任務練習檔" /><span>我能開啟 C504 任務練習檔。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能完成 SmartRingController 連線" /><span>我能完成 SmartRingController 連線。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能設計至少一個條件判斷" /><span>我能設計至少一個條件判斷。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能讓作品在不同條件下產生不同結果" /><span>我能讓作品在不同條件下產生不同結果。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能讓角色或 LED 依條件回應" /><span>我能讓角色或 LED 依條件回應。</span></li>
       </ul>
     </section>
 
-    <section class="card" data-section="explainItems">
+    <section class="card">
       <h2>我能說明</h2>
       <ul class="checklist">
-        <li><input type="checkbox" /><span>我能說明條件判斷如何決定程式流程。</span></li>
-        <li><input type="checkbox" /><span>我能說明成功與失敗條件的差異。</span></li>
-        <li><input type="checkbox" /><span>我能說明互動設計中條件的用途。</span></li>
+        <li><input type="checkbox" name="explainItems" value="我能說明條件判斷如何決定程式流程" /><span>我能說明條件判斷如何決定程式流程。</span></li>
+        <li><input type="checkbox" name="explainItems" value="我能說明成功與失敗條件的差異" /><span>我能說明成功與失敗條件的差異。</span></li>
+        <li><input type="checkbox" name="explainItems" value="我能說明互動設計中條件的用途" /><span>我能說明互動設計中條件的用途。</span></li>
       </ul>
     </section>
 
-    <section class="card challenge" data-section="challengeItems">
+    <section class="card challenge">
       <h2>延伸挑戰</h2>
       <ul class="checklist">
-        <li><input type="checkbox" /><span>我能加入多個判斷條件。</span></li>
-        <li><input type="checkbox" /><span>我能依條件改變角色造型。</span></li>
-        <li><input type="checkbox" /><span>我能加入不同關卡或分支流程。</span></li>
+        <li><input type="checkbox" name="challengeItems" value="我能加入多個判斷條件" /><span>我能加入多個判斷條件。</span></li>
+        <li><input type="checkbox" name="challengeItems" value="我能依條件改變角色造型" /><span>我能依條件改變角色造型。</span></li>
+        <li><input type="checkbox" name="challengeItems" value="我能加入不同關卡或分支流程" /><span>我能加入不同關卡或分支流程。</span></li>
       </ul>
     </section>
 
@@ -316,7 +313,12 @@
       <p>這個任務中，程式會依照不同情況做出不同反應；條件判斷讓作品變得更有決策能力。</p>
       <p class="note">你可以試著向同學說明：如果沒有條件判斷，互動作品會變得怎樣？</p>
 
-      <div id="statusMessage" class="status-message" aria-live="polite" hidden></div>
+      
+
+      <div class="field">
+        <label for="reflection">你覺得條件判斷可以讓互動作品變得更有趣嗎？請舉例。</label>
+        <textarea id="reflection" placeholder="請依據你的實作內容寫下想法。"></textarea>
+      </div>
       <div class="actions">
         <button id="submitButton" class="button primary" type="button">送出自我檢核</button>
         <p id="submitStatus" class="submit-status"></p>

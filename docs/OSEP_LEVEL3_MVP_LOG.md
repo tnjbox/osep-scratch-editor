@@ -550,3 +550,47 @@ docs/OSEP_LEVEL3_MVP_LOG.md
 ```text
 docs/OSEP_CH05_TASK_PLAN.md
 
+
+---
+
+## MVP-23｜統一第 4、5 章自我檢核表版型
+
+### 完成日期
+
+2026-06-18
+
+### 本版新增功能
+
+1. 統一第 4 章 C401～C406 自我檢核表版型。
+2. 統一第 5 章 C501～C506 自我檢核表版型。
+3. 將「學習反思」欄位從學生基本資料區移到最後的「完成後想一想」區塊。
+4. 移除自我檢核表中的獨立「按鍵對應」區塊。
+5. 確認各檢核表保留：
+   - `className`
+   - `seatNumber`
+   - `studentName`
+   - `reflection`
+   - `doneItems`
+   - `explainItems`
+   - `challengeItems`
+   - `submitButton`
+   - `submitStatus`
+   - `checklist-submit.js`
+   - `OSEP_CHECKLIST_CONFIG`
+
+### 修改檔案
+
+```text
+static/osep/checklists/ch04/C401_checklist.html
+static/osep/checklists/ch04/C402_checklist.html
+static/osep/checklists/ch04/C403_checklist.html
+static/osep/checklists/ch04/C404_checklist.html
+static/osep/checklists/ch04/C405_checklist.html
+static/osep/checklists/ch04/C406_checklist.html
+static/osep/checklists/ch05/C501_checklist.html
+static/osep/checklists/ch05/C502_checklist.html
+static/osep/checklists/ch05/C503_checklist.html
+static/osep/checklists/ch05/C504_checklist.html
+static/osep/checklists/ch05/C505_checklist.html
+static/osep/checklists/ch05/C506_checklist.html
+docs/OSEP_LEVEL3_MVP_LOG.md

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>C501｜連續按鍵控制自我檢核表</title>
+  <title>C501｜連續按鍵控制｜自我檢核表</title>
   <style>
     :root {
       --bg: #f6f8fb;
@@ -159,33 +159,12 @@
       resize: vertical;
     }
 
-    .status-message {
-      margin-top: 16px;
-      padding: 14px 16px;
-      border-radius: 14px;
-      border: 1px solid transparent;
-      background: #f8fafc;
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    .status-message.error {
-      background: #fef2f2;
-      border-color: #fecaca;
-      color: #991b1b;
-    }
-
-    .status-message.success {
-      background: #ecfdf5;
-      border-color: #a7f3d0;
-      color: #14532d;
-    }
-
     .actions {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
       margin-top: 24px;
+      align-items: center;
     }
 
     .button {
@@ -196,6 +175,9 @@
       font-weight: 700;
       border: 1px solid transparent;
       transition: 0.18s ease;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1rem;
     }
 
     .button.primary {
@@ -215,6 +197,24 @@
 
     .button.secondary:hover {
       background: #eff6ff;
+    }
+
+    .submit-status {
+      width: 100%;
+      margin: 4px 0 0;
+      font-weight: 700;
+    }
+
+    .submit-status.success {
+      color: #15803d;
+    }
+
+    .submit-status.warning {
+      color: #b45309;
+    }
+
+    .submit-status.error {
+      color: #b91c1c;
     }
 
     footer {
@@ -247,17 +247,23 @@
 <body>
   <header>
     <div class="label">第 5 章｜進階任務</div>
-    <h1>C501｜連續按鍵控制自我檢核表</h1>
+    <h1>C501｜連續按鍵控制｜自我檢核表</h1>
     <p>
-      完成本任務後，請檢查自己是否能透過 SmartRing 的方向鍵保持連續控制角色移動。
+      完成本任務後，請檢查自己是否能透過 SmartRing 的方向鍵持續控制角色移動，
+      並理解連續偵測與座標控制的概念。
     </p>
   </header>
 
   <main>
     <section class="card goal">
       <h2>任務目標</h2>
-      <p>我能使用 SmartRing 的方向鍵在按住時持續控制角色移動。</p>
-      <p class="note">這個任務的重點是理解「持續輸入」與「重複判斷」在互動程式中的角色。</p>
+      <p>
+        我能使用 SmartRing BTN1～BTN4 控制角色連續移動，理解「按一下移動」與
+        「按住持續移動」的差異，並使用 x / y 座標改變角色位置。
+      </p>
+      <p class="note">
+        本任務重點是透過「重複無限次」持續偵測按鍵狀態，讓角色在按住按鍵時能連續移動。
+      </p>
     </section>
 
     <section class="card">
@@ -275,48 +281,91 @@
           <label for="studentName">姓名</label>
           <input id="studentName" type="text" placeholder="請輸入姓名" required />
         </div>
-        <div class="field">
-          <label for="reflection">學習反思</label>
-          <textarea id="reflection" placeholder="請寫下你完成 C501 後的發現、困難或想改進的地方。"></textarea>
-        </div>
       </div>
     </section>
 
-    <section class="card done" data-section="doneItems">
+    <section class="card done">
       <h2>我做到了</h2>
       <ul class="checklist">
-        <li><input type="checkbox" /><span>我能開啟 C501 任務練習檔。</span></li>
-        <li><input type="checkbox" /><span>我能完成 SmartRingController 連線。</span></li>
-        <li><input type="checkbox" /><span>我能讓角色在按住方向鍵時持續移動。</span></li>
-        <li><input type="checkbox" /><span>我能分辨一次按鍵與持續按鍵的差異。</span></li>
-        <li><input type="checkbox" /><span>我能讓角色在不同方向鍵下有不同移動效果。</span></li>
+        <li>
+          <input type="checkbox" name="doneItems" value="我已成功連接 SmartRing 並載入 C501 任務檔" />
+          <span>我已成功連接 SmartRing 並載入 C501 任務檔。</span>
+        </li>
+        <li>
+          <input type="checkbox" name="doneItems" value="我能使用 BTN1～BTN4 控制角色上下左右移動" />
+          <span>我能使用 BTN1～BTN4 控制角色上下左右移動。</span>
+        </li>
+        <li>
+          <input type="checkbox" name="doneItems" value="我能讓角色在按住按鍵時持續移動" />
+          <span>我能讓角色在按住按鍵時持續移動。</span>
+        </li>
+        <li>
+          <input type="checkbox" name="doneItems" value="我有使用重複無限次持續偵測按鍵" />
+          <span>我有使用「重複無限次」持續偵測按鍵。</span>
+        </li>
+        <li>
+          <input type="checkbox" name="doneItems" value="我有使用 x 與 y 座標改變角色位置" />
+          <span>我有使用 x / y 座標改變角色位置。</span>
+        </li>
       </ul>
     </section>
 
-    <section class="card" data-section="explainItems">
+    <section class="card">
       <h2>我能說明</h2>
       <ul class="checklist">
-        <li><input type="checkbox" /><span>我能說明重複偵測的用途。</span></li>
-        <li><input type="checkbox" /><span>我能說明連續控制與單次控制的差異。</span></li>
-        <li><input type="checkbox" /><span>我能說明為什麼要在主迴圈中持續檢查輸入。</span></li>
+        <li>
+          <input type="checkbox" name="explainItems" value="我能說明按一下移動與按住持續移動的差異" />
+          <span>我能說明「按一下移動」與「按住持續移動」的差異。</span>
+        </li>
+        <li>
+          <input type="checkbox" name="explainItems" value="我能說明為什麼需要使用重複無限次" />
+          <span>我能說明為什麼需要使用「重複無限次」。</span>
+        </li>
+        <li>
+          <input type="checkbox" name="explainItems" value="我能說明 BTN1～BTN4 與角色移動方向的對應" />
+          <span>我能說明 BTN1～BTN4 與角色移動方向的對應。</span>
+        </li>
+        <li>
+          <input type="checkbox" name="explainItems" value="我能說明 x 座標與 y 座標如何影響角色位置" />
+          <span>我能說明 x 座標與 y 座標如何影響角色位置。</span>
+        </li>
       </ul>
     </section>
 
-    <section class="card challenge" data-section="challengeItems">
+    <section class="card challenge">
       <h2>延伸挑戰</h2>
       <ul class="checklist">
-        <li><input type="checkbox" /><span>我能加入角色移動速度的調整。</span></li>
-        <li><input type="checkbox" /><span>我能讓移動時有順滑效果。</span></li>
-        <li><input type="checkbox" /><span>我能設計不同按鍵的連續回饋。</span></li>
+        <li>
+          <input type="checkbox" name="challengeItems" value="我有加入 speed 變數控制移動速度" />
+          <span>我有加入 speed 變數控制移動速度。</span>
+        </li>
+        <li>
+          <input type="checkbox" name="challengeItems" value="我有讓角色碰到邊緣反彈或不超出舞台" />
+          <span>我有讓角色碰到邊緣反彈，或不超出舞台。</span>
+        </li>
+        <li>
+          <input type="checkbox" name="challengeItems" value="我有加入 LED 回饋顯示移動方向" />
+          <span>我有加入 LED 回饋顯示移動方向。</span>
+        </li>
+        <li>
+          <input type="checkbox" name="challengeItems" value="我能調整速度讓角色移動更順暢" />
+          <span>我能調整速度，讓角色移動更順暢。</span>
+        </li>
       </ul>
     </section>
 
     <section class="card">
       <h2>完成後想一想</h2>
-      <p>這個任務中，程式需要長時間偵測輸入，讓角色在按住按鍵時維持移動，而不是只在點擊瞬間反應。</p>
-      <p class="note">你可以試著向同學說明：什麼情況下需要連續偵測，而不是只判斷一次？</p>
+      <p>
+        這個任務中，程式需要長時間偵測輸入，讓角色在按住按鍵時維持移動，
+        而不是只在點擊瞬間反應。
+      </p>
 
-      <div id="statusMessage" class="status-message" aria-live="polite" hidden></div>
+      <div class="field">
+        <label for="reflection">你覺得連續按鍵控制適合用在哪些遊戲或互動作品中？請舉一個例子。</label>
+        <textarea id="reflection" placeholder="例如：迷宮逃脫、閃避障礙、接寶物遊戲……"></textarea>
+      </div>
+
       <div class="actions">
         <button id="submitButton" class="button primary" type="button">送出自我檢核</button>
         <p id="submitStatus" class="submit-status"></p>
@@ -329,13 +378,14 @@
   <footer>
     OSEP SmartRingController｜C501 連續按鍵控制自我檢核表
   </footer>
+
   <script>
-  window.OSEP_CHECKLIST_CONFIG = {
-    chapter: "第5章｜進階任務",
-    taskCode: "C501",
-    taskTitle: "連續按鍵控制"
-  };
-</script>
-<script src="../checklist-submit.js"></script>
+    window.OSEP_CHECKLIST_CONFIG = {
+      chapter: "第5章｜進階任務",
+      taskCode: "C501",
+      taskTitle: "連續按鍵控制"
+    };
+  </script>
+  <script src="../checklist-submit.js"></script>
 </body>
 </html>
