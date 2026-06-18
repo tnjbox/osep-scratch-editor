@@ -457,3 +457,26 @@ static/osep/checklists/ch04/C404_checklist.html
 static/osep/checklists/ch04/C405_checklist.html
 static/osep/checklists/ch04/C406_checklist.html
 docs/OSEP_LEVEL3_MVP_LOG.md
+
+---
+
+## MVP-20｜重整第 5 章進階任務架構
+
+### 完成日期
+
+2026-06-18
+
+### 本版新增功能
+
+1. 重整第 5 章「進階任務」的 C501～C506 任務序列。
+2. 將第 5 章定位為承接第 4 章基礎任務，進入連續控制、速度變數、LED 狀態提示、條件判斷、分數與生命值。
+3. 更新 `static/osep/data/tasks.js` 中 `ch05` 的章節說明、概念標籤與任務資料。
+4. 第 5 章任務仍維持 `enabled: false`，避免尚未建立任務檔時誤導學生開啟。
+5. 為後續 MVP-21～MVP-26 建立施工藍圖。
+
+### 修改檔案
+
+```text
+static/osep/data/tasks.js
+docs/OSEP_LEVEL3_MVP_LOG.md
+
