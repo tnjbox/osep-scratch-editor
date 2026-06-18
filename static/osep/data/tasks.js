@@ -123,8 +123,8 @@ window.OSEP_COURSE = {
           description: "讓角色在按住 SmartRing 方向鍵時可以持續移動，理解持續偵測與遊戲主迴圈的概念。",
           goals: ["能使用重複結構持續偵測按鍵", "能讓角色依照 BTN1～BTN4 連續移動", "能說明單次按鍵與連續控制的差異"],
           project: "/osep/projects/ch05/C501_continuous_control.sb3",
-          checklist: "",
-          enabled: false
+          checklist: "/osep/checklists/ch05/C501_checklist.html",
+          enabled: true
         },
         {
           code: "C502",
@@ -132,7 +132,7 @@ window.OSEP_COURSE = {
           description: "使用變數控制角色移動速度，讓同一組方向鍵可以搭配不同速度產生不同操作效果。",
           goals: ["能建立速度變數", "能用變數控制角色移動距離", "能設計慢速、中速或快速移動模式"],
           project: "/osep/projects/ch05/C502_speed_direction.sb3",
-          checklist: "",
+          checklist: "/osep/checklists/ch05/C502_checklist.html",
           enabled: false
         },
         {
@@ -141,7 +141,7 @@ window.OSEP_COURSE = {
           description: "讓 SmartRing LED 根據角色狀態、速度或碰撞結果顯示不同顏色，建立程式狀態與硬體回饋的連結。",
           goals: ["能依照角色狀態改變 LED 顏色", "能用 LED 顯示成功、警示或加速狀態", "能說明 LED 回饋與程式狀態的關係"],
           project: "/osep/projects/ch05/C503_led_status.sb3",
-          checklist: "",
+          checklist: "/osep/checklists/ch05/C503_checklist.html",
           enabled: false
         },
         {
@@ -150,7 +150,7 @@ window.OSEP_COURSE = {
           description: "設計需要判斷條件的互動任務，例如碰到目標得分、碰到障礙扣分，或按下正確按鍵才通過關卡。",
           goals: ["能使用 if 或 if-else 條件判斷", "能設計成功與失敗兩種互動結果", "能讓角色或 LED 依條件產生不同回饋"],
           project: "/osep/projects/ch05/C504_condition_interaction.sb3",
-          checklist: "",
+          checklist: "/osep/checklists/ch05/C504_checklist.html",
           enabled: false
         },
         {
@@ -159,7 +159,7 @@ window.OSEP_COURSE = {
           description: "整合分數、生命值、條件判斷與 LED 回饋，讓作品具備基本遊戲規則與結束條件。",
           goals: ["能建立分數與生命值變數", "能設計得分、扣血與遊戲結束規則", "能用 LED 呈現分數或生命值狀態"],
           project: "/osep/projects/ch05/C505_score_life.sb3",
-          checklist: "",
+          checklist: "/osep/checklists/ch05/C505_checklist.html",
           enabled: false
         },
         {
@@ -168,7 +168,7 @@ window.OSEP_COURSE = {
           description: "綜合 C501～C505 所學，設計一個具備方向控制、變數、條件判斷、LED 回饋與過關條件的 SmartRing 互動作品。",
           goals: ["能整合第 5 章進階程式概念", "能設計完整互動遊戲規則", "能完成具備挑戰目標的 SmartRing 作品"],
           project: "/osep/projects/ch05/C506_advanced_challenge.sb3",
-          checklist: "",
+          checklist: "/osep/checklists/ch05/C506_checklist.html",
           enabled: false
         }
       ]

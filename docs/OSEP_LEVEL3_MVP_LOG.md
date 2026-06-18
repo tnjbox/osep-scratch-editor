@@ -480,3 +480,44 @@ docs/OSEP_LEVEL3_MVP_LOG.md
 static/osep/data/tasks.js
 docs/OSEP_LEVEL3_MVP_LOG.md
 
+---
+
+## MVP-21｜建立第 5 章 C501～C506 任務基礎架構
+
+### 完成日期
+
+2026-06-18
+
+### 本版新增功能
+
+1. 建立第 5 章任務檔資料夾：
+   - `static/osep/projects/ch05/`
+2. 建立第 5 章自我檢核表資料夾：
+   - `static/osep/checklists/ch05/`
+3. 建立 C501～C506 任務檔骨架：
+   - `C501_continuous_control.sb3`
+   - `C502_speed_direction.sb3`
+   - `C503_led_status.sb3`
+   - `C504_condition_interaction.sb3`
+   - `C505_score_life.sb3`
+   - `C506_advanced_challenge.sb3`
+4. 建立 C501～C506 自我檢核表骨架：
+   - `C501_checklist.html`
+   - `C502_checklist.html`
+   - `C503_checklist.html`
+   - `C504_checklist.html`
+   - `C505_checklist.html`
+   - `C506_checklist.html`
+5. C501～C506 自我檢核表皆沿用 MVP-19 的共用送出程式：
+   - `static/osep/checklists/checklist-submit.js`
+6. 更新 `static/osep/data/tasks.js`：
+   - C501 補上任務檔與自我檢核表路徑並啟用。
+   - C502～C506 補上任務檔與自我檢核表路徑，但維持未啟用。
+7. 本版先建立第 5 章可測試骨架，正式教材內容後續再規劃與替換。
+
+### 修改檔案
+
+```text
+static/osep/data/tasks.js
+docs/OSEP_LEVEL3_MVP_LOG.md
+
