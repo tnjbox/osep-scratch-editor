@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>C601｜認識 LED 陣列｜自我檢核表</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --border: #e5e7eb;
+      --success-bg: #ecfdf5;
+      --success-border: #a7f3d0;
+      --challenge-bg: #fff7ed;
+      --challenge-border: #fed7aa;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    header {
+      background: linear-gradient(135deg, #2563eb, #0f172a);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    header .label {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.16);
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      letter-spacing: 0.04em;
+    }
+
+    header p {
+      margin: 12px auto 0;
+      max-width: 720px;
+      color: rgba(255, 255, 255, 0.86);
+    }
+
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 28px 18px 48px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    .card h2 {
+      margin: 0 0 14px;
+      font-size: 1.35rem;
+      color: #111827;
+    }
+
+    .goal {
+      background: #eff6ff;
+      border-left: 6px solid var(--primary);
+    }
+
+    .done {
+      background: var(--success-bg);
+      border-color: var(--success-border);
+    }
+
+    .challenge {
+      background: var(--challenge-bg);
+      border-color: var(--challenge-border);
+    }
+
+    .checklist {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .checklist li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px dashed rgba(107, 114, 128, 0.3);
+    }
+
+    .checklist li:last-child {
+      border-bottom: none;
+    }
+
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin-top: 4px;
+      accent-color: var(--primary);
+      flex: 0 0 auto;
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-top: 12px;
+    }
+
+    .field-group {
+      display: grid;
+      gap: 12px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field label {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      font-size: 1rem;
+      font-family: inherit;
+      color: var(--text);
+    }
+
+    .field textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+      align-items: center;
+    }
+
+    .button {
+      display: inline-block;
+      text-decoration: none;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: 0.18s ease;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    .button.primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .button.primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .button.secondary {
+      background: white;
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .button.secondary:hover {
+      background: #eff6ff;
+    }
+
+    .submit-status {
+      width: 100%;
+      margin: 4px 0 0;
+      font-weight: 700;
+    }
+
+    .submit-status.success {
+      color: #15803d;
+    }
+
+    .submit-status.warning {
+      color: #b45309;
+    }
+
+    .submit-status.error {
+      color: #b91c1c;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding: 24px 12px 36px;
+    }
+
+    @media (max-width: 640px) {
+      header {
+        padding: 32px 16px;
+      }
+
+      header h1 {
+        font-size: 1.6rem;
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      .button {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="label">第 6 章｜陣列任務</div>
+    <h1>C601｜認識 LED 陣列｜自我檢核表</h1>
+    <p>
+      完成本任務後，請檢查自己是否能理解 SmartRing LED 陣列的概念，並完成任務要求。
+    </p>
+  </header>
+
+  <main>
+    <section class="card goal">
+      <h2>任務目標</h2>
+      <p>我能認識 SmartRing 的 LED 燈條可以視為一組有順序的陣列資料，理解每一顆 LED 都有自己的位置。</p>
+      <p class="note">本任務重點是把 12 顆 LED 看成一組有順序的資料，為後續陣列控制與圖案設計做準備。</p>
+    </section>
+
+    <section class="card">
+      <h2>學生基本資料</h2>
+      <div class="field-group">
+        <div class="field">
+          <label for="className">班級</label>
+          <input id="className" type="text" placeholder="請輸入班級" required />
+        </div>
+        <div class="field">
+          <label for="seatNumber">座號</label>
+          <input id="seatNumber" type="text" placeholder="請輸入座號" required />
+        </div>
+        <div class="field">
+          <label for="studentName">姓名</label>
+          <input id="studentName" type="text" placeholder="請輸入姓名" required />
+        </div>
+      </div>
+    </section>
+
+    <section class="card done">
+      <h2>我做到了</h2>
+      <ul class="checklist">
+        <li>
+          <input type="checkbox" name="doneItems" value="我已成功開啟 C601 任務檔。" />
+          <span>我已成功開啟 C601 任務檔。</span>
+        </li>
+        <li>
+          <input type="checkbox" name="doneItems" value="我能指出 SmartRing 上不同 LED 的位置。" />
+          <span>我能指出 SmartRing 上不同 LED 的位置。</span>
+        </li>
+        <li>
+          <input type="checkbox" name="doneItems" value="我能理解 LED 可以用編號或索引來表示。" />
+          <span>我能理解 LED 可以用編號或索引來表示。</span>
+        </li>
+        <li>
+          <input type="checkbox" name="doneItems" value="我能觀察 LED 位置與顯示結果的關係。" />
+          <span>我能觀察 LED 位置與顯示結果的關係。</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>我能說明</h2>
+      <ul class="checklist">
+        <li>
+          <input type="checkbox" name="explainItems" value="我能說明為什麼 LED 燈條可以看成一組陣列資料。" />
+          <span>我能說明為什麼 LED 燈條可以看成一組陣列資料。</span>
+        </li>
+        <li>
+          <input type="checkbox" name="explainItems" value="我能說明 LED 位置順序對程式控制的影響。" />
+          <span>我能說明 LED 位置順序對程式控制的影響。</span>
+        </li>
+        <li>
+          <input type="checkbox" name="explainItems" value="我能說明單一 LED 控制與多顆 LED 控制的差異。" />
+          <span>我能說明單一 LED 控制與多顆 LED 控制的差異。</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="card challenge">
+      <h2>延伸挑戰</h2>
+      <ul class="checklist">
+        <li>
+          <input type="checkbox" name="challengeItems" value="我能嘗試點亮指定位置的 LED。" />
+          <span>我能嘗試點亮指定位置的 LED。</span>
+        </li>
+        <li>
+          <input type="checkbox" name="challengeItems" value="我能設計一個簡單的 LED 位置觀察任務。" />
+          <span>我能設計一個簡單的 LED 位置觀察任務。</span>
+        </li>
+        <li>
+          <input type="checkbox" name="challengeItems" value="我能用自己的話說明陣列和 LED 排列的關係。" />
+          <span>我能用自己的話說明陣列和 LED 排列的關係。</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>完成後想一想</h2>
+      <p>
+        陣列任務的重點，是把多個 LED 看成一組有順序、有狀態、可以被程式控制的資料。
+      </p>
+
+      <div class="field">
+        <label for="reflection">你覺得 SmartRing 的 LED 燈條為什麼可以看成一組陣列資料？</label>
+        <textarea id="reflection" placeholder="請依據你的實作內容寫下想法。"></textarea>
+      </div>
+
+      <div class="actions">
+        <button id="submitButton" class="button primary" type="button">送出自我檢核</button>
+        <p id="submitStatus" class="submit-status"></p>
+        <a class="button secondary" href="/osep/chapters/ch06.html">返回第 6 章</a>
+        <a class="button secondary" href="/osep/">返回教材總入口</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    OSEP SmartRingController｜C601 認識 LED 陣列 自我檢核表
+  </footer>
+
+  <script>
+    window.OSEP_CHECKLIST_CONFIG = {
+      chapter: "第6章｜陣列任務",
+      taskCode: "C601",
+      taskTitle: "認識 LED 陣列"
+    };
+  </script>
+  <script src="../checklist-submit.js"></script>
+</body>
+</html>
