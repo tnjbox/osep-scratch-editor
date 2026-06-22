@@ -133,7 +133,7 @@ window.OSEP_COURSE = {
           goals: ["能建立速度變數", "能用變數控制角色移動距離", "能設計慢速、中速或快速移動模式"],
           project: "/osep/projects/ch05/C502_speed_direction.sb3",
           checklist: "/osep/checklists/ch05/C502_checklist.html",
-          enabled: false
+          enabled: true
         },
         {
           code: "C503",
@@ -142,7 +142,7 @@ window.OSEP_COURSE = {
           goals: ["能依照角色狀態改變 LED 顏色", "能用 LED 顯示成功、警示或加速狀態", "能說明 LED 回饋與程式狀態的關係"],
           project: "/osep/projects/ch05/C503_led_status.sb3",
           checklist: "/osep/checklists/ch05/C503_checklist.html",
-          enabled: false
+          enabled: true
         },
         {
           code: "C504",
@@ -151,7 +151,7 @@ window.OSEP_COURSE = {
           goals: ["能使用 if 或 if-else 條件判斷", "能設計成功與失敗兩種互動結果", "能讓角色或 LED 依條件產生不同回饋"],
           project: "/osep/projects/ch05/C504_condition_interaction.sb3",
           checklist: "/osep/checklists/ch05/C504_checklist.html",
-          enabled: false
+          enabled: true
         },
         {
           code: "C505",
@@ -160,7 +160,7 @@ window.OSEP_COURSE = {
           goals: ["能建立分數與生命值變數", "能設計得分、扣血與遊戲結束規則", "能用 LED 呈現分數或生命值狀態"],
           project: "/osep/projects/ch05/C505_score_life.sb3",
           checklist: "/osep/checklists/ch05/C505_checklist.html",
-          enabled: false
+          enabled: true
         },
         {
           code: "C506",
@@ -169,7 +169,7 @@ window.OSEP_COURSE = {
           goals: ["能整合第 5 章進階程式概念", "能設計完整互動遊戲規則", "能完成具備挑戰目標的 SmartRing 作品"],
           project: "/osep/projects/ch05/C506_advanced_challenge.sb3",
           checklist: "/osep/checklists/ch05/C506_checklist.html",
-          enabled: false
+          enabled: true
         }
       ]
     },
@@ -189,7 +189,7 @@ window.OSEP_COURSE = {
           goals: ["能理解 LED 與陣列位置的關係", "能指出指定 LED 的位置", "能說明 LED 陣列在程式控制中的用途"],
           project: "/osep/projects/ch06/C601_led_array_intro.sb3",
           checklist: "/osep/checklists/ch06/C601_checklist.html",
-          enabled: false
+          enabled: true
         },
         {
           code: "C602",
@@ -198,7 +198,7 @@ window.OSEP_COURSE = {
           goals: ["能控制多顆 LED 的顏色或亮滅狀態", "能理解批次控制 LED 的概念", "能比較單一設定與批次設定的差異"],
           project: "/osep/projects/ch06/C602_array_led_control.sb3",
           checklist: "/osep/checklists/ch06/C602_checklist.html",
-          enabled: false
+          enabled: true
         },
         {
           code: "C603",
@@ -207,7 +207,7 @@ window.OSEP_COURSE = {
           goals: ["能觀察 LED 圖樣位移的效果", "能理解 shift 與 rotate 的差異", "能設計簡單的跑馬燈或循環燈效"],
           project: "/osep/projects/ch06/C603_array_shift_rotate.sb3",
           checklist: "/osep/checklists/ch06/C603_checklist.html",
-          enabled: false
+          enabled: true
         },
         {
           code: "C604",
@@ -216,7 +216,7 @@ window.OSEP_COURSE = {
           goals: ["能用 LED 數量表示分數或生命值", "能觀察資料變化與 LED 顯示的關係", "能說明視覺化回饋在互動作品中的用途"],
           project: "/osep/projects/ch06/C604_score_life_array.sb3",
           checklist: "/osep/checklists/ch06/C604_checklist.html",
-          enabled: false
+          enabled: true
         },
         {
           code: "C605",
@@ -225,7 +225,7 @@ window.OSEP_COURSE = {
           goals: ["能利用 LED 位置設計圖案", "能設計對稱或規律排列的 LED 效果", "能說明圖案設計與陣列位置的關係"],
           project: "/osep/projects/ch06/C605_array_pattern.sb3",
           checklist: "/osep/checklists/ch06/C605_checklist.html",
-          enabled: false
+          enabled: true
         },
         {
           code: "C606",
@@ -234,7 +234,7 @@ window.OSEP_COURSE = {
           goals: ["能整合第 6 章陣列概念", "能設計 LED 圖案與互動規則", "能完成具備主題的 SmartRing 陣列作品"],
           project: "/osep/projects/ch06/C606_array_challenge.sb3",
           checklist: "/osep/checklists/ch06/C606_checklist.html",
-          enabled: false
+          enabled: true
         }
       ]
     },
@@ -254,7 +254,7 @@ window.OSEP_COURSE = {
           goals: ["能理解自訂積木的用途", "能找出程式中重複出現的流程", "能說明模組化設計的好處"],
           project: "/osep/projects/ch07/C701_custom_block_intro.sb3",
           checklist: "/osep/checklists/ch07/C701_checklist.html",
-          enabled: false
+          enabled: true
         },
         {
           code: "C702",
@@ -263,7 +263,7 @@ window.OSEP_COURSE = {
           goals: ["能建立 LED 控制用自訂積木", "能重複使用同一個 LED 函式", "能說明函式封裝與程式重用的關係"],
           project: "/osep/projects/ch07/C702_led_function.sb3",
           checklist: "/osep/checklists/ch07/C702_checklist.html",
-          enabled: false
+          enabled: true
         },
         {
           code: "C703",
@@ -272,7 +272,7 @@ window.OSEP_COURSE = {
           goals: ["能理解參數的用途", "能設計具有參數的自訂積木", "能用參數控制不同 LED 效果"],
           project: "/osep/projects/ch07/C703_parameter_led.sb3",
           checklist: "/osep/checklists/ch07/C703_checklist.html",
-          enabled: false
+          enabled: true
         },
         {
           code: "C704",
@@ -281,7 +281,7 @@ window.OSEP_COURSE = {
           goals: ["能拆解互動作品的主要流程", "能將不同功能整理成不同自訂積木", "能說明模組化如何幫助程式維護"],
           project: "/osep/projects/ch07/C704_interaction_module.sb3",
           checklist: "/osep/checklists/ch07/C704_checklist.html",
-          enabled: false
+          enabled: true
         },
         {
           code: "C705",
@@ -290,7 +290,7 @@ window.OSEP_COURSE = {
           goals: ["能設計作品狀態變數", "能用自訂積木管理狀態切換", "能讓 LED 回饋對應不同作品狀態"],
           project: "/osep/projects/ch07/C705_state_management.sb3",
           checklist: "/osep/checklists/ch07/C705_checklist.html",
-          enabled: false
+          enabled: true
         },
         {
           code: "C706",
@@ -299,7 +299,7 @@ window.OSEP_COURSE = {
           goals: ["能整合第 7 章模組化概念", "能完成具備自訂積木的 SmartRing 作品", "能說明作品中各模組的功能"],
           project: "/osep/projects/ch07/C706_module_challenge.sb3",
           checklist: "/osep/checklists/ch07/C706_checklist.html",
-          enabled: false
+          enabled: true
         }
       ]
     }
