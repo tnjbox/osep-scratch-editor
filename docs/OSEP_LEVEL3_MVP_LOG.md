@@ -637,3 +637,39 @@ Commit：2472c4c14
 
 ```text
 http://localhost:8601/?extension=...&project_url=...
+
+## MVP-24B｜建立第 7 章練習檔與自我檢核表骨架
+
+完成狀態：已完成  
+分支：feature/osep-extension-menu
+
+### 1. 本版新增功能
+
+- 建立第 7 章「模組化任務」C701～C706 練習檔占位檔。
+- 建立第 7 章 C701～C706 自我檢核表骨架。
+- 更新 `tasks.js`，將第 7 章 C701～C706 任務接上對應自我檢核表路徑。
+- 第 7 章目前仍維持 `enabled: false`，任務練習檔尚未正式開放。
+- 本版只完成章節骨架，不製作正式 Scratch 任務內容。
+
+### 2. 修改檔案
+
+- `static/osep/data/tasks.js`
+- `static/osep/projects/ch07/C701_custom_block_intro.sb3`
+- `static/osep/projects/ch07/C702_led_function.sb3`
+- `static/osep/projects/ch07/C703_parameter_led.sb3`
+- `static/osep/projects/ch07/C704_interaction_module.sb3`
+- `static/osep/projects/ch07/C705_state_management.sb3`
+- `static/osep/projects/ch07/C706_module_challenge.sb3`
+- `static/osep/checklists/ch07/C701_checklist.html`
+- `static/osep/checklists/ch07/C702_checklist.html`
+- `static/osep/checklists/ch07/C703_checklist.html`
+- `static/osep/checklists/ch07/C704_checklist.html`
+- `static/osep/checklists/ch07/C705_checklist.html`
+- `static/osep/checklists/ch07/C706_checklist.html`
+
+### 3. 測試方式
+
+本機啟動：
+
+```powershell
+npm start

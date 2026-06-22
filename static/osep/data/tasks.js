@@ -253,7 +253,7 @@ window.OSEP_COURSE = {
           description: "認識如何將常用的 SmartRing 控制流程整理成自訂積木，降低程式重複並提升可讀性。",
           goals: ["能理解自訂積木的用途", "能找出程式中重複出現的流程", "能說明模組化設計的好處"],
           project: "/osep/projects/ch07/C701_custom_block_intro.sb3",
-          checklist: "",
+          checklist: "/osep/checklists/ch07/C701_checklist.html",
           enabled: false
         },
         {
@@ -262,7 +262,7 @@ window.OSEP_COURSE = {
           description: "將常用 LED 控制流程封裝成自訂積木，例如清除燈號、顯示狀態、顯示指定圖案。",
           goals: ["能建立 LED 控制用自訂積木", "能重複使用同一個 LED 函式", "能說明函式封裝與程式重用的關係"],
           project: "/osep/projects/ch07/C702_led_function.sb3",
-          checklist: "",
+          checklist: "/osep/checklists/ch07/C702_checklist.html",
           enabled: false
         },
         {
@@ -271,7 +271,7 @@ window.OSEP_COURSE = {
           description: "在自訂積木中加入參數，讓同一個函式可以控制不同位置、顏色或數量的 LED。",
           goals: ["能理解參數的用途", "能設計具有參數的自訂積木", "能用參數控制不同 LED 效果"],
           project: "/osep/projects/ch07/C703_parameter_led.sb3",
-          checklist: "",
+          checklist: "/osep/checklists/ch07/C703_checklist.html",
           enabled: false
         },
         {
@@ -280,7 +280,7 @@ window.OSEP_COURSE = {
           description: "將按鍵偵測、角色控制、LED 回饋等互動流程拆解成不同模組，提升程式結構清楚度。",
           goals: ["能拆解互動作品的主要流程", "能將不同功能整理成不同自訂積木", "能說明模組化如何幫助程式維護"],
           project: "/osep/projects/ch07/C704_interaction_module.sb3",
-          checklist: "",
+          checklist: "/osep/checklists/ch07/C704_checklist.html",
           enabled: false
         },
         {
@@ -289,7 +289,7 @@ window.OSEP_COURSE = {
           description: "使用變數、自訂積木與 LED 回饋管理作品狀態，例如開始、進行中、成功、失敗或結束。",
           goals: ["能設計作品狀態變數", "能用自訂積木管理狀態切換", "能讓 LED 回饋對應不同作品狀態"],
           project: "/osep/projects/ch07/C705_state_management.sb3",
-          checklist: "",
+          checklist: "/osep/checklists/ch07/C705_checklist.html",
           enabled: false
         },
         {
@@ -298,7 +298,7 @@ window.OSEP_COURSE = {
           description: "整合自訂積木、參數、狀態管理與 SmartRing LED 回饋，完成一個結構清楚的互動作品。",
           goals: ["能整合第 7 章模組化概念", "能完成具備自訂積木的 SmartRing 作品", "能說明作品中各模組的功能"],
           project: "/osep/projects/ch07/C706_module_challenge.sb3",
-          checklist: "",
+          checklist: "/osep/checklists/ch07/C706_checklist.html",
           enabled: false
         }
       ]
