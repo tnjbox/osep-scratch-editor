@@ -845,3 +845,111 @@ http://localhost:8601/osep/
 3. MVP-25-2：回到第 6 章教材主線，設計 C601～C606 示範題、仿作題與延伸挑戰。
 4. MVP-V01：規劃 SmartRing 虛擬控制器。
 5. MVP-AI01：規劃 AI 密室逃脫任務模式。
+
+
+---
+
+## MVP-26E｜更新 CH4～CH7 骨架練習檔與任務解鎖紀錄
+
+### 完成日期
+
+2026-06-22
+
+### 任務目標
+
+正式記錄 MVP-26D 已完成的 CH4～CH7 學生練習骨架檔更新與任務解鎖結果，作為後續教材檔案細修、Scratch 專案內容補強與課堂測試的依據。
+
+### 前置完成項目
+
+本紀錄對應前一版：
+
+* MVP-26D add chapter 4 to 7 starter projects and unlock tasks
+
+最新 commit：
+
+* 1bba6f029 MVP-26D add chapter 4 to 7 starter projects and unlock tasks
+
+### 完成內容
+
+1. 更新第 4 章 C401～C406 學生練習骨架檔。
+2. 更新第 5 章 C501～C506 學生練習骨架檔。
+3. 更新第 6 章 C601～C606 學生練習骨架檔。
+4. 更新第 7 章 C701～C706 學生練習骨架檔。
+5. 解鎖 CH5～CH7 任務，讓 C501～C706 可直接進入 Scratch Editor 測試。
+6. 確認 CH4～CH7 任務卡可正常點擊。
+7. 確認 C401～C706 對應 .sb3 可正常載入。
+8. 確認每個 .sb3 皆包含對應任務提示卡。
+9. 維持目前 .sb3 為「學生練習骨架版」，後續可再逐題加入更完整的 OSEP SmartRing 積木程式。
+
+### 修改檔案
+
+* static/osep/data/tasks.js
+* static/osep/projects/ch04/C401_button_detect.sb3
+* static/osep/projects/ch04/C402_sprite_move.sb3
+* static/osep/projects/ch04/C403_led_color.sb3
+* static/osep/projects/ch04/C404_led_feedback.sb3
+* static/osep/projects/ch04/C405_mini_game.sb3
+* static/osep/projects/ch04/C406_challenge.sb3
+* static/osep/projects/ch05/C501_continuous_control.sb3
+* static/osep/projects/ch05/C502_speed_direction.sb3
+* static/osep/projects/ch05/C503_led_status.sb3
+* static/osep/projects/ch05/C504_condition_interaction.sb3
+* static/osep/projects/ch05/C505_score_life.sb3
+* static/osep/projects/ch05/C506_advanced_challenge.sb3
+* static/osep/projects/ch06/C601_led_array_intro.sb3
+* static/osep/projects/ch06/C602_array_led_control.sb3
+* static/osep/projects/ch06/C603_array_shift_rotate.sb3
+* static/osep/projects/ch06/C604_score_life_array.sb3
+* static/osep/projects/ch06/C605_array_pattern.sb3
+* static/osep/projects/ch06/C606_array_challenge.sb3
+* static/osep/projects/ch07/C701_custom_block_intro.sb3
+* static/osep/projects/ch07/C702_led_function.sb3
+* static/osep/projects/ch07/C703_parameter_led.sb3
+* static/osep/projects/ch07/C704_interaction_module.sb3
+* static/osep/projects/ch07/C705_state_management.sb3
+* static/osep/projects/ch07/C706_module_challenge.sb3
+
+### 測試結果
+
+已完成測試：
+
+1. git status 顯示工作區乾淨。
+2. git log 顯示最新 commit 已同步到 origin/feature/osep-extension-menu。
+3. CH4～CH7 任務可進入 Scratch Editor。
+4. CH5～CH7 鎖定狀態已解除。
+5. C401～C706 專案可載入。
+6. 學生練習骨架提示卡可正常顯示。
+
+### Git 狀態
+
+測試後狀態：
+
+* On branch feature/osep-extension-menu
+* Your branch is up to date with origin/feature/osep-extension-menu
+* nothing to commit, working tree clean
+
+最新紀錄：
+
+* 1bba6f029 MVP-26D add chapter 4 to 7 starter projects and unlock tasks
+* 2be54e5a8 MVP-25-2 add chapter 6 task design
+* f50ac528f MVP-C8-1F add C8 demo checklist
+* 48ea3669a MVP-C8-1F add C8 demo checklist
+* 5518a003d MVP-C8-1E update C8 integration log
+
+### 決策紀錄
+
+1. CH4～CH7 的 .sb3 目前先採學生練習骨架版。
+2. 骨架檔以任務提示卡為主，不預先放入完整解答。
+3. 後續若需要，可逐題補上 OSEP SmartRing 積木示範區或教師版完成範例。
+4. CH5～CH7 任務已先解鎖，方便整體流程測試與教材比對。
+5. 目前不新增自動評分、不修改韌體、不調整 C8 通訊協定。
+
+### 後續建議
+
+下一步可選擇：
+
+1. MVP-27-1：逐題檢查 C401～C406 骨架任務內容與第 4 章教材一致性。
+2. MVP-27-2：逐題檢查 C501～C506 骨架任務內容與第 5 章教材一致性。
+3. MVP-27-3：逐題檢查 C601～C606 骨架任務內容與第 6 章教材一致性。
+4. MVP-27-4：逐題檢查 C701～C706 骨架任務內容與第 7 章教材一致性。
+5. MVP-28-1：開始製作 C401 教師示範版或學生半成品版 .sb3。
