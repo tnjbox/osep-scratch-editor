@@ -177,7 +177,7 @@
       <p id="connection-description">
         確認 OSEP Scratch Editor、SmartRing Extension、WebSerial 與 ESP8266 SmartRing 是否能正常連線。
       </p>
-      <a id="connection-link" class="btn secondary" href="#">開始連線測試</a>
+      <a id="connection-link" class="btn secondary" href="#" target="_blank" rel="noopener noreferrer">開始連線測試</a>
     </section>
 
     <h2 class="section-title">章節學習任務</h2>
@@ -204,7 +204,7 @@
     function createEditorUrl(projectPath) {
       const extensionUrl = `${origin}/osep/extensions/extensionV22C17.js`;
       const projectUrl = `${origin}${projectPath}`;
-      return `${origin}/?extension=${encodeURIComponent(extensionUrl)}&project_url=${encodeURIComponent(projectUrl)}`;
+      return `${origin}/editor.html?extension=${encodeURIComponent(extensionUrl)}&project_url=${encodeURIComponent(projectUrl)}`;
     }
 
     function renderHome() {

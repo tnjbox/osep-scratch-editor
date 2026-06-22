@@ -53,6 +53,11 @@
         return value;
     }
 
+    function mapLedValueToC8(value) {
+        const v = Math.max(0, Math.min(30, Math.round(Number(value) || 0)));
+        return Math.round((v / 30) * 255);
+    }
+
     function limitLEDIndex(index) {
         index = Number(index);
         if(isNaN(index)) index = 1;
@@ -293,10 +298,10 @@
 
         sendRGB(r, g, b) {
             return this.sendObject({
-                cmd:"RGB",
-                r:limitLEDValue(r),
-                g:limitLEDValue(g),
-                b:limitLEDValue(b)
+                cmd: "setAllLeds",
+                r: mapLedValueToC8(r),
+                g: mapLedValueToC8(g),
+                b: mapLedValueToC8(b)
             });
         }
 
@@ -311,7 +316,16 @@
         }
 
         clearLEDs() {
-            return this.sendObject({cmd:"CLEAR"});
+            return this.sendObject({ cmd: "clearLeds" });
+        }
+
+        setBrightness(value) {
+            const brightness = Math.max(0, Math.min(40, Math.round(Number(value) || 0)));
+
+            return this.sendObject({
+                cmd: "setBrightness",
+                value: brightness
+            });
         }
 
         sendBar(value, max) {
@@ -331,9 +345,15 @@
         }
 
         sendBuffer() {
+            const leds = STATE.ledBuffer.map((rgb) => ({
+                r: mapLedValueToC8(rgb[0]),
+                g: mapLedValueToC8(rgb[1]),
+                b: mapLedValueToC8(rgb[2])
+            }));
+
             return this.sendObject({
-                cmd:"BUFFER",
-                led:STATE.ledBuffer
+                cmd: "showBuffer",
+                leds: leds
             });
         }
     }
