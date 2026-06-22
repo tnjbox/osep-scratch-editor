@@ -673,3 +673,93 @@ http://localhost:8601/?extension=...&project_url=...
 
 ```powershell
 npm start
+
+## MVP-C8-1E｜更新 C8 通訊協定與展示修正紀錄
+
+完成狀態：已完成
+分支：feature/osep-extension-menu
+
+### 1. 本版新增功能
+
+* 補充 C8 通訊協定整合紀錄。
+* 確認 OSEP Scratch Editor 已可使用 C8 JSON LED 協定。
+* 確認 D8 版本硬體可正常進行 WebSerial 連線、按鍵讀取與 LED 控制。
+* 確認 Scratch 積木端亮度維持 0～30，送往 C8 韌體前自動 map 到 0～255。
+* 確認教材首頁 C01 連線測試可直接開啟 Scratch Editor 程式頁面。
+* 確認教材首頁 C01 連線測試改為新分頁開啟，保留原教材首頁。
+
+### 2. 修改與相關檔案
+
+* `static/osep/extensions/extensionV22C17.js`
+
+  * LED 指令由舊協定改為 C8 JSON 協定。
+  * `cmd:"RGB"` 改為 `cmd:"setAllLeds"`。
+  * `cmd:"BUFFER"` 改為 `cmd:"showBuffer"`。
+  * `cmd:"CLEAR"` 改為 `cmd:"clearLeds"`。
+  * 新增 `mapLedValueToC8()`，將 Scratch 積木端 0～30 轉換為 C8 韌體端 0～255。
+  * 保留原本 `ledBuffer` 架構，避免大幅修改既有積木邏輯。
+
+* `static/osep/index.html`
+
+  * C01 連線測試連結改為 `/editor.html?extension=...&project_url=...`。
+  * C01 連線測試按鈕加入 `target="_blank"` 與 `rel="noopener noreferrer"`。
+
+* `docs/OSEP_C8_SERIAL_PROTOCOL.md`
+
+  * 新增 C8 通訊協定正式文件。
+  * 說明 D8 / D4 兩種硬體版本共用 C8 JSON 通訊協定。
+  * 說明平台端不需判斷 D8 / D4，只需依照標準 JSON 協定收送資料。
+  * 說明 LED 指令、按鍵資料、亮度 map 策略與展示測試清單。
+
+### 3. 測試方式
+
+本機啟動：
+
+```powershell
+npm start
+```
+
+測試網址：
+
+```text
+http://localhost:8601/osep/
+```
+
+測試項目：
+
+* 教材首頁可正常開啟。
+* 點選 C01「開始連線測試」後，原首頁保留不動。
+* 新分頁可開啟 Scratch Editor。
+* 新分頁網址使用 `editor.html?extension=...&project_url=...`。
+* C01 連線測試專案可正常載入。
+* WebSerial 可正常連接 SmartRingController。
+* D8 版本按鍵可正常讀取。
+* 設定全部 LED 顏色可正常顯示。
+* 關閉全部 LED 可正常運作。
+* 設定單顆 LED 可正常顯示。
+* 顯示 LED 暫存陣列可正常運作。
+* Scratch 積木端輸入 0～30 後，LED 實際亮度已比雙重限制時明顯改善。
+
+### 4. 已完成 commit
+
+* `MVP-C8-1A update Scratch extension C8 protocol`
+* `MVP-C8-1D add C8 serial protocol documentation`
+
+### 5. 後續規劃
+
+* MVP-C8-1F：整理 C8 展示測試清單與備援策略。
+* MVP-F01：新增韌體燒錄入口規劃。
+* MVP-F02：整理 D8 / D4 韌體下載與燒錄說明。
+* MVP-V01：規劃 SmartRing 虛擬控制器。
+* MVP-AI01：規劃 AI 密室逃脫任務模式。
+
+### 6. 本階段暫不處理事項
+
+* 不修改 D8 / D4 韌體。
+* 不重新燒錄硬體。
+* 不新增 D8 / D4 專屬 Scratch 積木。
+* 不修改第 4～7 章教材內容。
+* 不新增 Scratch 自動評分。
+* 不實作韌體燒錄頁。
+* 不實作 SmartRing 虛擬控制器。
+* 不實作 AI 密室逃脫。
