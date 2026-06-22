@@ -594,3 +594,46 @@ static/osep/checklists/ch05/C504_checklist.html
 static/osep/checklists/ch05/C505_checklist.html
 static/osep/checklists/ch05/C506_checklist.html
 docs/OSEP_LEVEL3_MVP_LOG.md
+
+## MVP-24A｜建立第 6 章與第 7 章章節骨架
+
+完成狀態：已完成  
+Commit：2472c4c14  
+分支：feature/osep-extension-menu
+
+### 1. 本版新增功能
+
+- 建立第 6 章「陣列任務」章節頁骨架：`static/osep/chapters/ch06.html`
+- 建立第 7 章「模組化任務」章節頁骨架：`static/osep/chapters/ch07.html`
+- 新增第 6 章 C601～C606 任務練習檔占位檔。
+- 新增第 6 章 C601～C606 自我檢核表骨架。
+- 更新 `tasks.js`，加入並修正第 6 章、第 7 章章節資料。
+- 修正第 4～7 章任務練習檔連結，點選後直接進入 Scratch Editor 的 `editor.html` 頁面。
+- 第 7 章目前僅建立章節與任務資料骨架，正式練習檔與自我檢核表後續再補。
+
+### 2. 修改檔案
+
+- `static/osep/chapters/ch04.html`
+- `static/osep/chapters/ch05.html`
+- `static/osep/chapters/ch06.html`
+- `static/osep/chapters/ch07.html`
+- `static/osep/data/tasks.js`
+- `static/osep/projects/ch06/C601_led_array_intro.sb3`
+- `static/osep/projects/ch06/C602_array_led_control.sb3`
+- `static/osep/projects/ch06/C603_array_shift_rotate.sb3`
+- `static/osep/projects/ch06/C604_score_life_array.sb3`
+- `static/osep/projects/ch06/C605_array_pattern.sb3`
+- `static/osep/projects/ch06/C606_array_challenge.sb3`
+- `static/osep/checklists/ch06/C601_checklist.html`
+- `static/osep/checklists/ch06/C602_checklist.html`
+- `static/osep/checklists/ch06/C603_checklist.html`
+- `static/osep/checklists/ch06/C604_checklist.html`
+- `static/osep/checklists/ch06/C605_checklist.html`
+- `static/osep/checklists/ch06/C606_checklist.html`
+
+### 3. 重要修正
+
+原本任務練習檔連結會進入專題頁面：
+
+```text
+http://localhost:8601/?extension=...&project_url=...
