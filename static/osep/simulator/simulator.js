@@ -27,6 +27,15 @@
     };
   }
 
+  function normalizeBuffer(buffer, ledCount = LED_COUNT) {
+    const safeBuffer = Array.isArray(buffer) ? buffer : [];
+
+    return Array.from({ length: ledCount }, (_, index) => {
+      const color = safeBuffer[index] || {};
+      return createColor(color.r, color.g, color.b);
+    });
+  }
+
   function colorToCss(color) {
     const r = teachingValueToCssValue(color.r);
     const g = teachingValueToCssValue(color.g);
@@ -48,6 +57,7 @@
     constructor(ledCount = LED_COUNT) {
       this.ledCount = ledCount;
       this.leds = Array.from({ length: ledCount }, () => createColor(0, 0, 0));
+      this.buffer = Array.from({ length: ledCount }, () => createColor(0, 0, 0));
     }
 
     setLed(index, r, g, b) {
@@ -64,6 +74,37 @@
 
     clear() {
       return this.setAll(0, 0, 0);
+    }
+
+    setBuffer(buffer) {
+      this.buffer = normalizeBuffer(buffer, this.ledCount);
+      return this.getBuffer();
+    }
+
+    setBufferLed(index, r, g, b) {
+      const ledIndex = clampNumber(index, 1, this.ledCount) - 1;
+      this.buffer[ledIndex] = createColor(r, g, b);
+      return this.getBuffer();
+    }
+
+    setBufferAll(r, g, b) {
+      const color = createColor(r, g, b);
+      this.buffer = this.buffer.map(() => ({ ...color }));
+      return this.getBuffer();
+    }
+
+    clearBuffer() {
+      return this.setBufferAll(0, 0, 0);
+    }
+
+    showBuffer() {
+      this.leds = this.buffer.map(color => ({ ...color }));
+      return this.getState();
+    }
+
+    copyStateToBuffer() {
+      this.buffer = this.leds.map(color => ({ ...color }));
+      return this.getBuffer();
     }
 
     showProgress(value, r = 0, g = 20, b = 0) {
@@ -158,6 +199,15 @@
 
     getState() {
       return this.leds.map((color, index) => ({
+        index: index + 1,
+        r: color.r,
+        g: color.g,
+        b: color.b
+      }));
+    }
+
+    getBuffer() {
+      return this.buffer.map((color, index) => ({
         index: index + 1,
         r: color.r,
         g: color.g,
@@ -298,6 +348,7 @@
 
     render() {
       const state = this.core.getState();
+      const buffer = this.core.getBuffer();
 
       state.forEach(item => {
         const ledElement = this.ledElements[item.index - 1];
@@ -308,14 +359,21 @@
         ledElement.title = `LED ${item.index}: rgb(${item.r}, ${item.g}, ${item.b})`;
       });
 
-      this.stateOutputElement.textContent = JSON.stringify(state, null, 2);
+      this.stateOutputElement.textContent = JSON.stringify(
+        {
+          state,
+          buffer
+        },
+        null,
+        2
+      );
     }
 
     exposePublicApi() {
       const simulator = this;
 
       window.OSEPLedRingSimulator = {
-        version: "MVP-31-5",
+        version: "MVP-31-7",
         ledCount: LED_COUNT,
         maxTeachingValue: MAX_TEACHING_VALUE,
 
@@ -335,6 +393,42 @@
           simulator.core.clear();
           simulator.render();
           return simulator.core.getState();
+        },
+
+        setBuffer(buffer) {
+          simulator.core.setBuffer(buffer);
+          simulator.render();
+          return simulator.core.getBuffer();
+        },
+
+        setBufferLed(index, r, g, b) {
+          simulator.core.setBufferLed(index, r, g, b);
+          simulator.render();
+          return simulator.core.getBuffer();
+        },
+
+        setBufferAll(r, g, b) {
+          simulator.core.setBufferAll(r, g, b);
+          simulator.render();
+          return simulator.core.getBuffer();
+        },
+
+        clearBuffer() {
+          simulator.core.clearBuffer();
+          simulator.render();
+          return simulator.core.getBuffer();
+        },
+
+        showBuffer() {
+          simulator.core.showBuffer();
+          simulator.render();
+          return simulator.core.getState();
+        },
+
+        copyStateToBuffer() {
+          simulator.core.copyStateToBuffer();
+          simulator.render();
+          return simulator.core.getBuffer();
         },
 
         showProgress(value) {
@@ -363,6 +457,17 @@
 
         getState() {
           return simulator.core.getState();
+        },
+
+        getBuffer() {
+          return simulator.core.getBuffer();
+        },
+
+        getSnapshot() {
+          return {
+            state: simulator.core.getState(),
+            buffer: simulator.core.getBuffer()
+          };
         },
 
         teachingValueToCssValue(value) {

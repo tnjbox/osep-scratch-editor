@@ -1262,3 +1262,113 @@ window.OSEPLedRingSimulator.showLife(value);
 或：
 
 `MVP-31-8｜建立 LED Command Adapter 原型`
+
+## MVP-31-7｜補強模擬器 setBuffer / showBuffer
+
+### 任務目標
+
+補強第一版線上 LED 燈環模擬器的暫存陣列能力，讓模擬器可對應 OSEP Scratch Editor 與 Blockly Lab 中的 LED Buffer / 暫存陣列概念，作為未來軟硬體同步的基礎。
+
+### 本版修改檔案
+
+- `static/osep/simulator/simulator.js`
+- `docs/OSEP_LEVEL3_MVP_LOG.md`
+
+### 本版新增能力
+
+1. 新增模擬器內部 `buffer` 暫存陣列。
+2. 新增 `setBuffer(buffer)`。
+3. 新增 `setBufferLed(index, r, g, b)`。
+4. 新增 `setBufferAll(r, g, b)`。
+5. 新增 `clearBuffer()`。
+6. 新增 `showBuffer()`。
+7. 新增 `copyStateToBuffer()`。
+8. 新增 `getBuffer()`。
+9. 新增 `getSnapshot()`，同時回傳目前顯示狀態與暫存陣列。
+10. 狀態輸出區同時顯示 `state` 與 `buffer`。
+
+### 共用 API 補強
+
+本版更新 `window.OSEPLedRingSimulator`，新增下列方法：
+
+```javascript
+window.OSEPLedRingSimulator.setBuffer(buffer);
+window.OSEPLedRingSimulator.setBufferLed(index, r, g, b);
+window.OSEPLedRingSimulator.setBufferAll(r, g, b);
+window.OSEPLedRingSimulator.clearBuffer();
+window.OSEPLedRingSimulator.showBuffer();
+window.OSEPLedRingSimulator.copyStateToBuffer();
+window.OSEPLedRingSimulator.getBuffer();
+window.OSEPLedRingSimulator.getSnapshot();
+```
+
+### Buffer 規格
+
+`buffer` 採 12 顆 LED 陣列格式，每一格使用 RGB 教學數值 0～30。
+
+範例：
+
+```javascript
+[
+  { "r": 30, "g": 0, "b": 0 },
+  { "r": 0, "g": 30, "b": 0 },
+  { "r": 0, "g": 0, "b": 30 }
+]
+```
+
+規則：
+
+1. RGB 範圍統一限制為 0～30。
+2. LED 數量固定為 12。
+3. `setBuffer()` 輸入少於 12 筆時，剩餘 LED 自動補黑色。
+4. `setBuffer()` 輸入超過 12 筆時，只取前 12 筆。
+5. `setBuffer()` 只更新暫存陣列，不直接改變畫面顯示。
+6. `showBuffer()` 才會將暫存陣列顯示到 LED 燈環畫面。
+
+### 暫不實作
+
+本版暫不實作：
+
+- 新增 Buffer 操作 UI
+- Scratch Extension 即時連動
+- Blockly Lab 直接整合
+- WebSerial 模擬
+- 按鍵模擬
+- 跨頁同步
+- 軟硬體同步模式切換
+
+### 測試方式
+
+在瀏覽器開啟模擬器頁面後，按 F12 開啟 Console 測試：
+
+```javascript
+window.OSEPLedRingSimulator.setBuffer([
+  { r: 30, g: 0, b: 0 },
+  { r: 0, g: 30, b: 0 },
+  { r: 0, g: 0, b: 30 }
+]);
+
+window.OSEPLedRingSimulator.showBuffer();
+window.OSEPLedRingSimulator.getSnapshot();
+window.OSEPLedRingSimulator.clearBuffer();
+```
+
+確認：
+
+1. `setBuffer()` 後畫面 LED 不立即改變。
+2. `showBuffer()` 後 LED 顯示暫存陣列內容。
+3. `getBuffer()` 可取得暫存陣列。
+4. `getSnapshot()` 可同時取得 `state` 與 `buffer`。
+5. RGB 數值超過 30 時會被限制為 30。
+6. RGB 數值低於 0 時會被限制為 0。
+7. C01 課前連線測試不受影響。
+8. 第 4～7 章入口不受影響。
+9. 首頁線上模擬器入口不受影響。
+
+### 後續建議
+
+下一版可進入：
+
+`MVP-31-8｜建立 LED Command Adapter 原型`
+
+重點是先在模擬器頁或獨立 JS 中建立 `dispatchLedCommand(command)`，讓未來 OSEP Scratch Editor 與 Blockly Lab 都能透過統一 LED command 控制模擬器。
