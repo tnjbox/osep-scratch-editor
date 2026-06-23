@@ -31,11 +31,21 @@ window.OSEP_COURSE = {
         {
           code: "C401",
           title: "按鍵偵測",
-          description: "讀取 SmartRing 控制器的不同按鍵，讓 Scratch 角色回應目前按下的按鍵。",
+          description: "任務目標：學會讀取 SmartRing 控制器上的不同按鍵，讓 Scratch 角色可以回應目前按下的按鍵。",
           goals: [
-            "能完成 SmartRing 連線",
-            "能讀取不同按鍵狀態",
-            "能使用條件判斷做出角色回應"
+            "連線 SmartRing 控制器",
+            "測試 F、B、L、R、U、D、O、C 八個按鍵",
+            "按下不同按鍵時，讓 Scratch 角色說出對應的按鍵名稱",
+            "確認每一個按鍵都能被 Scratch 正確偵測"
+          ],
+          steps: [
+            "開啟 C401 任務練習檔",
+            "先完成 SmartRing 連線",
+            "找出 OSEP SmartRing 的按鍵偵測積木",
+            "使用「如果……那麼……」判斷按鍵是否被按下",
+            "按下 F 鍵時，讓角色說出「F」",
+            "依序完成 B、L、R、U、D、O、C 的按鍵回應",
+            "實際按下控制器上的每個按鍵，檢查角色是否正確回應"
           ],
           project: "/osep/projects/ch04/C401_button_detect.sb3",
           checklist: "/osep/checklists/ch04/C401_checklist.html",
@@ -44,11 +54,23 @@ window.OSEP_COURSE = {
         {
           code: "C402",
           title: "角色移動",
-          description: "使用 SmartRing 方向按鍵控制 Scratch 角色上下左右移動。",
+          description: "任務目標：學會使用 SmartRing 方向按鍵控制 Scratch 角色上下左右移動。",
           goals: [
-            "能理解方向輸入與角色座標的關係",
-            "能使用按鍵控制角色移動",
-            "能調整角色移動速度"
+            "使用 F、B、L、R 控制角色移動",
+            "讓角色可以往上、下、左、右移動",
+            "測試角色移動方向是否和按鍵對應",
+            "嘗試讓角色不要超出舞台範圍"
+          ],
+          steps: [
+            "開啟 C402 任務練習檔",
+            "先完成 SmartRing 連線",
+            "找出按鍵偵測積木",
+            "找出改變 x 座標與 y 座標的移動積木",
+            "按下 F 鍵時，讓角色往上移動",
+            "按下 B 鍵時，讓角色往下移動",
+            "按下 L 鍵時，讓角色往左移動",
+            "按下 R 鍵時，讓角色往右移動",
+            "測試角色是否能依照控制器穩定移動"
           ],
           project: "/osep/projects/ch04/C402_sprite_move.sb3",
           checklist: "/osep/checklists/ch04/C402_checklist.html",
@@ -57,11 +79,23 @@ window.OSEP_COURSE = {
         {
           code: "C403",
           title: "LED 顏色控制",
-          description: "使用 Scratch 積木控制 SmartRing LED 燈環顯示不同顏色。",
+          description: "任務目標：學會使用 Scratch 積木控制 SmartRing LED 的顏色。",
           goals: [
-            "能控制 LED 顯示顏色",
-            "能理解 RGB 顏色概念",
-            "能使用程式改變實體燈光輸出"
+            "讓全部 LED 顯示紅色",
+            "讓全部 LED 顯示綠色",
+            "讓全部 LED 顯示藍色",
+            "使用清除 LED 積木關閉燈光",
+            "嘗試設定指定 LED 顯示不同顏色"
+          ],
+          steps: [
+            "開啟 C403 任務練習檔",
+            "先完成 SmartRing 連線",
+            "找出 LED 顏色控制積木",
+            "設定全部 LED 顯示紅色",
+            "改成全部 LED 顯示綠色",
+            "改成全部 LED 顯示藍色",
+            "使用清除 LED 積木關閉燈光",
+            "嘗試改變 RGB 數值，觀察 LED 顏色如何變化"
           ],
           project: "/osep/projects/ch04/C403_led_color.sb3",
           checklist: "/osep/checklists/ch04/C403_checklist.html",
@@ -69,12 +103,23 @@ window.OSEP_COURSE = {
         },
         {
           code: "C404",
-          title: "LED 燈號回饋",
-          description: "結合按鍵輸入與 LED 顯示，讓 SmartRing 對不同操作產生燈號回饋。",
+          title: "LED 互動回饋",
+          description: "任務目標：學會讓 SmartRing 按鍵觸發 LED 回饋，讓控制器不只可以輸入，也可以用燈光回應操作結果。",
           goals: [
-            "能結合輸入與輸出",
-            "能設計不同按鍵對應不同燈號",
-            "能理解互動回饋的設計概念"
+            "按下 F 鍵時，LED 顯示綠色",
+            "按下 B 鍵時，LED 顯示紅色",
+            "按下 C 鍵時，清除 LED",
+            "測試不同按鍵是否會產生不同 LED 回饋"
+          ],
+          steps: [
+            "開啟 C404 任務練習檔",
+            "先完成 SmartRing 連線",
+            "找出按鍵偵測積木",
+            "找出 LED 顏色控制積木",
+            "使用條件判斷偵測 F 鍵，F 鍵被按下時讓 LED 顯示綠色",
+            "使用條件判斷偵測 B 鍵，B 鍵被按下時讓 LED 顯示紅色",
+            "使用條件判斷偵測 C 鍵，C 鍵被按下時清除 LED",
+            "實際按下 F、B、C，確認 LED 回饋是否正確"
           ],
           project: "/osep/projects/ch04/C404_led_feedback.sb3",
           checklist: "/osep/checklists/ch04/C404_checklist.html",
@@ -82,12 +127,24 @@ window.OSEP_COURSE = {
         },
         {
           code: "C405",
-          title: "簡易互動遊戲",
-          description: "使用 SmartRing 控制角色完成簡易互動任務，整合按鍵、角色與燈光控制。",
+          title: "迷你互動遊戲",
+          description: "任務目標：學會整合 SmartRing 按鍵、Scratch 角色移動與 LED 回饋，完成一個簡單互動遊戲。",
           goals: [
-            "能設計簡易遊戲互動",
-            "能整合角色移動與 LED 回饋",
-            "能完成一個小型互動作品"
+            "使用 SmartRing 控制角色移動",
+            "讓角色碰到目標時出現成功回饋",
+            "讓角色碰到障礙物或錯誤區域時出現失敗回饋",
+            "使用 LED 顯示成功或失敗狀態",
+            "測試遊戲是否能開始、操作、判斷與結束"
+          ],
+          steps: [
+            "開啟 C405 任務練習檔",
+            "先完成 SmartRing 連線",
+            "讓角色可以用 F、B、L、R 移動",
+            "設定一個目標物件",
+            "設定一個障礙物或失敗條件",
+            "當角色碰到目標時，讓角色說出成功訊息，並讓 LED 顯示綠色",
+            "當角色碰到障礙物時，讓角色說出失敗訊息，並讓 LED 顯示紅色",
+            "反覆測試遊戲流程是否完整"
           ],
           project: "/osep/projects/ch04/C405_mini_game.sb3",
           checklist: "/osep/checklists/ch04/C405_checklist.html",
@@ -95,12 +152,24 @@ window.OSEP_COURSE = {
         },
         {
           code: "C406",
-          title: "基礎挑戰任務",
-          description: "綜合本章所學，完成一個具備 SmartRing 控制、角色互動與燈光回饋的挑戰作品。",
+          title: "基礎任務挑戰",
+          description: "任務目標：運用第 4 章學過的按鍵偵測、角色移動與 LED 回饋，設計一個自己的 SmartRing 互動任務。",
           goals: [
-            "能整合本章基礎功能",
-            "能修改範例並加入自己的設計",
-            "能完成基礎互動挑戰"
+            "設計一個需要使用 SmartRing 按鍵的互動任務",
+            "至少使用一種角色移動或角色回應",
+            "至少使用一種 LED 回饋",
+            "加入成功條件或失敗條件",
+            "完成後測試你的任務是否可以順利操作"
+          ],
+          steps: [
+            "開啟 C406 任務練習檔",
+            "先想好你的任務規則",
+            "決定哪些按鍵要控制角色或觸發事件",
+            "設定角色移動或角色回應",
+            "設定 LED 成功或失敗回饋",
+            "加入任務完成條件",
+            "測試任務是否可以正常開始、操作與結束",
+            "修正操作不順或條件判斷錯誤的地方"
           ],
           project: "/osep/projects/ch04/C406_challenge.sb3",
           checklist: "/osep/checklists/ch04/C406_checklist.html",

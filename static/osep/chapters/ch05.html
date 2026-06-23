@@ -270,7 +270,27 @@
         const statusClass = task.enabled ? "task-status enabled" : "task-status";
         const statusText = task.enabled ? "已開放" : "即將開放";
 
-        const goalsHtml = task.goals.map(goal => `<li>${goal}</li>`).join("");
+        const stripTaskGoalPrefix = text => {
+          return String(text || "").replace(/^任務目標：/, "");
+        };
+
+        const listHtml = items => {
+          if (!Array.isArray(items) || items.length === 0) {
+            return "";
+          }
+
+          return items.map(item => `<li>${item}</li>`).join("");
+        };
+
+        const goalsHtml = listHtml(task.goals);
+        const stepsHtml = listHtml(task.steps);
+
+        const stepsSection = stepsHtml
+          ? `
+            <p><strong>操作步驟：</strong></p>
+            <ol>${stepsHtml}</ol>
+          `
+          : "";
 
         const projectButton = task.enabled
           ? `<a class="btn" href="${createEditorUrl(task.project)}" target="_blank" rel="noopener noreferrer">開啟任務練習檔</a>`
@@ -282,9 +302,10 @@
 
         body.innerHTML = `
           <p><span class="${statusClass}">${statusText}</span></p>
-          <p><strong>任務說明：</strong>${task.description}</p>
-          <p><strong>學習目標：</strong></p>
+          <p><strong>任務目標：</strong>${stripTaskGoalPrefix(task.description)}</p>
+          <p><strong>你要完成的任務：</strong></p>
           <ul>${goalsHtml}</ul>
+          ${stepsSection}
           <div class="button-row">
             ${projectButton}
             ${checklistButton}
