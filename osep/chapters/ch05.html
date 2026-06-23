@@ -201,7 +201,7 @@
 
   <main>
     <div class="nav">
-      <a href="/osep/">← 返回教材首頁</a>
+      <a id="home-link" href="../">← 返回教材首頁</a>
     </div>
 
     <section class="chapter-info">
@@ -221,8 +221,6 @@
   <script src="../data/tasks.js"></script>
   <script>
     const chapterId = "ch05";
-    const origin = window.location.origin;
-
     function getAppBaseUrl() {
       const marker = "/osep/";
       const path = window.location.pathname;
@@ -233,6 +231,20 @@
       }
 
       return window.location.origin;
+    }
+
+    function toAppUrl(path) {
+      if (!path) return "#";
+
+      if (path.startsWith("http://") || path.startsWith("https://")) {
+        return path;
+      }
+
+      if (path.startsWith("/")) {
+        return `${getAppBaseUrl()}${path}`;
+      }
+
+      return path;
     }
 
     function createEditorUrl(projectPath) {
@@ -249,6 +261,11 @@
     }
 
     function renderChapter() {
+      const homeLink = document.getElementById("home-link");
+      if (homeLink) {
+        homeLink.href = toAppUrl("/osep/");
+      }
+
       const course = window.OSEP_COURSE;
       const chapter = course.chapters.find(item => item.id === chapterId);
 
@@ -316,7 +333,7 @@
           : `<a class="btn disabled" href="#">任務練習檔尚未開放</a>`;
 
         const checklistButton = task.checklist
-          ? `<a class="btn secondary" href="${task.checklist}" target="_blank" rel="noopener">填寫自我檢核表</a>`
+          ? `<a class="btn secondary" href="${toAppUrl(task.checklist)}" target="_blank" rel="noopener">填寫自我檢核表</a>`
           : `<a class="btn secondary disabled" href="#">自我檢核表尚未開放</a>`;
 
         body.innerHTML = `
