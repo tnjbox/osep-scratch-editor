@@ -1372,3 +1372,61 @@ window.OSEPLedRingSimulator.clearBuffer();
 `MVP-31-8｜建立 LED Command Adapter 原型`
 
 重點是先在模擬器頁或獨立 JS 中建立 `dispatchLedCommand(command)`，讓未來 OSEP Scratch Editor 與 Blockly Lab 都能透過統一 LED command 控制模擬器。
+
+
+## MVP-31-9｜評估 OSEP Scratch Extension simulator-only 模式
+
+### 任務目標
+
+評估 OSEP Scratch Extension 是否能支援 `simulator-only` 模式，讓學生在沒有 SmartRingController 實體硬體時，也能透過線上 LED 燈環模擬器觀察 Scratch LED 積木執行結果。
+
+### 本版新增文件
+
+- `docs/OSEP_EXTENSION_SIMULATOR_MODE_PLAN.md`
+
+### 規劃重點
+
+1. 確認未來 OSEP Scratch Extension 可朝三種輸出模式發展：
+   - `hardware-only`
+   - `simulator-only`
+   - `hardware-and-simulator`
+2. 預設模式應維持 `hardware-only`，避免影響目前已穩定的實體硬體教學。
+3. `simulator-only` 可作為無硬體教學、線上教學與課前預習使用。
+4. `hardware-and-simulator` 可作為教師展示與除錯模式。
+5. Extension LED 積木可逐步轉成 LED command，再交由 LED Command Adapter 分派。
+6. RGB 教學數值仍維持 0～30。
+7. 本版不直接修改 Extension，先完成風險評估。
+
+### 重要結論
+
+目前 LED 模擬器與 Scratch Editor 不一定在同一頁面，因此 Extension 不能直接假設可呼叫：
+
+```javascript
+window.dispatchLedCommand(...)
+```
+
+若要進一步整合，需先評估模擬器與 Editor 的同步方式，例如：
+
+1. iframe + postMessage
+2. BroadcastChannel
+3. localStorage event
+4. 直接內嵌共用 JS 模組
+
+### 暫不實作
+
+本版暫不修改：
+
+- `extensionV22C17.js`
+- `tw-security-manager.jsx`
+- WebSerial runtime
+- ESP8266 韌體
+- Blockly Lab
+- Scratch Editor UI
+- 首頁
+- 積木定義
+
+### 後續建議
+
+下一版建議進入：
+
+`MVP-31-10｜評估模擬器跨頁同步方式`
