@@ -223,6 +223,32 @@
         return Math.round((value / max) * LED_COUNT);
     }
 
+    // =====================================================
+    // MVP-31-15：同步 LED 暫存陣列到線上模擬器
+    // -----------------------------------------------------
+    // 將 Extension 內部 STATE.ledBuffer 轉成模擬器使用的
+    // 0～30 RGB 物件陣列，先 setBuffer，再 showBuffer。
+    // 若模擬器未開啟或 BroadcastChannel 不支援，不影響硬體。
+    // =====================================================
+    function getSimulatorBufferSnapshot() {
+        return STATE.ledBuffer.map((rgb) => ({
+            r: limitLEDValue(rgb[0]),
+            g: limitLEDValue(rgb[1]),
+            b: limitLEDValue(rgb[2])
+        }));
+    }
+
+    function sendLocalBufferToSimulator() {
+        sendLedCommandToSimulator({
+            type: "setBuffer",
+            buffer: getSimulatorBufferSnapshot()
+        });
+
+        sendLedCommandToSimulator({
+            type: "showBuffer"
+        });
+    }
+
     class OSEPBridge {
 
         constructor() {
@@ -902,8 +928,10 @@
         }
 
         clearAndShowBuffer() {
+            // MVP-31-15：清空並顯示暫存陣列時，同步更新線上模擬器。
             this.stopLEDAnimationOnly();
             clearLocalBuffer();
+            sendLocalBufferToSimulator();
             return bridge.sendBuffer();
         }
 
@@ -912,7 +940,9 @@
         }
 
         showBuffer() {
+            // MVP-31-15：顯示暫存陣列時，同步送出 setBuffer + showBuffer。
             this.stopLEDAnimationOnly();
+            sendLocalBufferToSimulator();
             return bridge.sendBuffer();
         }
 
@@ -1013,6 +1043,8 @@
                 STATE.ledBuffer[i - 1] = [r,g,b];
             }
 
+            sendLocalBufferToSimulator();
+
             return bridge.sendBuffer();
         }
 
@@ -1031,6 +1063,8 @@
                 STATE.ledBuffer[i - 1] = [r,g,b];
             }
 
+            sendLocalBufferToSimulator();
+
             return bridge.sendBuffer();
         }
 
@@ -1048,6 +1082,8 @@
             for(let i = 2; i <= LED_COUNT; i += 2) {
                 STATE.ledBuffer[i - 1] = [r,g,b];
             }
+
+            sendLocalBufferToSimulator();
 
             return bridge.sendBuffer();
         }
