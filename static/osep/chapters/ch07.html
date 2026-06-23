@@ -226,7 +226,13 @@
     function createEditorUrl(projectPath) {
       const extensionUrl = `${origin}/osep/extensions/extensionV22C17.js`;
       const projectUrl = `${origin}${projectPath}`;
-      return `${origin}/editor.html?extension=${extensionUrl}&project_url=${projectUrl}`;
+
+      const params = new URLSearchParams({
+        extension: extensionUrl,
+        project_url: projectUrl
+      });
+
+      return `${origin}/editor?${params.toString()}`;
     }
 
     function renderChapter() {
