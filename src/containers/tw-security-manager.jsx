@@ -33,6 +33,8 @@ const isTrustedExtension = url => (
     // OSEP Scratch local trusted extensions.
     url.startsWith(`${window.location.origin}/osep/extensions/`) ||
 
+    url.startsWith('https://tnjbox.github.io/osep-scratch-editor/osep/extensions/') ||
+
     extensionsTrustedByUser.has(url)
 );
 
