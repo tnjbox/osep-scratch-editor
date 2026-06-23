@@ -35761,7 +35761,7 @@ url.startsWith('https://extensions.turbowarp.org/') ||
 // For development.
 url.startsWith('http://localhost:8000/') ||
 // OSEP Scratch local trusted extensions.
-url.startsWith("".concat(window.location.origin, "/osep/extensions/")) || extensionsTrustedByUser.has(url);
+url.startsWith("".concat(window.location.origin, "/osep/extensions/")) || url.startsWith('https://tnjbox.github.io/osep-scratch-editor/osep/extensions/') || extensionsTrustedByUser.has(url);
 
 /**
  * Set of fetch resource hosts that were manually trusted by the user.
