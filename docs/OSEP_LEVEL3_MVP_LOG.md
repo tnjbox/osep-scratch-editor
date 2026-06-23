@@ -1791,3 +1791,65 @@ channelName: "osep-led-ring"
 1. `setPixelRGB`
 2. `setScoreLED`
 3. `setLifeLED`
+
+
+## MVP-31-14｜Extension 同步單顆 LED 與 score / life
+
+### 任務目標
+
+延續 MVP-31-13 的 BroadcastChannel 最小同步原型，讓 OSEP Scratch Extension 進一步同步單顆 LED、分數 LED 與生命 LED 指令到線上 LED 燈環模擬器。
+
+### 本版修改檔案
+
+- `static/osep/extensions/extensionV22C17.js`
+- `docs/OSEP_LEVEL3_MVP_LOG.md`
+
+### 本版新增同步項目
+
+1. `setPixelRGB`
+   - Scratch 積木：設定第 N 顆 LED RGB R G B
+   - 模擬器 command：`setLed`
+
+2. `setScoreLED`
+   - Scratch 積木：顯示分數 LED 數值 VALUE 最大 MAX
+   - 模擬器 command：`showScore`
+
+3. `setLifeLED`
+   - Scratch 積木：顯示生命 LED 數值 VALUE 最大 MAX
+   - 模擬器 command：`showLife`
+
+### 設計原則
+
+1. 原本硬體控制流程不變。
+2. 原本 `bridge.sendBuffer()` 照常執行。
+3. BroadcastChannel 只作為模擬器同步旁路。
+4. 模擬器未開啟時不影響 Scratch。
+5. 瀏覽器不支援 BroadcastChannel 時不影響 Scratch。
+6. RGB 教學數值仍維持 0～30。
+
+### 測試重點
+
+1. Extension 可正常載入。
+2. C01 或任一任務可正常開啟。
+3. MVP-31-13 的 `setAll`、`clear`、`showProgress` 仍正常同步。
+4. `setPixelRGB` 可同步單顆 LED。
+5. `setScoreLED` 可同步分數 LED。
+6. `setLifeLED` 可同步生命 LED。
+7. 有硬體時 WebSerial 不受影響。
+8. 沒有硬體時 Scratch 不報錯。
+
+### 後續建議
+
+下一版建議進入：
+
+`MVP-31-15｜Extension 同步 Buffer / showBuffer`
+
+建議同步：
+
+1. `clearAndShowBuffer`
+2. `showBuffer`
+3. `setBufferRange`
+4. `setOddBuffer`
+5. `setEvenBuffer`
+
+但仍建議逐步測試，不要一次接入所有動畫。
