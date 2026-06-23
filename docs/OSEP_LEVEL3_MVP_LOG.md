@@ -1430,3 +1430,237 @@ window.dispatchLedCommand(...)
 下一版建議進入：
 
 `MVP-31-10｜評估模擬器跨頁同步方式`
+
+
+## MVP-31-10｜評估模擬器跨頁同步方式
+
+### 任務目標
+
+評估線上 LED 燈環模擬器與 OSEP Scratch Editor 之間的跨頁同步方式，作為未來 `simulator-only` 與 `hardware-and-simulator` 模式的技術基礎。
+
+### 本版新增文件
+
+- `docs/OSEP_SIMULATOR_CROSS_PAGE_SYNC_PLAN.md`
+
+### 評估方案
+
+本版比較下列四種方案：
+
+1. iframe + postMessage
+2. BroadcastChannel
+3. localStorage event
+4. 直接內嵌共用 JS 模組
+
+### 評估結論
+
+1. `iframe + postMessage` 適合中期正式整合，可將模擬器嵌入 Scratch Editor 或 Blockly Lab。
+2. `BroadcastChannel` 適合下一階段最小風險原型，不需要立即修改 Scratch Editor UI。
+3. `localStorage event` 不適合作為主方案，只適合作為備用方案。
+4. 直接內嵌共用 JS 模組適合中長期重構，但目前不建議立即進行。
+
+### 建議路線
+
+採用三階段策略：
+
+1. 短期：BroadcastChannel 原型
+2. 中期：iframe + postMessage
+3. 長期：抽離共用 LED 模擬器核心
+
+### 下一版建議
+
+下一版建議進入：
+
+`MVP-31-11｜建立 BroadcastChannel 同步原型`
+
+預期只新增：
+
+- `static/osep/simulator/led-sync-channel.js`
+
+並在模擬器頁監聽：
+
+```text
+osep-led-ring
+```
+
+channel。
+
+### 暫不實作
+
+本版暫不修改：
+
+- `extensionV22C17.js`
+- `tw-security-manager.jsx`
+- Scratch Editor UI
+- WebSerial runtime
+- ESP8266 韌體
+- Blockly Lab
+- 首頁任務連結
+
+
+## MVP-31-11｜建立 BroadcastChannel 同步原型
+
+### 任務目標
+
+建立線上 LED 燈環模擬器的 BroadcastChannel 同步原型，讓模擬器可接收同源頁面傳來的 LED command，作為未來 OSEP Scratch Editor 與 Blockly Lab 跨頁同步的基礎。
+
+### 本版修改檔案
+
+- 新增 `static/osep/simulator/led-sync-channel.js`
+- 修改 `static/osep/simulator/index.html`
+- 更新 `docs/OSEP_LEVEL3_MVP_LOG.md`
+
+### 本版新增能力
+
+1. 新增 `window.OSEPLedSyncChannel`
+2. 建立 BroadcastChannel 頻道：`osep-led-ring`
+3. 模擬器可接收同源頁面送出的單一 LED command
+4. 模擬器可接收同源頁面送出的多筆 LED commands
+5. 接收到 command 後呼叫 `window.dispatchLedCommand(command)`
+6. 支援 `getSnapshot` 訊息處理
+7. 提供 `sendTestCommand()` 供開發測試
+8. 提供 `getStatus()` 檢查同步狀態
+
+### 訊息格式
+
+單一 LED command：
+
+```javascript
+{
+  source: "OSEP",
+  type: "ledCommand",
+  command: {
+    type: "setLed",
+    index: 1,
+    r: 30,
+    g: 0,
+    b: 0
+  }
+}
+```
+
+多筆 LED commands：
+
+```javascript
+{
+  source: "OSEP",
+  type: "ledCommands",
+  commands: [
+    { type: "setLed", index: 1, r: 30, g: 0, b: 0 },
+    { type: "setLed", index: 2, r: 0, g: 30, b: 0 }
+  ]
+}
+```
+
+### index.html 修改
+
+在模擬器頁面底部，原本為：
+
+```html
+<script src="./simulator.js"></script>
+<script src="./led-command-adapter.js"></script>
+</body>
+</html>
+```
+
+改為：
+
+```html
+<script src="./simulator.js"></script>
+<script src="./led-command-adapter.js"></script>
+<script src="./led-sync-channel.js"></script>
+</body>
+</html>
+```
+
+### 測試方式
+
+開啟兩個分頁。
+
+#### 分頁 A：模擬器頁
+
+開啟：
+
+```text
+https://tnjbox.github.io/osep-scratch-editor/osep/simulator/
+```
+
+按 F12 開啟 Console，確認：
+
+```javascript
+window.OSEPLedSyncChannel.getStatus()
+```
+
+應看到：
+
+```text
+supported: true
+started: true
+channelName: "osep-led-ring"
+```
+
+#### 分頁 B：同源頁面
+
+開啟：
+
+```text
+https://tnjbox.github.io/osep-scratch-editor/osep/
+```
+
+按 F12 開啟 Console，輸入：
+
+```javascript
+const channel = new BroadcastChannel("osep-led-ring");
+
+channel.postMessage({
+  source: "OSEP",
+  type: "ledCommand",
+  command: {
+    type: "setLed",
+    index: 1,
+    r: 30,
+    g: 0,
+    b: 0
+  }
+});
+```
+
+分頁 A 的模擬器第 1 顆 LED 應變成紅色。
+
+### 批次測試
+
+在分頁 B 輸入：
+
+```javascript
+channel.postMessage({
+  source: "OSEP",
+  type: "ledCommands",
+  commands: [
+    { type: "setLed", index: 1, r: 30, g: 0, b: 0 },
+    { type: "setLed", index: 2, r: 0, g: 30, b: 0 },
+    { type: "setLed", index: 3, r: 0, g: 0, b: 30 }
+  ]
+});
+```
+
+分頁 A 的模擬器應顯示第 1 顆紅色、第 2 顆綠色、第 3 顆藍色。
+
+### 暫不實作
+
+本版暫不實作：
+
+- 不修改 `extensionV22C17.js`
+- 不修改 Scratch Editor UI
+- 不修改 Blockly Lab
+- 不修改 WebSerial runtime
+- 不修改 ESP8266 韌體
+- 不新增模式切換 UI
+- 不實作 iframe
+- 不實作 postMessage
+
+### 後續建議
+
+下一版可進入：
+
+`MVP-31-12｜評估 Extension 發送 BroadcastChannel 指令`
+
+重點是在不影響硬體控制的前提下，評估 OSEP Scratch Extension 是否能將 LED 積木轉成 BroadcastChannel 訊息。
