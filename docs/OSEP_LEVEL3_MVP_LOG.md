@@ -1219,3 +1219,46 @@ window.OSEPLedRingSimulator.showLife(value);
 ```
 
 最終目標是讓 OSEP Scratch Editor 與 Blockly Lab 都能走相同的 LED 指令介面，達成實體硬體與線上模擬器同步顯示。
+
+
+## MVP-31-6｜規劃模擬器與 Extension / Blockly Lab 的同步介面
+
+### 任務目標
+
+規劃線上 LED 燈環模擬器與 OSEP Scratch Editor、Blockly Lab 的同步介面，作為未來軟硬體同步控制的基礎。
+
+### 本版新增文件
+
+- `docs/OSEP_LED_SIMULATOR_SYNC_INTERFACE_PLAN.md`
+
+### 規劃重點
+
+1. 確認模擬器最終方向為「軟硬體同步」。
+2. OSEP Scratch Editor 與 Blockly Lab 未來應共用同一套 LED 模擬器 API。
+3. RGB 教學輸入範圍統一維持 0～30。
+4. 定義 LED Command Adapter 作為積木指令與輸出目標之間的中介層。
+5. 定義 Hardware Transport 與 Simulator Transport。
+6. 規劃三種同步模式：
+   - hardware-only
+   - simulator-only
+   - hardware-and-simulator
+
+### 暫不實作
+
+本版僅做同步介面規劃，暫不修改：
+
+- OSEP Scratch Extension
+- Blockly Lab runtime
+- WebSerial runtime
+- ESP8266 韌體
+- 線上模擬器程式碼
+
+### 後續建議
+
+下一版可進入：
+
+`MVP-31-7｜補強模擬器 setBuffer / showBuffer`
+
+或：
+
+`MVP-31-8｜建立 LED Command Adapter 原型`
