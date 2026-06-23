@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>C505｜分數與生命值自我檢核表</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --border: #e5e7eb;
+      --success-bg: #ecfdf5;
+      --success-border: #a7f3d0;
+      --challenge-bg: #fff7ed;
+      --challenge-border: #fed7aa;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    header {
+      background: linear-gradient(135deg, #2563eb, #0f172a);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    header .label {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.16);
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      letter-spacing: 0.04em;
+    }
+
+    header p {
+      margin: 12px auto 0;
+      max-width: 720px;
+      color: rgba(255, 255, 255, 0.86);
+    }
+
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 28px 18px 48px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    .card h2 {
+      margin: 0 0 14px;
+      font-size: 1.35rem;
+      color: #111827;
+    }
+
+    .goal {
+      background: #eff6ff;
+      border-left: 6px solid var(--primary);
+    }
+
+    .done {
+      background: var(--success-bg);
+      border-color: var(--success-border);
+    }
+
+    .challenge {
+      background: var(--challenge-bg);
+      border-color: var(--challenge-border);
+    }
+
+    .checklist {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .checklist li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px dashed rgba(107, 114, 128, 0.3);
+    }
+
+    .checklist li:last-child {
+      border-bottom: none;
+    }
+
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin-top: 4px;
+      accent-color: var(--primary);
+      flex: 0 0 auto;
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-top: 12px;
+    }
+
+    .field-group {
+      display: grid;
+      gap: 12px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field label {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      font-size: 1rem;
+      font-family: inherit;
+      color: var(--text);
+    }
+
+    .field textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .status-message {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      background: #f8fafc;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .status-message.error {
+      background: #fef2f2;
+      border-color: #fecaca;
+      color: #991b1b;
+    }
+
+    .status-message.success {
+      background: #ecfdf5;
+      border-color: #a7f3d0;
+      color: #14532d;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .button {
+      display: inline-block;
+      text-decoration: none;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: 0.18s ease;
+    }
+
+    .button.primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .button.primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .button.secondary {
+      background: white;
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .button.secondary:hover {
+      background: #eff6ff;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding: 24px 12px 36px;
+    }
+
+    @media (max-width: 640px) {
+      header {
+        padding: 32px 16px;
+      }
+
+      header h1 {
+        font-size: 1.6rem;
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      .button {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="label">第 5 章｜進階任務</div>
+    <h1>C505｜分數與生命值自我檢核表</h1>
+    <p>
+      完成本任務後，請檢查自己是否能建立分數與生命值系統並設計遊戲結束條件。
+    </p>
+  </header>
+
+  <main>
+    <section class="card goal">
+      <h2>任務目標</h2>
+      <p>我能使用變數建立分數與生命值，並設計遊戲結束規則。</p>
+      <p class="note">這個任務的重點是理解「變數」與「遊戲規則」如何組成完整作品。</p>
+    </section>
+
+    <section class="card">
+      <h2>學生基本資料</h2>
+      <div class="field-group">
+        <div class="field">
+          <label for="className">班級</label>
+          <input id="className" type="text" placeholder="請輸入班級" required />
+        </div>
+        <div class="field">
+          <label for="seatNumber">座號</label>
+          <input id="seatNumber" type="text" placeholder="請輸入座號" required />
+        </div>
+        <div class="field">
+          <label for="studentName">姓名</label>
+          <input id="studentName" type="text" placeholder="請輸入姓名" required />
+        </div>
+        
+      </div>
+    </section>
+
+    <section class="card done">
+      <h2>我做到了</h2>
+      <ul class="checklist">
+        <li><input type="checkbox" name="doneItems" value="我能開啟 C505 任務練習檔" /><span>我能開啟 C505 任務練習檔。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能建立分數變數" /><span>我能建立分數變數。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能建立生命值變數" /><span>我能建立生命值變數。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能讓得分或扣分改變遊戲狀態" /><span>我能讓得分或扣分改變遊戲狀態。</span></li>
+        <li><input type="checkbox" name="doneItems" value="我能設計遊戲結束條件" /><span>我能設計遊戲結束條件。</span></li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>我能說明</h2>
+      <ul class="checklist">
+        <li><input type="checkbox" name="explainItems" value="我能說明分數與生命值的用途" /><span>我能說明分數與生命值的用途。</span></li>
+        <li><input type="checkbox" name="explainItems" value="我能說明何時更新分數或生命值" /><span>我能說明何時更新分數或生命值。</span></li>
+        <li><input type="checkbox" name="explainItems" value="我能說明結束條件如何影響遊戲體驗" /><span>我能說明結束條件如何影響遊戲體驗。</span></li>
+      </ul>
+    </section>
+
+    <section class="card challenge">
+      <h2>延伸挑戰</h2>
+      <ul class="checklist">
+        <li><input type="checkbox" name="challengeItems" value="我能加入分數顯示與提示" /><span>我能加入分數顯示與提示。</span></li>
+        <li><input type="checkbox" name="challengeItems" value="我能讓生命值不足時顯示警示效果" /><span>我能讓生命值不足時顯示警示效果。</span></li>
+        <li><input type="checkbox" name="challengeItems" value="我能重新開始遊戲並重置分數" /><span>我能重新開始遊戲並重置分數。</span></li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>完成後想一想</h2>
+      <p>這個任務中，分數與生命值讓作品不只是「會動」，而是有明確的挑戰與結果。</p>
+      <p class="note">你可以試著向同學說明：為什麼遊戲需要分數與生命值這兩個系統？</p>
+
+      
+
+      <div class="field">
+        <label for="reflection">你覺得分數與生命值如何影響遊戲的挑戰性？</label>
+        <textarea id="reflection" placeholder="請依據你的實作內容寫下想法。"></textarea>
+      </div>
+      <div class="actions">
+        <button id="submitButton" class="button primary" type="button">送出自我檢核</button>
+        <p id="submitStatus" class="submit-status"></p>
+        <a class="button secondary" href="/osep/chapters/ch05.html">返回第 5 章</a>
+        <a class="button secondary" href="/osep/">返回教材總入口</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    OSEP SmartRingController｜C505 分數與生命值自我檢核表
+  </footer>
+  <script>
+  window.OSEP_CHECKLIST_CONFIG = {
+    chapter: "第5章｜進階任務",
+    taskCode: "C505",
+    taskTitle: "分數與生命值"
+  };
+</script>
+<script src="../checklist-submit.js"></script>
+</body>
+</html>
