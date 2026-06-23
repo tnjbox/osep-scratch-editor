@@ -1664,3 +1664,51 @@ channel.postMessage({
 `MVP-31-12｜評估 Extension 發送 BroadcastChannel 指令`
 
 重點是在不影響硬體控制的前提下，評估 OSEP Scratch Extension 是否能將 LED 積木轉成 BroadcastChannel 訊息。
+
+## MVP-31-12｜評估 Extension 發送 BroadcastChannel 指令
+
+### 任務目標
+
+評估 OSEP Scratch Extension 是否能在不影響實體硬體控制的前提下，將 LED 積木指令透過 BroadcastChannel 發送給線上 LED 燈環模擬器。
+
+### 本版新增文件
+
+- `docs/OSEP_EXTENSION_BROADCASTCHANNEL_PLAN.md`
+
+### 規劃重點
+
+1. Extension 可透過 `BroadcastChannel("osep-led-ring")` 將 LED command 發送給模擬器。
+2. BroadcastChannel 只作為短期跨頁同步原型，不取代 WebSerial。
+3. 正式教學整合中期仍以 iframe + postMessage 為主要方向。
+4. 發送函式必須採安全失敗設計，避免模擬器沒開或瀏覽器不支援時中斷 Scratch。
+5. RGB 教學數值仍維持 0～30。
+6. 不建議一次同步所有 LED 積木。
+
+### 建議下一版最小實作
+
+下一版 `MVP-31-13` 建議只同步：
+
+1. `setAll`
+2. `clear`
+3. `showProgress`
+
+原因是這三個指令最容易觀察、最容易測試，也比較不會牽涉 buffer 細節。
+
+### 暫不實作
+
+本版暫不修改：
+
+- `extensionV22C17.js`
+- `tw-security-manager.jsx`
+- WebSerial runtime
+- ESP8266 韌體
+- Blockly Lab
+- Scratch Editor UI
+- 首頁
+- 積木定義
+
+### 後續建議
+
+下一版建議進入：
+
+`MVP-31-13｜Extension 最小同步原型：setAll / clear / showProgress`
