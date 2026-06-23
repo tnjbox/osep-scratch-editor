@@ -1120,3 +1120,102 @@ nothing to commit, working tree clean
 * MVP-29-2｜重構 CH05 `.sb3` 為學生實作骨架版
 * MVP-29-3｜重構 CH06 `.sb3` 為學生實作骨架版
 * MVP-29-4｜重構 CH07 `.sb3` 為學生實作骨架版
+
+
+## MVP-31-5｜實作第一版共用核心 LED 燈環模擬器
+
+### 任務目標
+
+建立 OSEP Scratch Editor 教材網站的第一版線上 LED 燈環模擬器，提供無硬體情境下的 LED 陣列概念展示，並預留未來與 Blockly Lab 共用的模擬器核心架構。
+
+### 本版新增
+
+- 新增 `static/osep/simulator/index.html`
+- 新增 `static/osep/simulator/simulator.css`
+- 新增 `static/osep/simulator/simulator.js`
+- 修改首頁線上模擬器按鈕，改為連到 `./simulator/`
+
+### 功能內容
+
+第一版模擬器支援：
+
+1. 12 顆 LED 燈環顯示
+2. LED 編號 1～12
+3. 單顆 LED RGB 控制
+4. RGB 教學輸入範圍 0～30
+5. 全部 LED 顏色控制
+6. 清除全部
+7. 進度條顯示
+8. 分數 LED 顯示
+9. 生命值 LED 顯示
+10. 預設圖樣
+11. LED 狀態陣列顯示
+12. 返回教材首頁
+
+### 共用核心設計
+
+本版在 `simulator.js` 中預留：
+
+```javascript
+window.OSEPLedRingSimulator
+```
+
+未來可供 OSEP Scratch Editor 或 Blockly Lab 呼叫，例如：
+
+```javascript
+window.OSEPLedRingSimulator.setLed(1, 30, 0, 0);
+window.OSEPLedRingSimulator.setAll(0, 0, 30);
+window.OSEPLedRingSimulator.showProgress(6);
+window.OSEPLedRingSimulator.clear();
+```
+
+### RGB 範圍規則
+
+雖然真實 RGB 訊號可使用 0～255，但本教材與積木設計統一採用 0～30。
+
+因此模擬器狀態陣列顯示 0～30，網頁畫面顯示時再轉換為 0～255。
+
+### 暫不實作
+
+本版暫不實作：
+
+- Scratch Extension 即時連動
+- WebSerial 模擬
+- Blockly Lab 直接整合
+- 按鍵模擬
+- 軟硬體同步
+- 內嵌 Scratch Editor 面板
+
+### 測試結果
+
+待測試：
+
+1. GitHub Pages 可開啟 `/osep/simulator/`
+2. 首頁線上模擬器按鈕可正確進入
+3. 返回教材首頁正常
+4. C01 課前連線測試不受影響
+5. 第 4～7 章章節入口不受影響
+6. 單顆 LED RGB 控制正常
+7. 全部 LED 顏色控制正常
+8. 清除全部正常
+9. 進度條、分數、生命值顯示正常
+10. LED 狀態陣列以 0～30 顯示
+
+### 後續建議
+
+下一版建議進入：
+
+`MVP-31-6｜規劃模擬器與 Extension / Blockly Lab 的同步介面`
+
+重點是先定義共用同步 API，不急著直接修改 Extension 或 Blockly Lab，例如：
+
+```javascript
+window.OSEPLedRingSimulator.setLed(index, r, g, b);
+window.OSEPLedRingSimulator.setAll(r, g, b);
+window.OSEPLedRingSimulator.clear();
+window.OSEPLedRingSimulator.showProgress(value);
+window.OSEPLedRingSimulator.showScore(value);
+window.OSEPLedRingSimulator.showLife(value);
+```
+
+最終目標是讓 OSEP Scratch Editor 與 Blockly Lab 都能走相同的 LED 指令介面，達成實體硬體與線上模擬器同步顯示。

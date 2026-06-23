@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>OSEP LED 燈環模擬器</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./simulator.css" />
+</head>
+
+<body>
+  <header class="page-header">
+    <div class="header-inner">
+      <div>
+        <h1>OSEP LED 燈環模擬器</h1>
+        <p>
+          使用 0～30 的 RGB 數值模擬 SmartRingController 的 12 顆 LED 燈環，
+          可作為 OSEP Scratch Editor 與 Blockly Lab 共用的線上硬體模擬基礎。
+        </p>
+      </div>
+
+      <a class="home-link" href="../">返回教材首頁</a>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="sim-panel" aria-label="LED 燈環視覺模擬區">
+      <div class="panel-title-row">
+        <h2>12 顆 LED 燈環</h2>
+        <span class="mode-badge">RGB 範圍：0～30</span>
+      </div>
+
+      <div class="ring-area">
+        <div id="led-ring" class="led-ring" aria-label="12 顆 LED 燈環"></div>
+      </div>
+
+      <div class="hint-box">
+        <strong>教學提示：</strong>
+        SmartRingController 的 LED 可視為一組有 12 格的陣列。
+        本模擬器以 1～12 編號，對應課堂積木與教材任務中的 LED 位置。
+      </div>
+    </section>
+
+    <section class="control-panel" aria-label="LED 控制面板">
+      <h2>控制面板</h2>
+
+      <div class="control-group">
+        <h3>單顆 LED RGB 控制</h3>
+
+        <div class="form-grid">
+          <label>
+            LED 編號
+            <input id="led-index" type="number" min="1" max="12" value="1" />
+          </label>
+
+          <label>
+            R
+            <input id="red-value" type="number" min="0" max="30" value="30" />
+          </label>
+
+          <label>
+            G
+            <input id="green-value" type="number" min="0" max="30" value="0" />
+          </label>
+
+          <label>
+            B
+            <input id="blue-value" type="number" min="0" max="30" value="0" />
+          </label>
+        </div>
+
+        <button id="set-single-led" class="btn primary">設定單顆 LED</button>
+      </div>
+
+      <div class="control-group">
+        <h3>全部 LED 顏色</h3>
+
+        <div class="button-grid">
+          <button class="btn" data-action="all-red">全部紅色</button>
+          <button class="btn" data-action="all-green">全部綠色</button>
+          <button class="btn" data-action="all-blue">全部藍色</button>
+          <button class="btn" data-action="all-white">全部白色</button>
+          <button class="btn danger" data-action="clear">清除全部</button>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <h3>進度條 / 分數 / 生命值</h3>
+
+        <div class="form-row">
+          <label>
+            進度值 0～12
+            <input id="progress-value" type="number" min="0" max="12" value="6" />
+          </label>
+          <button id="show-progress" class="btn">顯示進度條</button>
+        </div>
+
+        <div class="form-row">
+          <label>
+            分數 0～12
+            <input id="score-value" type="number" min="0" max="12" value="4" />
+          </label>
+          <button id="show-score" class="btn">顯示分數</button>
+        </div>
+
+        <div class="form-row">
+          <label>
+            生命值 0～5
+            <input id="life-value" type="number" min="0" max="5" value="3" />
+          </label>
+          <button id="show-life" class="btn">顯示生命值</button>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <h3>預設圖樣</h3>
+
+        <div class="button-grid">
+          <button class="btn" data-pattern="odd">奇數 LED</button>
+          <button class="btn" data-pattern="even">偶數 LED</button>
+          <button class="btn" data-pattern="alternate">紅綠交錯</button>
+          <button class="btn" data-pattern="blue-white">藍白交錯</button>
+          <button class="btn" data-pattern="rainbow">彩虹示意</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="state-panel" aria-label="LED 狀態陣列">
+      <div class="panel-title-row">
+        <h2>LED 狀態陣列</h2>
+        <button id="copy-state" class="btn small">複製狀態</button>
+      </div>
+
+      <p class="state-note">
+        下方顯示的是教學用 RGB 數值，範圍為 0～30。
+        網頁顯示時會自動轉換為 0～255。
+      </p>
+
+      <pre id="state-output" class="state-output"></pre>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    OSEP Scratch Editor / Blockly Lab 共用 LED 模擬器核心｜MVP-31-5
+  </footer>
+
+  <script src="./simulator.js"></script>
+</body>
+</html>
