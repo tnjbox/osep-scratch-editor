@@ -842,8 +842,24 @@
 
         setPixelRGB(args) {
             // C14：單顆 LED 直接控制，同步更新 ledBuffer 中對應的一顆。
+            // MVP-31-14：同時嘗試送出 setLed command 給線上模擬器。
             this.stopLEDAnimationOnly();
-            setLocalBufferPixel(args.INDEX, args.R, args.G, args.B);
+
+            const index = limitLEDIndex(args.INDEX);
+            const r = limitLEDValue(args.R);
+            const g = limitLEDValue(args.G);
+            const b = limitLEDValue(args.B);
+
+            setLocalBufferPixel(index, r, g, b);
+
+            sendLedCommandToSimulator({
+                type: "setLed",
+                index: index,
+                r: r,
+                g: g,
+                b: b
+            });
+
             return bridge.sendBuffer();
         }
 
@@ -1048,6 +1064,7 @@
         }
 
         setScoreLED(args) {
+            // MVP-31-14：同時嘗試送出 showScore command 給線上模擬器。
             this.stopLEDAnimationOnly();
 
             const value = Math.round(Number(args.VALUE));
@@ -1064,10 +1081,19 @@
                 STATE.ledBuffer[i - 1] = [0,30,0];
             }
 
+            sendLedCommandToSimulator({
+                type: "showScore",
+                value: count,
+                max: LED_COUNT,
+                originalValue: safeValue,
+                originalMax: safeMax
+            });
+
             return bridge.sendBuffer();
         }
 
         setLifeLED(args) {
+            // MVP-31-14：同時嘗試送出 showLife command 給線上模擬器。
             this.stopLEDAnimationOnly();
 
             const value = Math.round(Number(args.VALUE));
@@ -1083,6 +1109,14 @@
             for(let i = 1; i <= count; i++) {
                 STATE.ledBuffer[i - 1] = [30,0,0];
             }
+
+            sendLedCommandToSimulator({
+                type: "showLife",
+                value: count,
+                max: LED_COUNT,
+                originalValue: safeValue,
+                originalMax: safeMax
+            });
 
             return bridge.sendBuffer();
         }
