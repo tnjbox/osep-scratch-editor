@@ -129,6 +129,49 @@
       background: #0f766e;
     }
 
+
+    .prep-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .prep-card {
+      background: white;
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+      border: 1px solid #e5e7eb;
+    }
+
+    .prep-card h3 {
+      margin: 0 0 10px;
+      font-size: 21px;
+    }
+
+    .prep-card p {
+      margin: 0 0 16px;
+      line-height: 1.6;
+      color: #4b5563;
+    }
+
+    .prep-card ul {
+      margin: 0 0 16px 20px;
+      padding: 0;
+      color: #4b5563;
+      line-height: 1.7;
+    }
+
+    .tag.hardware {
+      background: #ede9fe;
+      color: #6d28d9;
+    }
+
+    .btn.hardware {
+      background: #6d28d9;
+    }
+
     .note {
       margin-top: 28px;
       background: #fff7ed;
@@ -171,6 +214,22 @@
 
     <h2 class="section-title">開始前檢查</h2>
 
+    <section class="prep-grid" aria-label="硬體與韌體準備">
+      <article class="prep-card">
+        <span class="tag hardware">硬體準備</span>
+        <h3>SmartRingController 韌體燒錄</h3>
+        <p>
+          如果你的 SmartRingController 還沒有燒錄韌體，請先前往 Blockly Lab 完成韌體準備，再回到本教材進行 Scratch 任務。
+        </p>
+        <ul>
+          <li>確認 ESP8266 已連接電腦。</li>
+          <li>依 Blockly Lab 說明完成韌體燒錄或韌體確認。</li>
+          <li>完成後回到本頁進行 C01 課前連線測試。</li>
+        </ul>
+        <a class="btn hardware" href="https://tnjbox.github.io/blockly-lab/" target="_blank" rel="noopener noreferrer">前往 Blockly Lab 韌體工具</a>
+      </article>
+    </section>
+
     <section class="test-card">
       <span class="tag test">共用測試</span>
       <h3 id="connection-title">C01 課前連線測試</h3>
@@ -194,7 +253,7 @@
   </main>
 
   <footer>
-    OSEP Scratch Editor / SmartRingControl / Level 3 MVP-12
+    OSEP Scratch Editor / SmartRingControl / Level 3 MVP-31
   </footer>
 
   <script src="./data/tasks.js"></script>
