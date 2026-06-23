@@ -218,21 +218,34 @@
     OSEP Scratch Editor / SmartRingControl / Level 3 MVP-24
   </footer>
 
-  <script src="/osep/data/tasks.js"></script>
+  <script src="../data/tasks.js"></script>
   <script>
     const chapterId = "ch07";
     const origin = window.location.origin;
 
+    function getAppBaseUrl() {
+      const marker = "/osep/";
+      const path = window.location.pathname;
+      const index = path.indexOf(marker);
+
+      if (index >= 0) {
+        return `${window.location.origin}${path.slice(0, index)}`;
+      }
+
+      return window.location.origin;
+    }
+
     function createEditorUrl(projectPath) {
-      const extensionUrl = `${origin}/osep/extensions/extensionV22C17.js`;
-      const projectUrl = `${origin}${projectPath}`;
+      const appBaseUrl = getAppBaseUrl();
+      const extensionUrl = `${appBaseUrl}/osep/extensions/extensionV22C17.js`;
+      const projectUrl = `${appBaseUrl}${projectPath}`;
 
       const params = new URLSearchParams({
         extension: extensionUrl,
         project_url: projectUrl
       });
 
-      return `${origin}/editor?${params.toString()}`;
+      return `${appBaseUrl}/editor?${params.toString()}`;
     }
 
     function renderChapter() {
