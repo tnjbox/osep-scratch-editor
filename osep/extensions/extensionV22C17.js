@@ -182,6 +182,47 @@
         return "---";
     }
 
+    // =====================================================
+    // MVP-31-13：LED 模擬器 BroadcastChannel 同步原型
+    // -----------------------------------------------------
+    // 本函式只負責嘗試把 LED command 送到線上模擬器。
+    // 若瀏覽器不支援 BroadcastChannel、模擬器沒有開啟，
+    // 或送出過程失敗，都直接回傳 false，不影響原本硬體控制。
+    // =====================================================
+    function sendLedCommandToSimulator(command) {
+        if(typeof BroadcastChannel !== "function") {
+            return false;
+        }
+
+        try {
+            const channel = new BroadcastChannel("osep-led-ring");
+
+            channel.postMessage({
+                source: "OSEP",
+                type: "ledCommand",
+                command: command
+            });
+
+            channel.close();
+
+            return true;
+        } catch(e) {
+            return false;
+        }
+    }
+
+    function calculateProgressCount(value, max) {
+        value = Math.round(Number(value));
+        max = Math.round(Number(max));
+
+        if(isNaN(value)) value = 0;
+        if(isNaN(max) || max <= 0) max = LED_COUNT;
+        if(value < 0) value = 0;
+        if(value > max) value = max;
+
+        return Math.round((value / max) * LED_COUNT);
+    }
+
     class OSEPBridge {
 
         constructor() {
@@ -763,16 +804,39 @@
         setLED(args) {
             // C14：基礎區直接控制積木會同步修改 ledBuffer，
             // 再用 BUFFER 顯示，讓「實際燈光」與「Buffer 狀態」一致。
+            // MVP-31-13：同時嘗試送出 setAll command 給線上模擬器。
             this.stopLEDAnimationOnly();
             const rgb = colorToRGB(args.COLOR);
             setLocalBufferAll(rgb[0], rgb[1], rgb[2]);
+
+            sendLedCommandToSimulator({
+                type: "setAll",
+                r: rgb[0],
+                g: rgb[1],
+                b: rgb[2]
+            });
+
             return bridge.sendBuffer();
         }
 
         setLEDRGB(args) {
             // C14：全燈 RGB 直接控制，同步更新整個 ledBuffer。
+            // MVP-31-13：同時嘗試送出 setAll command 給線上模擬器。
             this.stopLEDAnimationOnly();
-            setLocalBufferAll(args.R, args.G, args.B);
+
+            const r = limitLEDValue(args.R);
+            const g = limitLEDValue(args.G);
+            const b = limitLEDValue(args.B);
+
+            setLocalBufferAll(r, g, b);
+
+            sendLedCommandToSimulator({
+                type: "setAll",
+                r: r,
+                g: g,
+                b: b
+            });
+
             return bridge.sendBuffer();
         }
 
@@ -785,16 +849,35 @@
 
         clearLEDs() {
             // C14：清燈時同步清空 ledBuffer。
+            // MVP-31-13：同時嘗試送出 clear command 給線上模擬器。
             this.stopLEDAnimationOnly();
             clearLocalBuffer();
+
+            sendLedCommandToSimulator({
+                type: "clear"
+            });
+
             return bridge.sendBuffer();
         }
 
         showBar(args) {
             // C14：LED bar 改由 Extension 端建立 Buffer 後直接顯示，
             // 顏色維持 C7 BAR 的黃 / 黃綠色。
+            // MVP-31-13：同時嘗試送出 showProgress command 給線上模擬器。
             this.stopLEDAnimationOnly();
+
+            const progressCount = calculateProgressCount(args.VALUE, args.MAX);
+
             setLocalBufferBar(args.VALUE, args.MAX, 30, 30, 0);
+
+            sendLedCommandToSimulator({
+                type: "showProgress",
+                value: progressCount,
+                max: LED_COUNT,
+                originalValue: Math.round(Number(args.VALUE)) || 0,
+                originalMax: Math.round(Number(args.MAX)) || LED_COUNT
+            });
+
             return bridge.sendBuffer();
         }
 
