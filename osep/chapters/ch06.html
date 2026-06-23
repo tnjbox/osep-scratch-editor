@@ -247,6 +247,13 @@
       return path;
     }
 
+    function getEditorPath() {
+      // GitHub Pages 直接使用 editor.html，避免 extensionless route 在遠端環境遺失 project_url。
+      // 本機 npx serve build 預覽時使用 editor，避免 /editor.html 被 serve 轉址成 /editor 後遺失 query string。
+      const host = window.location.hostname;
+      return host.endsWith("github.io") ? "editor.html" : "editor";
+    }
+
     function createEditorUrl(projectPath) {
       const appBaseUrl = getAppBaseUrl();
       const extensionUrl = `${appBaseUrl}/osep/extensions/extensionV22C17.js`;
@@ -257,7 +264,7 @@
         project_url: projectUrl
       });
 
-      return `${appBaseUrl}/editor?${params.toString()}`;
+      return `${appBaseUrl}/${getEditorPath()}?${params.toString()}`;
     }
 
     function renderChapter() {
