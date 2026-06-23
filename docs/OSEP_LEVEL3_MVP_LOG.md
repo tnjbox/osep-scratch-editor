@@ -1712,3 +1712,82 @@ channel.postMessage({
 下一版建議進入：
 
 `MVP-31-13｜Extension 最小同步原型：setAll / clear / showProgress`
+
+
+## MVP-31-13｜Extension 最小同步原型：setAll / clear / showProgress
+
+### 任務目標
+
+在不影響原本 WebSerial 實體硬體控制的前提下，於 OSEP Scratch Extension 內加入最小 BroadcastChannel 同步原型，讓部分 LED 積木執行時可同步更新線上 LED 燈環模擬器。
+
+### 修改檔案
+
+- `static/osep/extensions/extensionV22C17.js`
+- `docs/OSEP_LEVEL3_MVP_LOG.md`
+
+### 本版新增功能
+
+1. 新增 `sendLedCommandToSimulator(command)` 安全發送函式。
+2. 新增 `calculateProgressCount(value, max)` 輔助函式。
+3. `設定全部 LED 顏色 [COLOR]` 會額外送出 `setAll` command。
+4. `設定全部 LED RGB R [R] G [G] B [B]` 會額外送出 `setAll` command。
+5. `關閉全部 LED` 會額外送出 `clear` command。
+6. `顯示進度條 LED 數值 [VALUE] 最大 [MAX]` 會額外送出 `showProgress` command。
+
+### 安全策略
+
+1. BroadcastChannel 不支援時直接略過。
+2. 模擬器分頁沒有開啟時不影響 Scratch。
+3. 發送失敗時回傳 `false`，不丟出錯誤。
+4. 原本 `bridge.sendBuffer()` 硬體控制流程保留。
+5. 不新增積木，不新增模式切換 UI。
+6. 不修改 WebSerial、ESP8266 韌體、Scratch Editor UI、Blockly Lab。
+
+### 測試方式
+
+開啟兩個分頁：
+
+#### 分頁 A：LED 模擬器
+
+```text
+https://tnjbox.github.io/osep-scratch-editor/osep/simulator/
+```
+
+確認：
+
+```javascript
+window.OSEPLedSyncChannel.getStatus()
+```
+
+應看到：
+
+```text
+supported: true
+started: true
+channelName: "osep-led-ring"
+```
+
+#### 分頁 B：OSEP Scratch 任務
+
+開啟 C01 或任一包含 OSEP Extension 的任務，測試：
+
+1. 執行「設定全部 LED 顏色 RED」。
+2. 模擬器全部 LED 應變紅。
+3. 執行「設定全部 LED RGB R 0 G 30 B 0」。
+4. 模擬器全部 LED 應變綠。
+5. 執行「關閉全部 LED」。
+6. 模擬器 LED 應全部熄滅。
+7. 執行「顯示進度條 LED 數值 6 最大 12」。
+8. 模擬器應顯示約 6 顆 LED 的進度。
+
+### 後續建議
+
+下一版建議進入：
+
+`MVP-31-14｜Extension 同步單顆 LED 與 score / life`
+
+可逐步加入：
+
+1. `setPixelRGB`
+2. `setScoreLED`
+3. `setLifeLED`
