@@ -2206,3 +2206,41 @@ MVP-32 系列建議路線：
 1. `MVP-32-6｜新增「開啟 / 關閉模擬硬體」積木`
 2. `MVP-32-7｜Extension LED command 同步送 iframe + BroadcastChannel`
 3. `MVP-32-8｜優化模擬器浮動面板`
+
+
+## MVP-32-6｜新增「開啟 / 關閉模擬硬體」積木
+
+### 任務目標
+
+在 OSEP Scratch Extension 中新增「開啟 / 關閉模擬硬體」積木，讓學生可以從 Scratch 積木中開啟或關閉 SmartRing 模擬器浮動視窗。
+
+### 本版修改檔案
+
+- `static/osep/extensions/extensionV22C17.js`
+- `docs/OSEP_EXTENSION_SIMULATOR_TOGGLE_BLOCK_MVP32-6.md`
+- `docs/OSEP_LEVEL3_MVP_LOG.md`
+
+### 新增功能
+
+1. 新增「開啟 / 關閉模擬硬體」積木。
+2. 第一次執行積木會在右下角開啟模擬器浮動視窗。
+3. 第二次執行積木會關閉模擬器浮動視窗。
+4. 浮動視窗右上角新增 X，可手動關閉。
+5. 手動關閉後，再執行積木可重新開啟。
+6. iframe 載入 `/osep/simulator/embed.html`。
+7. 本版不改變 LED command 傳送路徑，iframe LED 同步保留到 MVP-32-7。
+
+### 測試重點
+
+1. 新增積木是否出現在 OSEP 擴充共同積木區。
+2. 第一次執行是否開啟模擬器。
+3. 第二次執行是否關閉模擬器。
+4. X 按鈕是否可手動關閉。
+5. 手動關閉後是否可再次用積木開啟。
+6. 既有 ESP8266 連線與 LED 控制功能不受影響。
+
+### 後續建議
+
+下一版建議進入：
+
+`MVP-32-7｜Extension LED command 同步送 iframe + BroadcastChannel`

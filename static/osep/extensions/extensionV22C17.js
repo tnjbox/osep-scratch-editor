@@ -249,6 +249,216 @@
         });
     }
 
+
+    // =====================================================
+    // MVP-32-6：Extension 端模擬硬體浮動視窗
+    // -----------------------------------------------------
+    // 本區只負責在 Scratch 練習頁建立 / 關閉 iframe 浮動面板。
+    // 第一次執行「開啟 / 關閉模擬硬體」會開啟面板；
+    // 第二次執行會關閉面板；面板右上角 X 也可手動關閉。
+    // 本版尚不改變 LED command 傳送路徑，iframe LED 同步留到 MVP-32-7。
+    // =====================================================
+    const SIMULATOR_UI = {
+        panelId: "osep-simulator-panel",
+        frameId: "osep-simulator-frame",
+        closeId: "osep-simulator-panel-close",
+        styleId: "osep-simulator-panel-style"
+    };
+
+    function getSimulatorPanel() {
+        if(typeof document === "undefined") {
+            return null;
+        }
+
+        return document.getElementById(SIMULATOR_UI.panelId);
+    }
+
+    function isSimulatorPanelOpen() {
+        return !!getSimulatorPanel();
+    }
+
+    function getSimulatorEmbedUrl() {
+        if(typeof window === "undefined" || !window.location) {
+            return "/osep/simulator/embed.html";
+        }
+
+        const origin = window.location.origin;
+        const path = window.location.pathname || "";
+
+        // GitHub Pages 正式網址：
+        // https://tnjbox.github.io/osep-scratch-editor/osep/...
+        if(path.includes("/osep-scratch-editor/")) {
+            return origin + "/osep-scratch-editor/osep/simulator/embed.html";
+        }
+
+        // 本機開發或一般網站根目錄：
+        // http://localhost:8601/osep/...
+        // http://localhost:3000/osep/...
+        return origin + "/osep/simulator/embed.html";
+    }
+
+    function ensureSimulatorPanelStyle() {
+        if(typeof document === "undefined") {
+            return;
+        }
+
+        if(document.getElementById(SIMULATOR_UI.styleId)) {
+            return;
+        }
+
+        const style = document.createElement("style");
+        style.id = SIMULATOR_UI.styleId;
+        style.textContent = `
+#${SIMULATOR_UI.panelId} {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    width: 320px;
+    height: 390px;
+    z-index: 999999;
+    background: #0f172a;
+    border: 1px solid rgba(148, 163, 184, 0.32);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 18px 50px rgba(15, 23, 42, 0.38);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", sans-serif;
+}
+
+#${SIMULATOR_UI.panelId} * {
+    box-sizing: border-box;
+}
+
+#${SIMULATOR_UI.panelId} .osep-simulator-panel-header {
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 0 8px 0 14px;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    background: linear-gradient(180deg, #111827, #0f172a);
+    user-select: none;
+}
+
+#${SIMULATOR_UI.panelId} .osep-simulator-panel-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#${SIMULATOR_UI.closeId} {
+    width: 28px;
+    height: 28px;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+#${SIMULATOR_UI.closeId}:hover {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+#${SIMULATOR_UI.frameId} {
+    width: 100%;
+    height: calc(100% - 38px);
+    border: 0;
+    display: block;
+    background: #0f172a;
+}
+
+@media (max-width: 520px) {
+    #${SIMULATOR_UI.panelId} {
+        right: 10px;
+        bottom: 10px;
+        width: min(320px, calc(100vw - 20px));
+        height: min(390px, calc(100vh - 20px));
+    }
+}
+        `;
+
+        document.head.appendChild(style);
+    }
+
+    function openSimulatorPanel() {
+        if(typeof document === "undefined") {
+            return false;
+        }
+
+        const existingPanel = getSimulatorPanel();
+        if(existingPanel) {
+            return true;
+        }
+
+        ensureSimulatorPanelStyle();
+
+        const panel = document.createElement("div");
+        panel.id = SIMULATOR_UI.panelId;
+        panel.setAttribute("role", "dialog");
+        panel.setAttribute("aria-label", "SmartRing 模擬硬體");
+
+        const header = document.createElement("div");
+        header.className = "osep-simulator-panel-header";
+
+        const title = document.createElement("span");
+        title.className = "osep-simulator-panel-title";
+        title.textContent = "SmartRing 模擬硬體";
+
+        const closeButton = document.createElement("button");
+        closeButton.id = SIMULATOR_UI.closeId;
+        closeButton.type = "button";
+        closeButton.title = "關閉模擬硬體";
+        closeButton.setAttribute("aria-label", "關閉模擬硬體");
+        closeButton.textContent = "×";
+        closeButton.addEventListener("click", () => {
+            closeSimulatorPanel();
+        });
+
+        const frame = document.createElement("iframe");
+        frame.id = SIMULATOR_UI.frameId;
+        frame.title = "SmartRing LED 模擬器";
+        frame.src = getSimulatorEmbedUrl();
+        frame.setAttribute("loading", "eager");
+        frame.setAttribute("allow", "");
+
+        header.appendChild(title);
+        header.appendChild(closeButton);
+        panel.appendChild(header);
+        panel.appendChild(frame);
+
+        document.body.appendChild(panel);
+
+        return true;
+    }
+
+    function closeSimulatorPanel() {
+        const panel = getSimulatorPanel();
+
+        if(panel && panel.parentNode) {
+            panel.parentNode.removeChild(panel);
+        }
+
+        return true;
+    }
+
+    function toggleSimulatorPanel() {
+        if(isSimulatorPanelOpen()) {
+            return closeSimulatorPanel();
+        }
+
+        return openSimulatorPanel();
+    }
+
     class OSEPBridge {
 
         constructor() {
@@ -441,6 +651,8 @@
                     { opcode:'connect', blockType:Scratch.BlockType.COMMAND, text:'連接 ESP8266' },
 
                     { opcode:'connected', blockType:Scratch.BlockType.BOOLEAN, text:'ESP8266 已連線？' },
+
+                    { opcode:'toggleSimulatorPanel', blockType:Scratch.BlockType.COMMAND, text:'開啟 / 關閉模擬硬體' },
 
                     {
                         opcode:'btn',
@@ -761,6 +973,13 @@
 
         connect() {
             return bridge.connect();
+        }
+
+
+        toggleSimulatorPanel() {
+            // MVP-32-6：第一次執行開啟模擬器，第二次執行關閉模擬器。
+            // 面板右上角 X 也可手動關閉；關閉後再執行本積木會重新開啟。
+            toggleSimulatorPanel();
         }
 
         getIndex(args) {
