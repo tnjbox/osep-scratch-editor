@@ -2244,3 +2244,40 @@ MVP-32 系列建議路線：
 下一版建議進入：
 
 `MVP-32-7｜Extension LED command 同步送 iframe + BroadcastChannel`
+
+
+## MVP-32-7｜Extension LED command 同步送 iframe + BroadcastChannel
+
+### 任務目標
+
+讓 OSEP Extension 的 LED command 同時同步到同頁 iframe 模擬器與 BroadcastChannel 跨分頁模擬器。
+
+### 本版修改檔案
+
+- `static/osep/extensions/extensionV22C17.js`
+- `docs/OSEP_EXTENSION_IFRAME_BROADCAST_SYNC_MVP32-7.md`
+- `docs/OSEP_LEVEL3_MVP_LOG.md`
+
+### 新增功能
+
+1. 新增 `sendLedCommandToIframe(command)`。
+2. 新增 `sendLedCommandsToIframe(commands)`。
+3. 新增 `sendLedCommandToBroadcastChannel(command)`。
+4. `sendLedCommandToSimulator(command)` 改為同步送 iframe + BroadcastChannel。
+5. `sendLocalBufferToSimulator()` 對 iframe 使用 `ledCommands` 批次傳送 `setBuffer + showBuffer`。
+6. BroadcastChannel 保留原本逐筆 `ledCommand` 相容格式。
+7. 未開啟 iframe 模擬器時，不影響原本硬體控制與 BroadcastChannel 同步。
+
+### 測試重點
+
+1. 開啟 / 關閉模擬硬體積木仍可正常操作。
+2. 開啟 iframe 模擬器後，LED 積木可控制右下角模擬器。
+3. 同時開啟 `/osep/simulator/` 跨分頁模擬器時，BroadcastChannel 仍可同步。
+4. 實體 ESP8266 LED 控制不受影響。
+5. 暫存陣列顯示流程仍正常。
+
+### 後續建議
+
+下一版建議進入：
+
+`MVP-32-8｜優化模擬器浮動面板位置與樣式`
