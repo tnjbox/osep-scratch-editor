@@ -2093,3 +2093,51 @@ MVP-32 系列建議路線：
 下一版建議進入：
 
 `MVP-32-3｜建立獨立 iframe 測試頁`
+
+
+## MVP-32-3｜建立 LED 模擬器 embed 精簡頁
+
+### 任務目標
+
+建立專門給 Scratch 練習頁 iframe 使用的 LED 模擬器精簡頁，只保留 WS2812 LED 燈環顯示，不提供手動控制面板。
+
+### 本版新增檔案
+
+- `static/osep/simulator/embed.html`
+- `docs/OSEP_SIMULATOR_EMBED_PAGE_MVP32-3.md`
+
+### 本版設計原則
+
+1. 模擬器 iframe 只作為顯示裝置。
+2. 控制來源應為 Scratch OSEP 積木。
+3. iframe 內不提供測試按鈕。
+4. iframe 內不提供 RGB 手動輸入。
+5. 保留 postMessage 接收能力。
+6. 不影響原本完整模擬器頁 `/osep/simulator/`。
+7. 不修改 `extensionV22C17.js`。
+8. 不修改 Scratch Editor UI。
+
+### 支援 command
+
+- `setLed`
+- `setAll`
+- `clear`
+- `showProgress`
+- `showScore`
+- `showLife`
+- `setBuffer`
+- `showBuffer`
+
+### 測試重點
+
+1. `/osep/simulator/embed.html` 可正常顯示 12 顆 LED。
+2. `window.OSEPEmbedSimulator.getStatus()` 回傳 `ready: true`。
+3. `window.dispatchLedCommand()` 可直接控制 LED。
+4. parent 頁透過 iframe `postMessage` 可控制 LED。
+5. 原本完整模擬器頁不受影響。
+
+### 後續建議
+
+下一版建議進入：
+
+`MVP-32-4｜建立 iframe embed 測試頁`
