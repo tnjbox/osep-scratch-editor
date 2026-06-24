@@ -2176,3 +2176,33 @@ MVP-32 系列建議路線：
 ### 後續建議
 
 下一版建議進入：`MVP-32-5｜分析 Scratch 練習頁嵌入位置`
+
+
+## MVP-32-5｜規劃 Extension 端開關模擬器積木與手動關閉機制
+
+### 任務目標
+
+規劃在 OSEP Scratch Extension 中新增「開啟 / 關閉模擬硬體」積木，讓學生可在 Scratch 練習頁自行開啟或關閉 SmartRing 模擬器浮動視窗。
+
+### 本版新增文件
+
+- `docs/OSEP_EXTENSION_SIMULATOR_TOGGLE_BLOCK_PLAN_MVP32-5.md`
+
+### 設計結論
+
+1. 一般 Scratch 任務維持原本介面。
+2. 只有載入 OSEP / SmartRingController 擴充並執行積木時才顯示模擬硬體。
+3. 第一版不先改 Scratch Editor 工具列，避免 UI 改動風險。
+4. 先以 Extension 積木控制模擬器浮動面板。
+5. 第一次執行積木：開啟模擬器。
+6. 第二次執行積木：關閉模擬器。
+7. 浮動面板右上角需提供 X，可手動關閉。
+8. 手動關閉後，下一次執行積木必須能重新開啟。
+9. 第一版建議使用右下角固定浮動面板。
+10. 後續再將 LED command 同步路徑擴充為 iframe postMessage + BroadcastChannel fallback。
+
+### 建議後續路線
+
+1. `MVP-32-6｜新增「開啟 / 關閉模擬硬體」積木`
+2. `MVP-32-7｜Extension LED command 同步送 iframe + BroadcastChannel`
+3. `MVP-32-8｜優化模擬器浮動面板`
