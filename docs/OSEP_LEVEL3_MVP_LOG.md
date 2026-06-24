@@ -2044,3 +2044,52 @@ MVP-32 系列建議路線：
 下一版建議進入：
 
 `MVP-32-2｜建立模擬器 postMessage 接收端`
+
+
+## MVP-32-2｜建立模擬器 postMessage 接收端
+
+### 任務目標
+
+在 LED 燈環模擬器頁面新增 `postMessage` 接收能力，讓未來 iframe parent 頁面可以傳送 LED command 給模擬器。
+
+### 本版新增檔案
+
+- `static/osep/simulator/led-postmessage-bridge.js`
+- `docs/OSEP_SIMULATOR_POSTMESSAGE_RECEIVER_MVP32-2.md`
+
+### 本版修改檔案
+
+- `static/osep/simulator/index.html`
+- `docs/OSEP_LEVEL3_MVP_LOG.md`
+
+### 新增功能
+
+1. 模擬器可監聽 `window.message`。
+2. 支援同源 parent 頁面透過 `postMessage` 傳入 LED command。
+3. 支援 `ledCommand`。
+4. 支援 `ledCommands`。
+5. 支援 `getStatus`。
+6. 指令會轉交給既有 `window.dispatchLedCommand()` 或 `window.OSEPLedCommandAdapter.dispatchLedCommand()`。
+7. 不影響既有 BroadcastChannel 同步功能。
+
+### 設計原則
+
+1. 只新增 iframe receiver，不修改 Scratch Editor UI。
+2. 不修改 `extensionV22C17.js`。
+3. 不影響 WebSerial 或 ESP8266 韌體。
+4. 先採同源限制，避免跨來源訊息風險。
+5. 保留 BroadcastChannel 作為開發測試與 fallback 備用通道。
+
+### 測試重點
+
+1. 模擬器可正常載入。
+2. `window.OSEPLedPostMessageBridge.getStatus()` 回傳 `started: true`。
+3. parent 頁透過 iframe `contentWindow.postMessage()` 可控制 LED。
+4. 原本 BroadcastChannel 同步仍正常。
+5. Scratch Extension 前幾版同步功能不受影響。
+
+### 後續建議
+
+下一版建議進入：
+
+`MVP-32-3｜建立獨立 iframe 測試頁`
