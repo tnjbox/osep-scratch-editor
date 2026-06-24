@@ -2281,3 +2281,70 @@ MVP-32 系列建議路線：
 下一版建議進入：
 
 `MVP-32-8｜優化模擬器浮動面板位置與樣式`
+
+
+## MVP-32-8｜優化模擬器浮動面板位置與樣式
+
+### 任務目標
+
+在不修改 Scratch Editor 原始 UI 的前提下，優化由 Extension 建立的 SmartRing 模擬硬體浮動面板。
+
+### 本版修改檔案
+
+- `static/osep/extensions/extensionV22C17.js`
+- `docs/OSEP_SIMULATOR_FLOATING_PANEL_UI_MVP32-8.md`
+- `docs/OSEP_LEVEL3_MVP_LOG.md`
+
+### 新增功能
+
+1. 面板尺寸調整為較不遮擋舞台的 300px × 360px。
+2. 標題列加入 SmartRing 模擬硬體名稱與狀態點。
+3. 新增縮小 / 還原按鈕。
+4. 保留 X 手動關閉。
+5. 支援拖曳標題列移動面板。
+6. 小螢幕下自動限制面板尺寸。
+7. 不改變 LED command 同步邏輯。
+8. 不影響 iframe + BroadcastChannel 同步。
+
+### 測試重點
+
+1. 面板可正常開啟。
+2. 面板可正常關閉。
+3. X 可手動關閉。
+4. — 可縮小。
+5. □ 可還原。
+6. 標題列可拖曳移動。
+7. LED command 仍可同步到 iframe。
+8. BroadcastChannel 跨分頁同步仍正常。
+
+### 後續建議
+
+下一版可進入：
+
+`MVP-32-9｜新增模擬硬體狀態積木與模式提示`
+
+
+## MVP-32-8B｜精簡 embed 模擬器畫面與移除縮小按鈕
+
+### 任務目標
+
+讓 Scratch 練習頁中的 SmartRing 模擬器更精簡，避免佔用舞台畫面。
+
+### 本版修改檔案
+
+- `static/osep/extensions/extensionV22C17.js`
+- `static/osep/simulator/embed.html`
+- `docs/OSEP_SIMULATOR_COMPACT_EMBED_UI_MVP32-8B.md`
+- `docs/OSEP_LEVEL3_MVP_LOG.md`
+
+### 調整內容
+
+1. 移除 embed iframe 內的 `SmartRing LED 模擬器` 標題。
+2. 移除 embed iframe 內的 `WS2812 × 12` 副標。
+3. 移除底部狀態列。
+4. 將狀態文字移到 LED 燈環中心。
+5. 除標題列外，iframe 內盡量只保留 LED 燈環。
+6. 移除浮動面板縮小 / 還原按鈕。
+7. 保留 X 手動關閉。
+8. 保留拖曳移動。
+9. 保留 iframe + BroadcastChannel 同步。
