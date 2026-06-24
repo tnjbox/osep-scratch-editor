@@ -190,25 +190,14 @@
     // 或送出過程失敗，都直接回傳 false，不影響原本硬體控制。
     // =====================================================
     function sendLedCommandToSimulator(command) {
-        if(typeof BroadcastChannel !== "function") {
-            return false;
+        // MVP-32-7：正式同步送 iframe + BroadcastChannel。
+        // iframe 用於 Scratch 同頁模擬器；BroadcastChannel 保留跨分頁測試與 fallback。
+        if(!command || typeof command !== "object") {
+            return;
         }
 
-        try {
-            const channel = new BroadcastChannel("osep-led-ring");
-
-            channel.postMessage({
-                source: "OSEP",
-                type: "ledCommand",
-                command: command
-            });
-
-            channel.close();
-
-            return true;
-        } catch(e) {
-            return false;
-        }
+        sendLedCommandToIframe(command);
+        sendLedCommandToBroadcastChannel(command);
     }
 
     function calculateProgressCount(value, max) {
@@ -239,14 +228,23 @@
     }
 
     function sendLocalBufferToSimulator() {
-        sendLedCommandToSimulator({
-            type: "setBuffer",
-            buffer: getSimulatorBufferSnapshot()
-        });
+        const commands = [
+            {
+                type: "setBuffer",
+                buffer: getSimulatorBufferSnapshot()
+            },
+            {
+                type: "showBuffer"
+            }
+        ];
 
-        sendLedCommandToSimulator({
-            type: "showBuffer"
-        });
+        // MVP-32-7：暫存陣列使用 ledCommands 批次送入 iframe；
+        // BroadcastChannel 則保留原本 ledCommand 逐筆格式，維持跨分頁 fallback。
+        sendLedCommandsToIframe(commands);
+
+        for(const command of commands) {
+            sendLedCommandToBroadcastChannel(command);
+        }
     }
 
 
@@ -457,6 +455,92 @@
         }
 
         return openSimulatorPanel();
+    }
+
+    function sendLedCommandToBroadcastChannel(command) {
+        if(!command || typeof command !== "object") {
+            return false;
+        }
+
+        try {
+            if(typeof BroadcastChannel === "undefined") {
+                return false;
+            }
+
+            const channel = new BroadcastChannel("osep-led-ring");
+            channel.postMessage({
+                source: "OSEP",
+                type: "ledCommand",
+                command: command
+            });
+            channel.close();
+            return true;
+        } catch(e) {
+            console.warn("[OSEP Simulator] BroadcastChannel sync failed:", e);
+            return false;
+        }
+    }
+
+    function sendLedCommandToIframe(command) {
+        if(!command || typeof command !== "object") {
+            return false;
+        }
+
+        const panel = getSimulatorPanel();
+        if(!panel) {
+            return false;
+        }
+
+        const frame = document.getElementById(SIMULATOR_UI.frameId);
+        if(!frame || !frame.contentWindow) {
+            return false;
+        }
+
+        try {
+            frame.contentWindow.postMessage(
+                {
+                    source: "OSEP",
+                    type: "ledCommand",
+                    command: command
+                },
+                window.location.origin
+            );
+            return true;
+        } catch(e) {
+            console.warn("[OSEP Simulator] iframe postMessage failed:", e);
+            return false;
+        }
+    }
+
+    function sendLedCommandsToIframe(commands) {
+        if(!Array.isArray(commands) || commands.length === 0) {
+            return false;
+        }
+
+        const panel = getSimulatorPanel();
+        if(!panel) {
+            return false;
+        }
+
+        const frame = document.getElementById(SIMULATOR_UI.frameId);
+        if(!frame || !frame.contentWindow) {
+            return false;
+        }
+
+        try {
+            frame.contentWindow.postMessage(
+                {
+                    source: "OSEP",
+                    type: "ledCommands",
+                    commands: commands
+                },
+                window.location.origin
+            );
+            return true;
+        } catch(e) {
+            console.warn("[OSEP Simulator] iframe postMessage failed:", e);
+            return false;
+        }
     }
 
     class OSEPBridge {
