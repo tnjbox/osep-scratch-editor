@@ -260,7 +260,6 @@
         panelId: "osep-simulator-panel",
         frameId: "osep-simulator-frame",
         closeId: "osep-simulator-panel-close",
-        minimizeId: "osep-simulator-panel-minimize",
         styleId: "osep-simulator-panel-style"
     };
 
@@ -318,8 +317,8 @@
     position: fixed;
     right: 18px;
     bottom: 18px;
-    width: 300px;
-    height: 360px;
+    width: 286px;
+    height: 326px;
     z-index: 999999;
     background: #0f172a;
     border: 1px solid rgba(148, 163, 184, 0.34);
@@ -340,16 +339,8 @@
     opacity: 0.94;
 }
 
-#${SIMULATOR_UI.panelId}.osep-simulator-panel-minimized {
-    height: 42px;
-}
-
-#${SIMULATOR_UI.panelId}.osep-simulator-panel-minimized #${SIMULATOR_UI.frameId} {
-    display: none;
-}
-
 #${SIMULATOR_UI.panelId} .osep-simulator-panel-header {
-    height: 42px;
+    height: 38px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -385,14 +376,6 @@
     flex: 0 0 auto;
 }
 
-#${SIMULATOR_UI.panelId} .osep-simulator-panel-actions {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    flex: 0 0 auto;
-}
-
-#${SIMULATOR_UI.minimizeId},
 #${SIMULATOR_UI.closeId} {
     width: 28px;
     height: 28px;
@@ -400,17 +383,12 @@
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.08);
     color: #ffffff;
-    font-size: 18px;
+    font-size: 20px;
     line-height: 1;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-}
-
-#${SIMULATOR_UI.minimizeId}:hover,
-#${SIMULATOR_UI.closeId}:hover {
-    background: rgba(255, 255, 255, 0.18);
 }
 
 #${SIMULATOR_UI.closeId}:hover {
@@ -419,7 +397,7 @@
 
 #${SIMULATOR_UI.frameId} {
     width: 100%;
-    height: calc(100% - 42px);
+    height: calc(100% - 38px);
     border: 0;
     display: block;
     background: #0f172a;
@@ -429,12 +407,8 @@
     #${SIMULATOR_UI.panelId} {
         right: 10px;
         bottom: 10px;
-        width: min(300px, calc(100vw - 20px));
-        height: min(360px, calc(100vh - 20px));
-    }
-
-    #${SIMULATOR_UI.panelId}.osep-simulator-panel-minimized {
-        height: 42px;
+        width: min(286px, calc(100vw - 20px));
+        height: min(326px, calc(100vh - 20px));
     }
 }
         `;
@@ -461,25 +435,6 @@
         panel.style.top = position.top + "px";
         panel.style.right = "auto";
         panel.style.bottom = "auto";
-    }
-
-    function toggleSimulatorPanelMinimized() {
-        const panel = getSimulatorPanel();
-        if(!panel) {
-            return false;
-        }
-
-        panel.classList.toggle("osep-simulator-panel-minimized");
-
-        const button = document.getElementById(SIMULATOR_UI.minimizeId);
-        if(button) {
-            const minimized = panel.classList.contains("osep-simulator-panel-minimized");
-            button.textContent = minimized ? "□" : "—";
-            button.title = minimized ? "還原模擬硬體" : "縮小模擬硬體";
-            button.setAttribute("aria-label", button.title);
-        }
-
-        return true;
     }
 
     function enableSimulatorPanelDrag(panel, header) {
@@ -558,19 +513,6 @@
         title.className = "osep-simulator-panel-title";
         title.textContent = "SmartRing 模擬硬體";
 
-        const actions = document.createElement("span");
-        actions.className = "osep-simulator-panel-actions";
-
-        const minimizeButton = document.createElement("button");
-        minimizeButton.id = SIMULATOR_UI.minimizeId;
-        minimizeButton.type = "button";
-        minimizeButton.title = "縮小模擬硬體";
-        minimizeButton.setAttribute("aria-label", "縮小模擬硬體");
-        minimizeButton.textContent = "—";
-        minimizeButton.addEventListener("click", () => {
-            toggleSimulatorPanelMinimized();
-        });
-
         const closeButton = document.createElement("button");
         closeButton.id = SIMULATOR_UI.closeId;
         closeButton.type = "button";
@@ -588,16 +530,16 @@
         frame.setAttribute("loading", "eager");
         frame.setAttribute("allow", "");
 
-        actions.appendChild(minimizeButton);
-        actions.appendChild(closeButton);
         header.appendChild(title);
-        header.appendChild(actions);
+        header.appendChild(closeButton);
         panel.appendChild(header);
         panel.appendChild(frame);
 
         document.body.appendChild(panel);
 
-        enableSimulatorPanelDrag(panel, header);
+        if(typeof enableSimulatorPanelDrag === "function") {
+            enableSimulatorPanelDrag(panel, header);
+        }
 
         return true;
     }
