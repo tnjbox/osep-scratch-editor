@@ -1939,3 +1939,59 @@ channelName: "osep-led-ring"
 6. `rotateBufferRight` + `showBuffer`
 
 仍建議保持「只有顯示時才同步」，避免暫存陣列編輯過程過度頻繁廣播。
+
+
+## MVP-31-16｜Extension 同步暫存陣列編輯後的顯示流程與位移旋轉
+
+### 任務目標
+
+確認 MVP-31-15 後，OSEP Scratch Extension 的 LED 暫存陣列編輯類積木，是否能透過 `showBuffer()` 正確同步到線上 LED 燈環模擬器。
+
+### 本版判斷
+
+檢查最新版 `extensionV22C17.js` 後，MVP-31-15 已經加入：
+
+- `getSimulatorBufferSnapshot()`
+- `sendLocalBufferToSimulator()`
+
+且 `showBuffer()` 已經會送出：
+
+1. `setBuffer`
+2. `showBuffer`
+
+因此只要暫存陣列編輯積木正確修改 `STATE.ledBuffer`，最後執行「顯示 LED 暫存陣列」即可同步到模擬器。
+
+### 本版結論
+
+本版不建議修改 Extension 行為，原因是：
+
+1. `setBufferPixel`、`fillBuffer`、`copyBufferPixel`、`shiftBufferLeft`、`shiftBufferRight`、`rotateBufferLeft`、`rotateBufferRight`、`reverseBuffer` 都屬於暫存陣列編輯積木。
+2. 暫存陣列編輯積木應只修改 `STATE.ledBuffer`，不應立即顯示。
+3. 真正顯示應集中在 `showBuffer()`。
+4. 這樣較符合「先編輯陣列，再顯示結果」的演算法教學概念。
+5. 也可避免模擬器立即變化但硬體尚未顯示，造成軟硬體不同步。
+
+### 本版產出
+
+- `docs/OSEP_BUFFER_EDIT_SHOW_WORKFLOW_TEST_MVP31-16.md`
+- 更新 `docs/OSEP_LEVEL3_MVP_LOG.md`
+
+### 測試重點
+
+需確認下列流程可正確同步模擬器：
+
+1. 單顆暫存後顯示
+2. 填滿暫存陣列後顯示
+3. 複製暫存陣列後顯示
+4. 向左平移後顯示
+5. 向右平移後顯示
+6. 向左旋轉後顯示
+7. 向右旋轉後顯示
+8. 反轉後顯示
+
+### 後續建議
+
+下一步可選：
+
+1. `MVP-31-17｜Extension 同步 LED 動畫效果`
+2. `MVP-32-1｜規劃 iframe + postMessage 同框模擬器`
