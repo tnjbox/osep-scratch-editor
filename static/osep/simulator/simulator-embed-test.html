@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OSEP SmartRing Embed Simulator Test</title>
+  <style>
+    :root { --bg:#f8fafc; --panel:#fff; --border:#dbe3ef; --text:#0f172a; --muted:#64748b; --primary:#2563eb; --danger:#dc2626; --radius:18px; }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100vh; background:var(--bg); color:var(--text); font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif; }
+    .page { width:min(1120px, calc(100% - 32px)); margin:0 auto; padding:28px 0 40px; }
+    .eyebrow { margin:0 0 6px; color:var(--primary); font-size:13px; font-weight:800; letter-spacing:.08em; }
+    h1 { margin:0 0 10px; font-size:clamp(26px,4vw,40px); }
+    .lead { margin:0 0 20px; color:var(--muted); line-height:1.7; }
+    .layout { display:grid; grid-template-columns:minmax(320px,420px) 1fr; gap:20px; align-items:start; }
+    .card { background:rgba(255,255,255,.94); border:1px solid var(--border); border-radius:var(--radius); box-shadow:0 18px 50px rgba(15,23,42,.08); overflow:hidden; }
+    .card-header { padding:16px 18px; border-bottom:1px solid var(--border); background:linear-gradient(180deg,#fff,#f8fafc); }
+    .card-header h2 { margin:0; font-size:18px; }
+    .card-header p { margin:6px 0 0; color:var(--muted); font-size:13px; line-height:1.5; }
+    .sim-frame-wrap { padding:14px; }
+    iframe { width:100%; height:380px; border:0; border-radius:16px; display:block; background:#0f172a; }
+    .controls { padding:16px 18px 18px; display:grid; gap:18px; }
+    .section { display:grid; gap:10px; }
+    .section h3 { margin:0; font-size:15px; color:#334155; }
+    .button-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+    button { border:0; border-radius:13px; padding:11px 12px; background:var(--primary); color:white; font-weight:800; cursor:pointer; box-shadow:0 8px 22px rgba(37,99,235,.20); }
+    button:hover { filter:brightness(.92); }
+    button.secondary { background:#0f172a; }
+    button.danger { background:var(--danger); }
+    button.soft { background:#475569; }
+    .status-box { padding:13px 14px; border:1px solid var(--border); border-radius:14px; background:#f8fafc; color:var(--muted); font-size:13px; line-height:1.55; min-height:46px; white-space:pre-wrap; }
+    .code { padding:14px; border-radius:14px; background:#0f172a; color:#dbeafe; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:12px; line-height:1.55; overflow:auto; max-height:260px; white-space:pre-wrap; }
+    @media (max-width:820px) { .layout { grid-template-columns:1fr; } iframe { height:340px; } }
+    @media (max-width:480px) { .page { width:min(100% - 20px,1120px); padding-top:18px; } .button-grid { grid-template-columns:1fr; } iframe { height:310px; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <p class="eyebrow">MVP-32-4</p>
+      <h1>OSEP SmartRing iframe embed 測試頁</h1>
+      <p class="lead">這個頁面用來驗證 parent 頁面透過 postMessage 控制 /osep/simulator/embed.html 的流程。這不是正式 Scratch 練習頁，而是進入同框整合前的安全測試頁。</p>
+    </header>
+
+    <section class="layout">
+      <article class="card">
+        <div class="card-header">
+          <h2>iframe 內嵌精簡模擬器</h2>
+          <p>iframe src：<code>./simulator/embed.html</code></p>
+        </div>
+        <div class="sim-frame-wrap">
+          <iframe id="osep-led-simulator-frame" src="./simulator/embed.html" title="OSEP SmartRing LED Embed Simulator"></iframe>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <h2>postMessage 測試控制台</h2>
+          <p>按鈕會從 parent 頁面送出 LED command 給 iframe。</p>
+        </div>
+        <div class="controls">
+          <section class="section">
+            <h3>基本測試</h3>
+            <div class="button-grid">
+              <button data-action="red1">第 1 顆紅燈</button>
+              <button data-action="greenAll">全部綠燈</button>
+              <button data-action="blue6">第 6 顆藍燈</button>
+              <button class="danger" data-action="clear">清除全部</button>
+            </div>
+          </section>
+          <section class="section">
+            <h3>狀態型顯示</h3>
+            <div class="button-grid">
+              <button data-action="progress">進度條 6 / 12</button>
+              <button data-action="score">分數 8 / 12</button>
+              <button data-action="life">生命 3 / 5</button>
+              <button class="soft" data-action="status">查詢 iframe 狀態</button>
+            </div>
+          </section>
+          <section class="section">
+            <h3>暫存陣列測試</h3>
+            <div class="button-grid">
+              <button class="secondary" data-action="rainbow">彩色排列</button>
+              <button class="secondary" data-action="halfRed">前半紅燈</button>
+              <button class="secondary" data-action="oddGreen">奇數綠燈</button>
+              <button class="secondary" data-action="evenBlue">偶數藍燈</button>
+            </div>
+          </section>
+          <section class="section">
+            <h3>執行狀態</h3>
+            <div class="status-box" id="statusBox">等待測試指令。</div>
+          </section>
+          <section class="section">
+            <h3>最後送出的 message</h3>
+            <div class="code" id="messageBox">{}</div>
+          </section>
+        </div>
+      </article>
+    </section>
+  </main>
+  <script>
+    (function() {
+      "use strict";
+      const SOURCE_NAME = "OSEP";
+      const frame = document.getElementById("osep-led-simulator-frame");
+      const statusBox = document.getElementById("statusBox");
+      const messageBox = document.getElementById("messageBox");
+      function setStatus(text) { statusBox.textContent = text; }
+      function showMessage(message) { messageBox.textContent = JSON.stringify(message, null, 2); }
+      function postToSimulator(message) {
+        if (!frame || !frame.contentWindow) { setStatus("找不到 iframe 或 iframe 尚未載入。"); return; }
+        showMessage(message);
+        frame.contentWindow.postMessage(message, window.location.origin);
+        setStatus(`已送出 ${message.type || "unknown"} 到 iframe：${new Date().toLocaleTimeString()}`);
+      }
+      function sendCommand(command) { postToSimulator({ source:SOURCE_NAME, type:"ledCommand", command }); }
+      function sendCommands(commands) { postToSimulator({ source:SOURCE_NAME, type:"ledCommands", commands }); }
+      function makeEmptyBuffer() { return Array.from({ length:12 }, () => ({ r:0, g:0, b:0 })); }
+      function setBufferPixel(buffer, index, r, g, b) { buffer[Math.max(1, Math.min(12, Math.round(Number(index) || 1))) - 1] = { r, g, b }; }
+      function sendBuffer(buffer) { sendCommands([{ type:"setBuffer", buffer }, { type:"showBuffer" }]); }
+      const actions = {
+        red1(){ sendCommand({ type:"setLed", index:1, r:30, g:0, b:0 }); },
+        greenAll(){ sendCommand({ type:"setAll", r:0, g:30, b:0 }); },
+        blue6(){ sendCommand({ type:"setLed", index:6, r:0, g:0, b:30 }); },
+        clear(){ sendCommand({ type:"clear" }); },
+        progress(){ sendCommand({ type:"showProgress", value:6, max:12 }); },
+        score(){ sendCommand({ type:"showScore", value:8, max:12 }); },
+        life(){ sendCommand({ type:"showLife", value:3, max:5 }); },
+        status(){ postToSimulator({ source:SOURCE_NAME, type:"getStatus" }); },
+        rainbow(){ sendBuffer([
+          {r:30,g:0,b:0},{r:30,g:10,b:0},{r:30,g:20,b:0},{r:30,g:30,b:0},
+          {r:0,g:30,b:0},{r:0,g:25,b:20},{r:0,g:15,b:30},{r:0,g:0,b:30},
+          {r:15,g:0,b:30},{r:25,g:0,b:30},{r:30,g:0,b:15},{r:30,g:0,b:5}
+        ]); },
+        halfRed(){ const b=makeEmptyBuffer(); for(let i=1;i<=6;i++) setBufferPixel(b,i,30,0,0); sendBuffer(b); },
+        oddGreen(){ const b=makeEmptyBuffer(); for(let i=1;i<=12;i+=2) setBufferPixel(b,i,0,30,0); sendBuffer(b); },
+        evenBlue(){ const b=makeEmptyBuffer(); for(let i=2;i<=12;i+=2) setBufferPixel(b,i,0,0,30); sendBuffer(b); }
+      };
+      document.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-action]");
+        if (button && actions[button.dataset.action]) actions[button.dataset.action]();
+      });
+      window.addEventListener("message", (event) => {
+        if (event.origin !== window.location.origin) return;
+        const message = event.data;
+        if (!message || typeof message !== "object" || message.source !== SOURCE_NAME) return;
+        if (message.type === "embedStatus") setStatus(`收到 iframe 狀態：${JSON.stringify(message.status, null, 2)}`);
+        if (message.type === "postMessageBridgeReply") setStatus(`收到 iframe 回覆：${JSON.stringify(message, null, 2)}`);
+      });
+      frame.addEventListener("load", () => setStatus("iframe 已載入，可以開始測試。"));
+    })();
+  </script>
+</body>
+</html>

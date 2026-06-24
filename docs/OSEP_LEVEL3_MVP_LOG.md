@@ -2141,3 +2141,38 @@ MVP-32 系列建議路線：
 下一版建議進入：
 
 `MVP-32-4｜建立 iframe embed 測試頁`
+
+
+## MVP-32-4｜建立 iframe embed 測試頁
+
+### 任務目標
+
+建立 parent 測試頁，用來驗證 parent 頁面透過 `postMessage` 控制 iframe 內的 `/osep/simulator/embed.html`。
+
+### 本版新增檔案
+
+- `static/osep/simulator-embed-test.html`
+- `docs/OSEP_SIMULATOR_EMBED_TEST_PAGE_MVP32-4.md`
+
+### 測試頁功能
+
+1. 內嵌 `/osep/simulator/embed.html`。
+2. 提供基本 LED 測試按鈕。
+3. 提供進度條、分數、生命顯示測試。
+4. 提供暫存陣列測試。
+5. 顯示最後送出的 postMessage JSON。
+6. 支援 iframe 狀態查詢。
+
+### 本版不修改
+
+- `extensionV22C17.js`
+- Scratch Editor UI
+- 完整模擬器頁 `/osep/simulator/`
+- embed 模擬器頁 `/osep/simulator/embed.html`
+- WebSerial
+- ESP8266 韌體
+- Blockly Lab
+
+### 後續建議
+
+下一版建議進入：`MVP-32-5｜分析 Scratch 練習頁嵌入位置`
