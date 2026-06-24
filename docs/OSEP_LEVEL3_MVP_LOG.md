@@ -2348,3 +2348,30 @@ MVP-32 系列建議路線：
 7. 保留 X 手動關閉。
 8. 保留拖曳移動。
 9. 保留 iframe + BroadcastChannel 同步。
+
+
+## MVP-32-9 fixed｜簡化入口頁使用方式區塊並保留 C01
+
+### 修正原因
+
+前一版 MVP-32-9 使用的入口頁底稿不正確，導致 C01 課前連線測試區塊遺失。
+
+### 本版處理
+
+改以使用者重新上傳的正確 `index.html` 為底稿重新處理。
+
+### 修改檔案
+
+- `static/osep/index.html`
+- `docs/OSEP_INDEX_SIMPLIFY_USAGE_MVP32-9_FIXED.md`
+- `docs/OSEP_LEVEL3_MVP_LOG.md`
+
+### 調整內容
+
+1. 刪除「開始前選擇使用方式」。
+2. 刪除「方式 A｜使用實體硬體」。
+3. 刪除「方式 B｜使用線上模擬」。
+4. 保留 C01 課前連線測試。
+5. 保留章節學習任務。
+6. 使用提醒加入「燒錄韌體」超連結。
+7. 「燒錄韌體」連到 `https://tnjbox.github.io/blockly-lab/firmware.html`。
