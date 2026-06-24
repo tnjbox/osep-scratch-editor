@@ -1853,3 +1853,89 @@ channelName: "osep-led-ring"
 5. `setEvenBuffer`
 
 但仍建議逐步測試，不要一次接入所有動畫。
+
+## MVP-31-15｜Extension 同步 Buffer / showBuffer
+
+### 任務目標
+
+延續 MVP-31-13 與 MVP-31-14 的 BroadcastChannel 同步原型，讓 OSEP Scratch Extension 的 LED 暫存陣列顯示類積木可以同步到線上 LED 燈環模擬器。
+
+### 本版修改檔案
+
+- `static/osep/extensions/extensionV22C17.js`
+- `docs/OSEP_LEVEL3_MVP_LOG.md`
+
+### 本版新增同步項目
+
+1. `clearAndShowBuffer`
+   - Scratch 積木：清空並顯示 LED 暫存陣列
+   - 模擬器 command：`setBuffer` + `showBuffer`
+
+2. `showBuffer`
+   - Scratch 積木：顯示 LED 暫存陣列
+   - 模擬器 command：`setBuffer` + `showBuffer`
+
+3. `setBufferRange`
+   - Scratch 積木：設定第 START 到 END 顆 LED RGB
+   - 模擬器 command：`setBuffer` + `showBuffer`
+
+4. `setOddBuffer`
+   - Scratch 積木：設定奇數 LED RGB
+   - 模擬器 command：`setBuffer` + `showBuffer`
+
+5. `setEvenBuffer`
+   - Scratch 積木：設定偶數 LED RGB
+   - 模擬器 command：`setBuffer` + `showBuffer`
+
+### 新增內部輔助函式
+
+本版新增：
+
+- `getSimulatorBufferSnapshot()`
+- `sendLocalBufferToSimulator()`
+
+功能是將 Extension 內部 `STATE.ledBuffer` 轉為模擬器使用的 RGB 物件陣列，並依序送出：
+
+1. `setBuffer`
+2. `showBuffer`
+
+### 設計原則
+
+1. 原本硬體控制流程不變。
+2. 原本 `bridge.sendBuffer()` 照常執行。
+3. BroadcastChannel 只作為模擬器同步旁路。
+4. 模擬器未開啟時不影響 Scratch。
+5. 瀏覽器不支援 BroadcastChannel 時不影響 Scratch。
+6. RGB 教學數值仍維持 0～30。
+7. 暫不同步動畫類 `setInterval()` 連續效果，避免一次改動過大。
+
+### 測試重點
+
+1. Extension 可正常載入。
+2. C01 或任一任務可正常開啟。
+3. MVP-31-13 的 `setAll`、`clear`、`showProgress` 仍正常同步。
+4. MVP-31-14 的 `setLed`、`showScore`、`showLife` 仍正常同步。
+5. `clearAndShowBuffer` 可同步清空模擬器。
+6. `showBuffer` 可同步目前暫存陣列。
+7. `setBufferRange` 可同步指定區段。
+8. `setOddBuffer` 可同步奇數 LED。
+9. `setEvenBuffer` 可同步偶數 LED。
+10. 有硬體時 WebSerial 不受影響。
+11. 沒有硬體時 Scratch 不報錯。
+
+### 後續建議
+
+下一版建議進入：
+
+`MVP-31-16｜Extension 同步暫存陣列編輯後的顯示流程與位移旋轉`
+
+可評估是否同步：
+
+1. `fillBuffer` + `showBuffer`
+2. `setBufferPixel` + `showBuffer`
+3. `shiftBufferLeft` + `showBuffer`
+4. `shiftBufferRight` + `showBuffer`
+5. `rotateBufferLeft` + `showBuffer`
+6. `rotateBufferRight` + `showBuffer`
+
+仍建議保持「只有顯示時才同步」，避免暫存陣列編輯過程過度頻繁廣播。
