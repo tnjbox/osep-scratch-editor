@@ -1995,3 +1995,52 @@ channelName: "osep-led-ring"
 
 1. `MVP-31-17｜Extension 同步 LED 動畫效果`
 2. `MVP-32-1｜規劃 iframe + postMessage 同框模擬器`
+
+
+## MVP-32-1｜規劃 iframe + postMessage 同框模擬器
+
+### 任務目標
+
+規劃未來將線上 LED 燈環模擬器嵌入 OSEP Scratch Editor，形成 Scratch 與 LED 模擬器同框的正式教學介面。
+
+### 本版新增文件
+
+- `docs/OSEP_IFRAME_POSTMESSAGE_SIMULATOR_PLAN.md`
+
+### 規劃重點
+
+1. BroadcastChannel 已完成跨分頁同步原型驗證。
+2. 正式教學整合應轉向 iframe + postMessage。
+3. iframe 可讓學生在 Scratch Editor 同一頁看到 LED 模擬器。
+4. postMessage 可讓 parent 頁面安全傳送 LED command 給 iframe。
+5. LED command 格式沿用目前已驗證格式。
+6. 建議不要讓 Extension 直接依賴 iframe DOM。
+7. 建議建立 Parent 中介層 `OSEPSimulatorBridge`。
+8. BroadcastChannel 保留作為開發測試與 fallback 備用通道。
+
+### 建議路線
+
+MVP-32 系列建議路線：
+
+1. `MVP-32-1｜規劃 iframe + postMessage 同框模擬器`
+2. `MVP-32-2｜建立模擬器 postMessage 接收端`
+3. `MVP-32-3｜建立獨立 iframe 測試頁`
+4. `MVP-32-4｜規劃 Editor 內嵌位置`
+5. `MVP-32-5｜Editor 同框原型`
+
+### 暫不實作
+
+本版暫不修改：
+
+- `extensionV22C17.js`
+- Scratch Editor UI
+- WebSerial runtime
+- ESP8266 韌體
+- Blockly Lab
+- 模擬器程式碼
+
+### 後續建議
+
+下一版建議進入：
+
+`MVP-32-2｜建立模擬器 postMessage 接收端`
